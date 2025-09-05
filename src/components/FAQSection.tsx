@@ -1,0 +1,150 @@
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { ChevronDown, X } from 'lucide-react';
+import { useLandingPageContent } from '../context/LandingPageContext';
+
+export const FAQSection: React.FC = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const { faqs, isLoading } = useLandingPageContent();
+
+  const toggleFaq = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  // Default FAQs in case data hasn't loaded yet
+  const defaultFaqs = [
+    {
+      question: "How does VideoRemix.io work?",
+      answer: "VideoRemix.io uses artificial intelligence to automate the video editing process. Upload your footage, choose a template, make any customizations you want, and our AI will handle the tedious parts of editing. You can export the final video in minutes instead of hours."
+    },
+    {
+      question: "Do I need any technical skills to use VideoRemix.io?",
+      answer: "Not at all! VideoRemix.io is designed for users with zero video editing experience. Our intuitive interface and AI-powered features make it easy for anyone to create professional-looking videos without technical skills."
+    },
+    {
+      question: "What types of videos can I create?",
+      answer: "You can create virtually any type of video including social media content, marketing videos, product demos, educational content, YouTube videos, testimonials, webinar recordings, and much more. Our template library covers dozens of use cases across all major industries."
+    },
+    {
+      question: "Is there a limit to the number of videos I can create?",
+      answer: "Free accounts can export up to 5 videos per month. Pro accounts have unlimited video exports with no restrictions."
+    },
+    {
+      question: "What happens when my subscription ends?",
+      answer: "You'll still have access to your account and projects, but you'll be limited to the free plan features. You can renew or upgrade your subscription at any time to regain access to Pro features."
+    },
+    {
+      question: "Can I cancel at any time?",
+      answer: "Yes! You can cancel your subscription at any time from your account dashboard. If you cancel within the first 14 days, you're eligible for our money-back guarantee."
+    }
+  ];
+
+  // Use faqs from Supabase if available, otherwise use default
+  const displayFaqs = (!isLoading && faqs && faqs.length > 0) ? faqs : defaultFaqs;
+
+  return (
+    <section id="faq" className="py-20 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden">
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-4xl mx-auto text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            Frequently Asked Questions
+          </h2>
+          
+          <p className="text-xl text-gray-300 mb-0">
+            Everything you need to know about VideoRemix.io
+          </p>
+        </motion.div>
+        
+        <div className="max-w-3xl mx-auto">
+          <div className="space-y-4">
+            {displayFaqs.map((faq, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.2 + index * 0.05 }}
+                whileHover={{ 
+                  boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
+                  y: -4, 
+                  transition: { duration: 0.2 }
+                }}
+                className="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden"
+              >
+                <button
+                  className="flex justify-between items-center w-full text-left px-6 py-5 focus:outline-none"
+                  onClick={() => toggleFaq(index)}
+                  aria-expanded={openIndex === index}
+                >
+                  <h3 className="text-lg font-medium text-white">{faq.question}</h3>
+                  <div className={`flex-shrink-0 ml-2 p-1 rounded-full transition-colors duration-200 ${
+                    openIndex === index ? 'bg-primary-500/20 text-primary-400' : 'bg-gray-700 text-gray-400'
+                  }`}>
+                    <motion.div
+                      animate={{ rotate: openIndex === index ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <ChevronDown className="h-5 w-5" />
+                    </motion.div>
+                  </div>
+                </button>
+                
+                <motion.div 
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ 
+                    height: openIndex === index ? 'auto' : 0,
+                    opacity: openIndex === index ? 1 : 0
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-6 pb-5 text-gray-300">
+                    {faq.answer}
+                  </div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="mt-12 text-center"
+          >
+            <p className="text-gray-300 mb-6">
+              Still have questions? Our support team is here to help.
+            </p>
+            
+            <motion.a 
+              href="#contact" 
+              className="inline-flex items-center bg-gray-800 hover:bg-gray-700 text-white font-medium px-6 py-3 rounded-lg border border-gray-700"
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
+                borderColor: "rgba(99, 102, 241, 0.4)"
+              }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.2 }}
+            >
+              Contact Support
+            </motion.a>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default FAQSection;

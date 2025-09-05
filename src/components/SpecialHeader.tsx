@@ -136,6 +136,9 @@ const SpecialHeader: React.FC = () => {
           <Link to="/dashboard" className="text-white/80 hover:text-white px-3 py-2 text-sm font-medium">
             Dashboard
           </Link>
+          <Link to="/dashboard" className="text-white/80 hover:text-white px-3 py-2 text-sm font-medium">
+            Dashboard
+          </Link>
           <Link to="/faq" className="text-white/80 hover:text-white px-3 py-2 text-sm font-medium">
             FAQ
           </Link>
@@ -230,6 +233,9 @@ const SpecialHeader: React.FC = () => {
               
               <Link to="/pricing" className="block text-white hover:bg-gray-800 px-3 py-2 rounded-md">
                 Pricing
+              </Link>
+              <Link to="/dashboard" className="block text-white hover:bg-gray-800 px-3 py-2 rounded-md">
+                Dashboard
               </Link>
               <Link to="/dashboard" className="block text-white hover:bg-gray-800 px-3 py-2 rounded-md">
                 Dashboard

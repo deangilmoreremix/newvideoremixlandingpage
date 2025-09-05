@@ -55,6 +55,8 @@ function App() {
   // Detect mobile/tablet
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
+  const [bannerHeight, setBannerHeight] = useState(0);
+  const bannerRef = React.useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     const checkDevice = () => {
@@ -68,6 +70,36 @@ function App() {
     return () => window.removeEventListener('resize', checkDevice);
   }, []);
 
+  // Measure banner height and update offset
+  useEffect(() => {
+    const measureBanner = () => {
+      if (bannerRef.current) {
+        const height = bannerRef.current.offsetHeight;
+        setBannerHeight(height);
+      }
+    };
+
+    // Measure initially
+    measureBanner();
+
+    // Remeasure on window resize
+    window.addEventListener('resize', measureBanner);
+    
+    // Use ResizeObserver for more accurate measurement if available
+    if (window.ResizeObserver && bannerRef.current) {
+      const resizeObserver = new ResizeObserver(measureBanner);
+      resizeObserver.observe(bannerRef.current);
+      
+      return () => {
+        window.removeEventListener('resize', measureBanner);
+        resizeObserver.disconnect();
+      };
+    }
+    
+    return () => {
+      window.removeEventListener('resize', measureBanner);
+    };
+  }, []);
   // Update document title with page section
   useEffect(() => {
     const updateTitle = () => {
@@ -106,10 +138,12 @@ function App() {
       </Helmet>
       
       {/* Urgency Banner - Always at the top */}
-      <UrgencyBanner />
+      <div ref={bannerRef}>
+        <UrgencyBanner />
+      </div>
       
       {/* Scroll Progress Indicator */}
-      <ScrollProgressBar />
+      <ScrollProgressBar topOffset={bannerHeight} />
       
       {/* Custom Cursor (desktop only) */}
       {!isMobile && !isTablet && <CustomCursor />}
@@ -128,7 +162,7 @@ function App() {
         <Route path="/" element={
           <ErrorBoundary onError={handleError}>
             <SparkleBackground>
-              <SpecialHeader />
+              <SpecialHeader topOffset={bannerHeight} />
               <Suspense fallback={<SectionLoader />}>
                 <LandingPage isMobile={isMobile} isTablet={isTablet} />
                 <SpecialFooter />
@@ -141,7 +175,7 @@ function App() {
         <Route path="/tools" element={
           <ErrorBoundary onError={handleError}>
             <SparkleBackground>
-              <SpecialHeader />
+              <SpecialHeader topOffset={bannerHeight} />
               <Suspense fallback={<SectionLoader />}>
                 <ToolsHubPage />
                 <SpecialFooter />
@@ -154,7 +188,7 @@ function App() {
         <Route path="/app/:appId" element={
           <ErrorBoundary onError={handleError}>
             <SparkleBackground>
-              <SpecialHeader />
+              <SpecialHeader topOffset={bannerHeight} />
               <Suspense fallback={<SectionLoader />}>
                 <AppPage />
                 <SpecialFooter />
@@ -167,7 +201,7 @@ function App() {
         <Route path="/features/ai-video-creator" element={
           <ErrorBoundary onError={handleError}>
             <SparkleBackground>
-              <SpecialHeader />
+              <SpecialHeader topOffset={bannerHeight} />
               <Suspense fallback={<SectionLoader />}>
                 <AIVideoCreatorPage />
                 <SpecialFooter />
@@ -179,7 +213,7 @@ function App() {
         <Route path="/features/ai-editing" element={
           <ErrorBoundary onError={handleError}>
             <SparkleBackground>
-              <SpecialHeader />
+              <SpecialHeader topOffset={bannerHeight} />
               <Suspense fallback={<SectionLoader />}>
                 <AIEditingPage />
                 <SpecialFooter />
@@ -191,7 +225,7 @@ function App() {
         <Route path="/features/smart-templates" element={
           <ErrorBoundary onError={handleError}>
             <SparkleBackground>
-              <SpecialHeader />
+              <SpecialHeader topOffset={bannerHeight} />
               <Suspense fallback={<SectionLoader />}>
                 <SmartTemplatesPage />
                 <SpecialFooter />
@@ -203,7 +237,7 @@ function App() {
         <Route path="/features/content-repurposing" element={
           <ErrorBoundary onError={handleError}>
             <SparkleBackground>
-              <SpecialHeader />
+              <SpecialHeader topOffset={bannerHeight} />
               <Suspense fallback={<SectionLoader />}>
                 <ContentRepurposingPage />
                 <SpecialFooter />
@@ -215,7 +249,7 @@ function App() {
         <Route path="/features/auto-captions" element={
           <ErrorBoundary onError={handleError}>
             <SparkleBackground>
-              <SpecialHeader />
+              <SpecialHeader topOffset={bannerHeight} />
               <Suspense fallback={<SectionLoader />}>
                 <AutoCaptionsPage />
                 <SpecialFooter />
@@ -227,7 +261,7 @@ function App() {
         <Route path="/features/collaboration" element={
           <ErrorBoundary onError={handleError}>
             <SparkleBackground>
-              <SpecialHeader />
+              <SpecialHeader topOffset={bannerHeight} />
               <Suspense fallback={<SectionLoader />}>
                 <CollaborationPage />
                 <SpecialFooter />
@@ -240,7 +274,7 @@ function App() {
         <Route path="/features" element={
           <ErrorBoundary onError={handleError}>
             <SparkleBackground>
-              <SpecialHeader />
+              <SpecialHeader topOffset={bannerHeight} />
               <Suspense fallback={<SectionLoader />}>
                 <FeatureListPage />
                 <SpecialFooter />
@@ -252,7 +286,7 @@ function App() {
         <Route path="/pricing" element={
           <ErrorBoundary onError={handleError}>
             <SparkleBackground>
-              <SpecialHeader />
+              <SpecialHeader topOffset={bannerHeight} />
               <Suspense fallback={<SectionLoader />}>
                 <PricingPage />
                 <SpecialFooter />
@@ -264,7 +298,7 @@ function App() {
         <Route path="/faq" element={
           <ErrorBoundary onError={handleError}>
             <SparkleBackground>
-              <SpecialHeader />
+              <SpecialHeader topOffset={bannerHeight} />
               <Suspense fallback={<SectionLoader />}>
                 <FAQPage />
                 <SpecialFooter />
@@ -276,7 +310,7 @@ function App() {
         <Route path="/about" element={
           <ErrorBoundary onError={handleError}>
             <SparkleBackground>
-              <SpecialHeader />
+              <SpecialHeader topOffset={bannerHeight} />
               <Suspense fallback={<SectionLoader />}>
                 <AboutUsPage />
                 <SpecialFooter />
@@ -288,7 +322,7 @@ function App() {
         <Route path="/contact" element={
           <ErrorBoundary onError={handleError}>
             <SparkleBackground>
-              <SpecialHeader />
+              <SpecialHeader topOffset={bannerHeight} />
               <Suspense fallback={<SectionLoader />}>
                 <ContactPage />
                 <SpecialFooter />
@@ -300,7 +334,7 @@ function App() {
         <Route path="/blog" element={
           <ErrorBoundary onError={handleError}>
             <SparkleBackground>
-              <SpecialHeader />
+              <SpecialHeader topOffset={bannerHeight} />
               <Suspense fallback={<SectionLoader />}>
                 <BlogPage />
                 <SpecialFooter />
@@ -312,7 +346,7 @@ function App() {
         <Route path="/blog/:postId" element={
           <ErrorBoundary onError={handleError}>
             <SparkleBackground>
-              <SpecialHeader />
+              <SpecialHeader topOffset={bannerHeight} />
               <Suspense fallback={<SectionLoader />}>
                 <BlogPostPage />
                 <SpecialFooter />
@@ -325,7 +359,7 @@ function App() {
         <Route path="/help" element={
           <ErrorBoundary onError={handleError}>
             <SparkleBackground>
-              <SpecialHeader />
+              <SpecialHeader topOffset={bannerHeight} />
               <Suspense fallback={<SectionLoader />}>
                 <HelpCenterPage />
                 <SpecialFooter />
@@ -337,7 +371,7 @@ function App() {
         <Route path="/help/:articleId" element={
           <ErrorBoundary onError={handleError}>
             <SparkleBackground>
-              <SpecialHeader />
+              <SpecialHeader topOffset={bannerHeight} />
               <Suspense fallback={<SectionLoader />}>
                 <HelpArticlePage />
                 <SpecialFooter />
@@ -350,7 +384,7 @@ function App() {
         <Route path="/dashboard" element={
           <ErrorBoundary onError={handleError}>
             <SparkleBackground>
-              <SpecialHeader />
+              <SpecialHeader topOffset={bannerHeight} />
               <Suspense fallback={<SectionLoader />}>
                 <DashboardPage />
                 <SpecialFooter />

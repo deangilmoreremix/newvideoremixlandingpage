@@ -3,7 +3,11 @@ import { Video, ChevronDown, ArrowRight, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-const SpecialHeader: React.FC = () => {
+interface SpecialHeaderProps {
+  topOffset?: number;
+}
+
+const SpecialHeader: React.FC<SpecialHeaderProps> = ({ topOffset = 0 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -44,7 +48,8 @@ const SpecialHeader: React.FC = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 100, damping: 15 }}
-      className={`fixed top-0 left-0 right-0 z-50 py-3 ${isScrolled ? 'bg-black/90 backdrop-blur-md' : 'bg-transparent'}`}
+      className={`fixed left-0 right-0 z-40 py-3 ${isScrolled ? 'bg-black/90 backdrop-blur-md' : 'bg-transparent'}`}
+      style={{ top: `${topOffset}px` }}
     >
       <div className="container mx-auto px-4 md:px-8 flex items-center justify-between">
         {/* Logo */}

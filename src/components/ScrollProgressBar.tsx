@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 
-const ScrollProgressBar: React.FC = () => {
+interface ScrollProgressBarProps {
+  topOffset?: number;
+}
+
+const ScrollProgressBar: React.FC<ScrollProgressBarProps> = ({ topOffset = 0 }) => {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -29,8 +33,9 @@ const ScrollProgressBar: React.FC = () => {
 
   return (
     <motion.div 
-      className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-600 via-primary-400 to-secondary-500 z-50 origin-left"
+      className="fixed left-0 right-0 h-1 bg-gradient-to-r from-primary-600 via-primary-400 to-secondary-500 z-50 origin-left"
       style={{ scaleX }}
+      style={{ scaleX, top: `${topOffset}px` }}
     />
   );
 };

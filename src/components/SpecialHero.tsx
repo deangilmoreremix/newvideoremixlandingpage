@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, ChevronDown, Shield, Clock, Star, ArrowRight, Sparkles, Award, Video } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
-import UrgencyBanner from './UrgencyBanner';
 import { useMediaQuery } from 'react-responsive';
 import useMeasure from 'react-use-measure';
 import CountUp from 'react-countup';
@@ -533,9 +532,6 @@ const SpecialHero: React.FC = () => {
 
   return (
     <section className="relative pt-32 pb-16 overflow-hidden bg-gradient-to-b from-black to-gray-900">
-      {/* SPECIAL OFFER ALERT */}
-      <UrgencyBanner />
-
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
           {/* Main Content - Left Side */}

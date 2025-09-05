@@ -7,6 +7,7 @@ import ScrollProgressBar from './components/ScrollProgressBar';
 import CustomCursor from './components/CustomCursor';
 import LiveActivityIndicator from './components/LiveActivityIndicator';
 import AudioPlayer from './components/AudioPlayer';
+import UrgencyBanner from './components/UrgencyBanner';
 import ErrorBoundary from './components/ErrorBoundary';
 import AIAssistant from './components/AIAssistant';
 
@@ -103,6 +104,9 @@ function App() {
         <title>VideoRemix.io - AI-Powered Video Creation & Editing</title>
         <meta name="description" content="Create, edit and remix videos with AI-powered tools. Transform your content with VideoRemix.io's easy-to-use platform." />
       </Helmet>
+      
+      {/* Urgency Banner - Always at the top */}
+      <UrgencyBanner />
       
       {/* Scroll Progress Indicator */}
       <ScrollProgressBar />

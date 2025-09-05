@@ -31,6 +31,7 @@ const AboutUsPage = lazy(() => import('./pages/AboutUsPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
+const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 const SpecialFooter = lazy(() => import('./components/SpecialFooter'));
 
 // Help Center pages
@@ -335,6 +336,19 @@ function App() {
               <SpecialHeader />
               <Suspense fallback={<SectionLoader />}>
                 <HelpArticlePage />
+                <SpecialFooter />
+              </Suspense>
+            </SparkleBackground>
+          </ErrorBoundary>
+        } />
+        
+        {/* Dashboard Route */}
+        <Route path="/dashboard" element={
+          <ErrorBoundary onError={handleError}>
+            <SparkleBackground>
+              <SpecialHeader />
+              <Suspense fallback={<SectionLoader />}>
+                <DashboardPage />
                 <SpecialFooter />
               </Suspense>
             </SparkleBackground>

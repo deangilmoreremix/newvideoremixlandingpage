@@ -91,32 +91,49 @@ const personalizationBenefits = [
 // Updated URLs for personalized tools
 const toolUrlMap: {[key: string]: string} = {
   // AI Content tools
-  'ai-creative-studio': 'https://ai-personalized-content.videoremix.io',
-  'thumbnail-generator': 'https://ai-personalized-content.videoremix.io',
-  'ai-art': 'https://ai-personalized-content.videoremix.io',
-  'storyboard': 'https://ai-personalized-content.videoremix.io',
-  'rebrander-ai': 'https://ai-personalized-content.videoremix.io',
+  'ai-creative-studio': 'https://capable-mermaid-3c73fa.netlify.app/',
+  'thumbnail-generator': 'https://capable-mermaid-3c73fa.netlify.app/',
+  'ai-art': 'https://capable-mermaid-3c73fa.netlify.app/',
+  'storyboard': 'https://capable-mermaid-3c73fa.netlify.app/',
+  'rebrander-ai': 'https://capable-mermaid-3c73fa.netlify.app/',
   'gif-editor': 'https://ai-personalized-content.videoremix.io',
   'meme-generator': 'https://ai-personalized-content.videoremix.io',
-  'hybrid-ai': 'https://ai-personalized-content.videoremix.io',
-  'gemini-features': 'https://ai-personalized-content.videoremix.io',
-  'multimodal-creator': 'https://ai-personalized-content.videoremix.io',
+  'hybrid-ai': 'https://capable-mermaid-3c73fa.netlify.app/',
+  'gemini-features': 'https://capable-mermaid-3c73fa.netlify.app/',
+  'multimodal-creator': 'https://capable-mermaid-3c73fa.netlify.app/',
   
   // Sales page related tools
-  'landing-page': 'https://sales-page-builder.videoremix.io',
-  'page-planner': 'https://sales-page-builder.videoremix.io',
-  'page-cloner': 'https://sales-page-builder.videoremix.io',
+  'landing-page': 'https://prismatic-starship-c0b4c2.netlify.app',
+  'page-planner': 'https://prismatic-starship-c0b4c2.netlify.app',
+  'page-cloner': 'https://prismatic-starship-c0b4c2.netlify.app',
   
   // Proposal tools
-  'proposal-generator': 'https://proposal-ai.videoremix.io',
-  'realtime-proposal': 'https://proposal-ai.videoremix.io',
-  'smart-pricing': 'https://proposal-ai.videoremix.io',
+  'proposal-generator': 'https://keen-pastelito-6b9074.netlify.app',
+  'realtime-proposal': 'https://keen-pastelito-6b9074.netlify.app',
+  'smart-pricing': 'https://keen-pastelito-6b9074.netlify.app',
   
   // Sales assistant tools
-  'client-research': 'https://sales-assistant-ai.videoremix.io',
-  'objection-handler': 'https://sales-assistant-ai.videoremix.io',
-  'follow-up-emails': 'https://sales-assistant-ai.videoremix.io',
-  'client-sentiment-analyzer': 'https://sales-assistant-ai.videoremix.io'
+  'client-research': 'https://gentle-frangipane-ceed17.netlify.app',
+  'objection-handler': 'https://gentle-frangipane-ceed17.netlify.app',
+  'follow-up-emails': 'https://gentle-frangipane-ceed17.netlify.app',
+  'client-sentiment-analyzer': 'https://gentle-frangipane-ceed17.netlify.app',
+  
+  // NEW APPS URLs
+  'ai-referral-maximizer': 'https://eloquent-kleicha-7e3a3e.netlify.app',
+  'ai-sales': 'https://magnificent-lamington-619374.netlify.app/',
+  'personalizer-recorder': 'https://adorable-arithmetic-675d28.netlify.app/',
+  'smart-crm-closer': 'https://stupendous-twilight-64389a.netlify.app/',
+  'video-ai-editor': 'https://heroic-seahorse-296f32.netlify.app/',
+  'ai-video-image': 'https://thriving-mochi-ecd815.netlify.app/',
+  'ai-skills-monetizer': 'https://roaring-mochi-39a60a.netlify.app',
+  'ai-signature': 'https://kaleidoscopic-tarsier-3d0a6c.netlify.app/',
+  'ai-template-generator': 'https://cute-khapse-4e62cb.netlify.app',
+  'funnelcraft-ai': 'https://serene-valkyrie-fec320.netlify.app/',
+  'interactive-shopping': 'https://inspiring-mandazi-d17556.netlify.app',
+  'personalizer-profile': 'https://endearing-churros-2ce8c6.netlify.app/',
+  'personalizer-video-image-transformer': 'https://thriving-mochi-ecd815.netlify.app/',
+  'personalizer-url-video-generation': 'https://cute-khapse-4e62cb.netlify.app/',
+  'sales-assistant-app': 'https://gentle-frangipane-ceed17.netlify.app'
 };
 
 const AppGallerySection: React.FC = () => {

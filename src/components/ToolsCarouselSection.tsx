@@ -536,32 +536,49 @@ const ToolsCarouselSection: React.FC = () => {
             
             <motion.a 
               href="/pricing"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center bg-white text-primary-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg"
-            >
-              View Marketing Plans
+  'ai-creative-studio': 'https://capable-mermaid-3c73fa.netlify.app/',
+  'thumbnail-generator': 'https://capable-mermaid-3c73fa.netlify.app/',
+  'ai-art': 'https://capable-mermaid-3c73fa.netlify.app/',
+  'storyboard': 'https://capable-mermaid-3c73fa.netlify.app/',
+  'rebrander-ai': 'https://capable-mermaid-3c73fa.netlify.app/',
               <ArrowRight className="ml-2 h-5 w-5" />
             </motion.a>
-            
-            <p className="mt-4 text-gray-400 text-sm">
-              Start with our 14-day free marketing personalization trial. No credit card required.
+  'hybrid-ai': 'https://capable-mermaid-3c73fa.netlify.app/',
+  'gemini-features': 'https://capable-mermaid-3c73fa.netlify.app/',
+  'multimodal-creator': 'https://capable-mermaid-3c73fa.netlify.app/',
             </p>
           </div>
-        </motion.div>
-      </div>
-      
+  'landing-page': 'https://prismatic-starship-c0b4c2.netlify.app',
+  'page-planner': 'https://prismatic-starship-c0b4c2.netlify.app',
+  'page-cloner': 'https://prismatic-starship-c0b4c2.netlify.app',
       <style jsx>{`
         .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .hide-scrollbar {
+  'proposal-generator': 'https://keen-pastelito-6b9074.netlify.app',
+  'realtime-proposal': 'https://keen-pastelito-6b9074.netlify.app',
+  'smart-pricing': 'https://keen-pastelito-6b9074.netlify.app',
           -ms-overflow-style: none;
           scrollbar-width: none;
-        }
-      `}</style>
-    </section>
-  );
+  'client-research': 'https://gentle-frangipane-ceed17.netlify.app',
+  'objection-handler': 'https://gentle-frangipane-ceed17.netlify.app',
+  'follow-up-emails': 'https://gentle-frangipane-ceed17.netlify.app',
+  'client-sentiment-analyzer': 'https://gentle-frangipane-ceed17.netlify.app',
+  
+  // NEW APPS URLs
+  'ai-referral-maximizer': 'https://eloquent-kleicha-7e3a3e.netlify.app',
+  'ai-sales': 'https://magnificent-lamington-619374.netlify.app/',
+  'personalizer-recorder': 'https://adorable-arithmetic-675d28.netlify.app/',
+  'smart-crm-closer': 'https://stupendous-twilight-64389a.netlify.app/',
+  'video-ai-editor': 'https://heroic-seahorse-296f32.netlify.app/',
+  'ai-video-image': 'https://thriving-mochi-ecd815.netlify.app/',
+  'ai-skills-monetizer': 'https://roaring-mochi-39a60a.netlify.app',
+  'ai-signature': 'https://kaleidoscopic-tarsier-3d0a6c.netlify.app/',
+  'ai-template-generator': 'https://cute-khapse-4e62cb.netlify.app',
+  'funnelcraft-ai': 'https://serene-valkyrie-fec320.netlify.app/',
+  'interactive-shopping': 'https://inspiring-mandazi-d17556.netlify.app',
+  'personalizer-profile': 'https://endearing-churros-2ce8c6.netlify.app/',
+  'personalizer-video-image-transformer': 'https://thriving-mochi-ecd815.netlify.app/',
+  'personalizer-url-video-generation': 'https://cute-khapse-4e62cb.netlify.app/',
+  'sales-assistant-app': 'https://gentle-frangipane-ceed17.netlify.app'
 };
 
 export default ToolsCarouselSection;

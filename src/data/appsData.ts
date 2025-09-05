@@ -18,7 +18,20 @@ import {
   PanelTop,
   Zap,
   Camera,
-  Share
+  Share,
+  Megaphone,
+  Database,
+  Monitor,
+  DollarSign,
+  FileSignature,
+  LayoutTemplate,
+  ShoppingBag,
+  Store,
+  UserCheck,
+  Rocket,
+  Settings,
+  BarChart2,
+  Briefcase
 } from 'lucide-react';
 
 // App data structure
@@ -229,5 +242,114 @@ export const appsData: App[] = [
     category: 'video',
     icon: React.createElement(FileText),
     image: 'https://images.unsplash.com/photo-1455390528084-8b85e4bcd271?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+  },
+  // NEW APPS
+  {
+    id: 'ai-referral-maximizer',
+    name: 'AI Referral Maximizer',
+    description: 'Maximize your referral program with AI optimization',
+    category: 'lead-gen',
+    icon: React.createElement(Megaphone),
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    new: true
+  },
+  {
+    id: 'smart-crm-closer',
+    name: 'Smart CRM Closer',
+    description: 'Close more deals with intelligent CRM automation',
+    category: 'lead-gen',
+    icon: React.createElement(Database),
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    popular: true
+  },
+  {
+    id: 'video-ai-editor',
+    name: 'Video AI Editor',
+    description: 'Advanced AI-powered video editing with smart automation',
+    category: 'video',
+    icon: React.createElement(Video),
+    image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    new: true
+  },
+  {
+    id: 'ai-video-image',
+    name: 'AI Video & Image',
+    description: 'Transform videos and images with AI enhancement',
+    category: 'ai-image',
+    icon: React.createElement(ImageIcon),
+    image: 'https://images.unsplash.com/photo-1579403124614-197f69d8187b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    popular: true
+  },
+  {
+    id: 'ai-skills-monetizer',
+    name: 'AI Skills Monetizer',
+    description: 'Turn your skills into profitable online businesses',
+    category: 'personalizer',
+    icon: React.createElement(DollarSign),
+    image: 'https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    new: true
+  },
+  {
+    id: 'ai-signature',
+    name: 'AI Signature',
+    description: 'Generate professional digital signatures with AI',
+    category: 'personalizer',
+    icon: React.createElement(FileSignature),
+    image: 'https://images.unsplash.com/photo-1586380980850-5bb0c0329b2e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    new: true
+  },
+  {
+    id: 'ai-template-generator',
+    name: 'AI Template Generator',
+    description: 'Create custom templates for any purpose with AI',
+    category: 'creative',
+    icon: React.createElement(LayoutTemplate),
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    popular: true
+  },
+  {
+    id: 'funnelcraft-ai',
+    name: 'FunnelCraft AI',
+    description: 'Build high-converting sales funnels with AI assistance',
+    category: 'lead-gen',
+    icon: React.createElement(BarChart2),
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    popular: true
+  },
+  {
+    id: 'interactive-shopping',
+    name: 'Interactive Shopping',
+    description: 'Create engaging interactive shopping experiences',
+    category: 'creative',
+    icon: React.createElement(ShoppingBag),
+    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    new: true
+  },
+  {
+    id: 'personalizer-video-image-transformer',
+    name: 'AI Video & Image Transformer',
+    description: 'Transform videos and images with advanced AI processing',
+    category: 'ai-image',
+    icon: React.createElement(Sparkles),
+    image: 'https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    new: true
+  },
+  {
+    id: 'personalizer-url-video-generation',
+    name: 'URL Video Generation Templates & Editor',
+    description: 'Generate videos from URLs with smart template matching',
+    category: 'video',
+    icon: React.createElement(Video),
+    image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    new: true
+  },
+  {
+    id: 'sales-assistant-app',
+    name: 'Sales Assistant App',
+    description: 'Your complete AI-powered sales assistant',
+    category: 'lead-gen',
+    icon: React.createElement(Briefcase),
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    popular: true
   }
 ];

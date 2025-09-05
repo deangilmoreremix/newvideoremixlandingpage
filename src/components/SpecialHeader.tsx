@@ -94,7 +94,7 @@ const SpecialHeader: React.FC = () => {
             </button>
             
             {activeDropdown === 'tools' && (
-              <div className="absolute left-0 mt-1 w-[320px] bg-black/90 backdrop-blur-md border border-gray-700 rounded-lg shadow-lg overflow-hidden z-50">
+              <div className="absolute left-0 mt-1 w-[320px] bg-black/90 backdrop-blur-md border border-gray-700 rounded-lg shadow-lg overflow-hidden z-[100]">
                 <div className="p-4">
                   <h3 className="text-primary-400 font-medium text-sm mb-3 flex items-center">
                     <Sparkles className="h-4 w-4 mr-1" /> Featured Tools

@@ -96,7 +96,7 @@ const SpecialFooter: React.FC = () => {
             <div className="space-y-2">
               <div className="flex items-center">
                 <Mail className="h-4 w-4 mr-2 text-primary-400" />
-                <a href="mailto:hello@videoremix.io" className="hover:text-white transition-colors">hello@videoremix.io</a>
+                <a href="mailto:hello@videoremix.vip" className="hover:text-white transition-colors">hello@videoremix.vip</a>
               </div>
               <div className="flex items-center">
                 <Phone className="h-4 w-4 mr-2 text-primary-400" />

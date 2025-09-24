@@ -10,6 +10,7 @@ import AudioPlayer from './components/AudioPlayer';
 import UrgencyBanner from './components/UrgencyBanner';
 import ErrorBoundary from './components/ErrorBoundary';
 import AIAssistant from './components/AIAssistant';
+import { AdminProvider } from './context/AdminContext';
 
 // Lazy loaded components for better performance
 const LandingPage = lazy(() => import('./pages/LandingPage'));
@@ -33,6 +34,7 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 const SpecialFooter = lazy(() => import('./components/SpecialFooter'));
 
 // Help Center pages
@@ -131,11 +133,12 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-900">
-      <Helmet>
-        <title>VideoRemix.io - AI-Powered Video Creation & Editing</title>
-        <meta name="description" content="Create, edit and remix videos with AI-powered tools. Transform your content with VideoRemix.io's easy-to-use platform." />
-      </Helmet>
+    <AdminProvider>
+      <div className="flex flex-col min-h-screen bg-gray-900">
+        <Helmet>
+          <title>VideoRemix.io - AI-Powered Marketing Personalization Platform</title>
+          <meta name="description" content="Create personalized marketing content that converts with AI-powered tools. Transform your campaigns with VideoRemix.io's marketing personalization platform." />
+        </Helmet>
       
       {/* Urgency Banner - Always at the top */}
       <div ref={bannerRef}>
@@ -392,8 +395,18 @@ function App() {
             </SparkleBackground>
           </ErrorBoundary>
         } />
+
+        {/* Admin Dashboard Route */}
+        <Route path="/admin" element={
+          <ErrorBoundary onError={handleError}>
+            <Suspense fallback={<SectionLoader />}>
+              <AdminDashboard />
+            </Suspense>
+          </ErrorBoundary>
+        } />
       </Routes>
     </div>
+    </AdminProvider>
   );
 }
 

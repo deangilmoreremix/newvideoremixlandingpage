@@ -266,7 +266,7 @@ const VideoPreview = () => {
           }}
           transition={{ repeat: Infinity, duration: 2 }}
         >
-          See personalized marketing in action
+          See personalized marketing content in action
         </motion.div>
         
         {/* Decorative elements */}
@@ -453,9 +453,9 @@ const CreateFirstVideoCTA = () => {
           <Video className="h-5 w-5 text-white" />
         </div>
       </div>
-      <h3 className="text-center text-xl font-bold text-white mb-3">Create Your First Personalized Marketing Video</h3>
+      <h3 className="text-center text-xl font-bold text-white mb-3">Create Your First Personalized Marketing Campaign</h3>
       <p className="text-center text-gray-300 mb-4">
-        Launch your first personalized marketing campaign in minutes with our AI-powered marketing wizard.
+        Launch your first personalized marketing campaign in minutes with our AI-powered personalization platform.
       </p>
       <div className="flex justify-center">
         <Link
@@ -463,7 +463,7 @@ const CreateFirstVideoCTA = () => {
           className="flex items-center bg-white text-primary-600 hover:bg-gray-100 font-semibold px-6 py-2.5 rounded-lg shadow-lg transition-all duration-200"
         >
           <Video className="h-5 w-5 mr-2" />
-          Start Personalized Marketing
+          Start Personalizing Content
           <ArrowRight className="ml-2 h-4 w-4" />
         </Link>
       </div>
@@ -482,13 +482,13 @@ const SpecialHero: React.FC = () => {
     {
       name: "David Chen",
       role: "Marketing Director",
-      quote: "The personalization tools helped us achieve a 215% increase in marketing video engagement and 3X more campaign leads.",
+      quote: "The personalization tools helped us achieve a 215% increase in marketing engagement and 3X more campaign leads.",
       image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150"
     },
     {
       name: "Sarah Wilson",
       role: "Digital Marketing Lead",
-      quote: "I create custom marketing videos for different audience segments in minutes. My conversion rates have doubled since using VideoRemix.",
+      quote: "I create custom marketing content for different audience segments in minutes. My conversion rates have doubled since using VideoRemix.",
       image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=150"
     }
   ];
@@ -548,7 +548,7 @@ const SpecialHero: React.FC = () => {
               </div>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-none md:leading-tight relative">
-                Create Personalized Marketing Videos That <span className="text-primary-400">Convert Your Audience</span>
+                Create Personalized Marketing Content That <span className="text-primary-400">Converts Your Audience</span>
               </h1>
 
               <p className="text-xl md:text-2xl text-gray-300 mb-8">
@@ -557,7 +557,7 @@ const SpecialHero: React.FC = () => {
 
               <div className="space-y-4 mb-8">
                 {[
-                  "AI-powered personalization for marketing videos and campaigns",
+                  "AI-powered personalization for marketing content and campaigns",
                   "50+ marketing personalization tools for marketers and businesses",
                   "Create personalized campaigns in minutes, not hours",
                   "Increase marketing ROI with audience-specific content"
@@ -602,7 +602,7 @@ const SpecialHero: React.FC = () => {
                     className="block w-full md:w-auto md:inline-block text-center bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-bold text-xl px-8 py-5 rounded-lg shadow-lg"
                   >
                     <span className="flex items-center justify-center">
-                      START PERSONALIZED MARKETING
+                      START PERSONALIZING CONTENT
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </span>
                   </a>

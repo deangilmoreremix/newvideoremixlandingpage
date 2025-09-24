@@ -480,7 +480,7 @@ const CaseStudiesSection: React.FC = () => {
                     <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center">
                       <span className="text-white font-medium">VideoRemix.io Solution</span>
                       <motion.a 
-                        href="https://ai-personalized-content.videoremix.io"
+                        href="https://ai-personalized-content.videoremix.vip"
                         className="flex items-center bg-primary-600/80 backdrop-blur-sm text-white px-3 py-1 rounded-lg text-sm"
                         whileHover={{ scale: 1.05, backgroundColor: "rgba(99, 102, 241, 0.9)" }}
                       >
@@ -571,7 +571,7 @@ const CaseStudiesSection: React.FC = () => {
                   
                   <div className="flex justify-center mt-4">
                     <motion.a
-                      href="https://ai-personalized-content.videoremix.io"
+                      href="https://ai-personalized-content.videoremix.vip"
                       className="text-primary-400 text-sm font-medium inline-flex items-center"
                       whileHover={{ scale: 1.05, x: 5 }}
                     >
@@ -687,7 +687,7 @@ const CaseStudiesSection: React.FC = () => {
             
             <div className="mt-6 text-center">
               <motion.a
-                href="https://ai-personalized-content.videoremix.io"
+                href="https://ai-personalized-content.videoremix.vip"
                 className="inline-flex items-center text-primary-400 font-medium"
                 whileHover={{ scale: 1.05, x: 5 }}
               >
@@ -725,7 +725,7 @@ const CaseStudiesSection: React.FC = () => {
             className="inline-block"
           >
             <a 
-              href="https://ai-personalized-content.videoremix.io" 
+              href="https://ai-personalized-content.videoremix.vip" 
               className="inline-flex items-center bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-bold px-8 py-4 rounded-lg shadow-lg"
             >
               Start Your Personalization Journey

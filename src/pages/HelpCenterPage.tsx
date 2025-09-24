@@ -849,7 +849,7 @@ const HelpCenterPage: React.FC = () => {
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                   <a 
-                    href="https://forum.videoremix.io" 
+                    href="https://forum.videoremix.vip"
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="bg-gray-800/70 rounded-lg p-5 hover:border-primary-500/30 border border-gray-700 transition-colors"

@@ -178,8 +178,8 @@ const FeatureListPage: React.FC = () => {
       <Helmet>
         <title>Features | VideoRemix.io</title>
         <meta 
-          name="description" 
-          content="Explore the powerful AI-driven video creation and editing features of VideoRemix.io. Learn how our tools can transform your content creation process." 
+          name="description"
+          content="Explore the powerful AI-driven marketing personalization features of VideoRemix.io. Learn how our tools can transform your marketing campaigns."
         />
       </Helmet>
 
@@ -205,7 +205,7 @@ const FeatureListPage: React.FC = () => {
                 </MagicSparkles>
                 
                 <p className="text-xl text-gray-300 mb-8">
-                  Discover the industry-leading tools that make VideoRemix.io the ultimate platform for video creation, editing, and optimization.
+                  Discover the industry-leading tools that make VideoRemix.io the ultimate platform for marketing personalization and campaign optimization.
                 </p>
               </motion.div>
 
@@ -462,7 +462,7 @@ const FeatureListPage: React.FC = () => {
                 How Our Features Compare
               </h2>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                VideoRemix.io offers capabilities that outshine traditional video editing software and other online tools
+                VideoRemix.io offers capabilities that outshine traditional marketing tools and other online platforms
               </p>
             </div>
             

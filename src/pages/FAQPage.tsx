@@ -23,7 +23,7 @@ const faqData = [
   // Getting Started
   {
     question: "What is VideoRemix.io?",
-    answer: "VideoRemix.io is an AI-powered video creation and editing platform designed to help content creators, marketers, and businesses create professional-quality videos in minutes instead of hours. Our platform combines artificial intelligence with intuitive design to eliminate the technical barriers of traditional video editing.",
+    answer: "VideoRemix.io is an AI-powered marketing personalization platform designed to help marketers and businesses create personalized marketing content that drives results. Our platform combines artificial intelligence with intuitive design to eliminate the technical barriers of traditional marketing content creation, enabling you to create personalized videos, images, and campaigns in minutes instead of hours.",
     category: "getting-started"
   },
   {
@@ -351,7 +351,7 @@ const faqData = [
   },
   {
     question: "My problem isn't listed here. How do I get help?",
-    answer: "Our support team is ready to help! For technical issues, please visit our Help Center for detailed guides or contact support directly through the chat icon in the bottom right corner of the app. You can also email support@videoremix.io with details about your issue. Pro and Business users receive priority support with faster response times.",
+    answer: "Our support team is ready to help! For technical issues, please visit our Help Center for detailed guides or contact support directly through the chat icon in the bottom right corner of the app. You can also email support@videoremix.vip with details about your issue. Pro and Business users receive priority support with faster response times.",
     category: "troubleshooting"
   }
 ];
@@ -743,7 +743,7 @@ const FAQPage: React.FC = () => {
                       </motion.a>
                       
                       <motion.a
-                        href="mailto:support@videoremix.io"
+                        href="mailto:support@videoremix.vip"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-medium flex items-center justify-center border border-gray-700"

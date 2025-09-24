@@ -9,7 +9,7 @@ const PricingPage: React.FC = () => {
     <main className="w-full">
       <Helmet>
         <title>Pricing | VideoRemix.io</title>
-        <meta name="description" content="Choose the perfect plan for your video creation and editing needs with VideoRemix.io. From free to enterprise, we have the right pricing for you." />
+        <meta name="description" content="Choose the perfect plan for your marketing personalization needs with VideoRemix.io. From free to enterprise, we have the right pricing for you." />
       </Helmet>
       
       <section id="pricing-hero" className="py-20 md:py-28">

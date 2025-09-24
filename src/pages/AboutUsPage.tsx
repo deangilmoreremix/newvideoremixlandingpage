@@ -11,8 +11,8 @@ const AboutUsPage: React.FC = () => {
       <Helmet>
         <title>About VideoRemix.io | Our Story, Mission & Team</title>
         <meta 
-          name="description" 
-          content="Learn about VideoRemix.io's mission to democratize video creation with AI-powered tools. Meet our team and discover the story behind our platform." 
+          name="description"
+          content="Learn about VideoRemix.io's mission to democratize marketing personalization with AI-powered tools. Meet our team and discover the story behind our platform."
         />
       </Helmet>
       
@@ -37,7 +37,7 @@ const AboutUsPage: React.FC = () => {
                 </MagicSparkles>
                 
                 <p className="text-xl text-gray-300 mb-8">
-                  We're on a mission to democratize video creation and empower creators with AI-powered tools.
+                  We're on a mission to democratize marketing personalization and empower marketers with AI-powered tools.
                 </p>
               </motion.div>
             </div>
@@ -68,13 +68,13 @@ const AboutUsPage: React.FC = () => {
               >
                 <h2 className="text-3xl font-bold text-white mb-6">Our Story</h2>
                 <p className="text-gray-300 mb-4">
-                  VideoRemix.io was born from a simple observation: video creation was still too complex, time-consuming, and technical for most people. Despite the growing importance of video content, the tools remained stuck in the past.
+                  VideoRemix.io was born from a simple observation: marketing personalization was still too complex, time-consuming, and technical for most businesses. Despite the growing importance of personalized marketing, the tools remained stuck in the past.
                 </p>
                 <p className="text-gray-300 mb-4">
-                  Founded in 2022 by a team of AI engineers and video production experts, we set out to build a platform that would make professional video creation accessible to everyone, regardless of technical skill or budget constraints.
+                  Founded in 2022 by a team of AI engineers and marketing experts, we set out to build a platform that would make professional marketing personalization accessible to everyone, regardless of technical skill or budget constraints.
                 </p>
                 <p className="text-gray-300">
-                  Today, VideoRemix.io serves thousands of creators, marketers, and businesses worldwide, helping them produce professional-quality videos in a fraction of the time it would traditionally take.
+                  Today, VideoRemix.io serves thousands of marketers and businesses worldwide, helping them create personalized marketing campaigns in a fraction of the time it would traditionally take.
                 </p>
               </motion.div>
             </div>
@@ -94,7 +94,7 @@ const AboutUsPage: React.FC = () => {
                   <Sparkles className="h-10 w-10 text-primary-400" />
                 </div>
                 <p className="text-2xl text-gray-100 italic mb-4">
-                  "To empower everyone to create professional videos without the technical barriers, democratizing video creation through AI and intuitive design."
+                  "To empower everyone to create personalized marketing that converts without the technical barriers, democratizing marketing personalization through AI and intuitive design."
                 </p>
                 <p className="text-gray-400">
                   This mission guides everything we do, from feature development to customer support.
@@ -121,7 +121,7 @@ const AboutUsPage: React.FC = () => {
                 {[
                   {
                     title: "Innovation First",
-                    description: "We continuously push the boundaries of what's possible with AI and video technology.",
+                    description: "We continuously push the boundaries of what's possible with AI and marketing personalization technology.",
                     icon: <Sparkles className="h-8 w-8 text-primary-400" />
                   },
                   {
@@ -179,7 +179,7 @@ const AboutUsPage: React.FC = () => {
               >
                 <h2 className="text-3xl font-bold text-white mb-6">Meet Our Leadership Team</h2>
                 <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                  The passionate people behind VideoRemix.io working to transform video creation.
+                  The passionate people behind VideoRemix.io working to transform marketing personalization.
                 </p>
               </motion.div>
               
@@ -188,7 +188,7 @@ const AboutUsPage: React.FC = () => {
                   {
                     name: "Alex Morgan",
                     role: "Founder & CEO",
-                    bio: "Former AI Research Lead at Google, Alex founded VideoRemix.io to democratize video creation.",
+                    bio: "Former AI Research Lead at Google, Alex founded VideoRemix.io to democratize marketing personalization.",
                     image: "https://randomuser.me/api/portraits/men/32.jpg"
                   },
                   {
@@ -249,7 +249,7 @@ const AboutUsPage: React.FC = () => {
               </h2>
               
               <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                Experience firsthand how our platform is transforming video creation for creators worldwide.
+                Experience firsthand how our platform is transforming marketing personalization for businesses worldwide.
               </p>
               
               <div className="flex flex-col sm:flex-row justify-center gap-4">

@@ -71,7 +71,7 @@ const ContactPage: React.FC = () => {
                       </div>
                       <div>
                         <p className="text-sm text-gray-400">Email</p>
-                        <a href="mailto:support@videoremix.io" className="text-white hover:text-primary-400">support@videoremix.io</a>
+                        <a href="mailto:support@videoremix.vip" className="text-white hover:text-primary-400">support@videoremix.vip</a>
                       </div>
                     </div>
                     

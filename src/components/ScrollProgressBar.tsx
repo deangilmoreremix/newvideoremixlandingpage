@@ -32,9 +32,8 @@ const ScrollProgressBar: React.FC<ScrollProgressBarProps> = ({ topOffset = 0 }) 
   if (!isVisible) return null;
 
   return (
-    <motion.div 
+    <motion.div
       className="fixed left-0 right-0 h-1 bg-gradient-to-r from-primary-600 via-primary-400 to-secondary-500 z-50 origin-left"
-      style={{ scaleX }}
       style={{ scaleX, top: `${topOffset}px` }}
     />
   );

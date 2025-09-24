@@ -52,7 +52,7 @@ const personalizationTools = [
     description: 'Create AI-generated marketing content tailored to your audience',
     category: 'content-creation',
     icon: <Sparkles className="h-6 w-6" />,
-    url: 'https://ai-personalized-content.videoremix.io',
+    url: 'https://ai-personalized-content.videoremix.vip',
     popular: true,
     new: false
   },
@@ -62,7 +62,7 @@ const personalizationTools = [
     description: 'Generate marketing videos based on audience data',
     category: 'content-creation',
     icon: <VideoIcon className="h-6 w-6" />,
-    url: 'https://ai-personalized-content.videoremix.io',
+    url: 'https://ai-personalized-content.videoremix.vip',
     popular: true,
     new: false
   },
@@ -72,7 +72,7 @@ const personalizationTools = [
     description: 'Create and customize animated GIFs for marketing campaigns',
     category: 'content-creation',
     icon: <FileImage className="h-6 w-6" />,
-    url: 'https://ai-personalized-content.videoremix.io',
+    url: 'https://ai-personalized-content.videoremix.vip',
     popular: false,
     new: true
   },
@@ -82,7 +82,7 @@ const personalizationTools = [
     description: 'Generate images for targeted marketing campaigns',
     category: 'content-creation',
     icon: <Palette className="h-6 w-6" />,
-    url: 'https://ai-personalized-content.videoremix.io',
+    url: 'https://ai-personalized-content.videoremix.vip',
     popular: true,
     new: false
   },
@@ -94,7 +94,7 @@ const personalizationTools = [
     description: 'Create custom action figures for marketing campaigns',
     category: 'visual-styles',
     icon: <Palette className="h-6 w-6" />,
-    url: 'https://ai-personalized-content.videoremix.io',
+    url: 'https://ai-personalized-content.videoremix.vip',
     popular: true,
     new: false
   },
@@ -104,7 +104,7 @@ const personalizationTools = [
     description: 'Transform marketing images into Ghibli-inspired artwork',
     category: 'visual-styles',
     icon: <Palette className="h-6 w-6" />,
-    url: 'https://ai-personalized-content.videoremix.io',
+    url: 'https://ai-personalized-content.videoremix.vip',
     popular: true,
     new: false
   },
@@ -114,7 +114,7 @@ const personalizationTools = [
     description: 'Generate nostalgic figures for marketing campaigns',
     category: 'visual-styles',
     icon: <Palette className="h-6 w-6" />,
-    url: 'https://ai-personalized-content.videoremix.io',
+    url: 'https://ai-personalized-content.videoremix.vip',
     popular: false,
     new: false
   },
@@ -124,7 +124,7 @@ const personalizationTools = [
     description: 'Convert marketing images into personalized cartoon illustrations',
     category: 'visual-styles',
     icon: <Palette className="h-6 w-6" />,
-    url: 'https://ai-personalized-content.videoremix.io',
+    url: 'https://ai-personalized-content.videoremix.vip',
     popular: false,
     new: true
   },
@@ -136,7 +136,7 @@ const personalizationTools = [
     description: 'Create tailored proposals for specific market segments',
     category: 'sales-tools',
     icon: <ShoppingCart className="h-6 w-6" />,
-    url: 'https://proposal-ai.videoremix.io',
+    url: 'https://proposal-ai.videoremix.vip',
     popular: true,
     new: false
   },
@@ -146,7 +146,7 @@ const personalizationTools = [
     description: 'Research audience segments to create personalized marketing',
     category: 'sales-tools',
     icon: <Users className="h-6 w-6" />,
-    url: 'https://sales-assistant-ai.videoremix.io',
+    url: 'https://sales-assistant-ai.videoremix.vip',
     popular: true,
     new: false
   },
@@ -156,7 +156,7 @@ const personalizationTools = [
     description: 'Generate segment-specific pricing recommendations',
     category: 'sales-tools',
     icon: <ShoppingCart className="h-6 w-6" />,
-    url: 'https://proposal-ai.videoremix.io',
+    url: 'https://proposal-ai.videoremix.vip',
     popular: false,
     new: false
   },
@@ -166,7 +166,7 @@ const personalizationTools = [
     description: 'Generate tailored responses to potential customer objections',
     category: 'sales-tools',
     icon: <MessageSquare className="h-6 w-6" />,
-    url: 'https://sales-assistant-ai.videoremix.io',
+    url: 'https://sales-assistant-ai.videoremix.vip',
     popular: false,
     new: false
   },
@@ -178,7 +178,7 @@ const personalizationTools = [
     description: 'Generate segment-specific follow-up communications',
     category: 'communication',
     icon: <MessageSquare className="h-6 w-6" />,
-    url: 'https://sales-assistant-ai.videoremix.io',
+    url: 'https://sales-assistant-ai.videoremix.vip',
     popular: true,
     new: false
   },
@@ -188,7 +188,7 @@ const personalizationTools = [
     description: 'Translate marketing content while preserving key messaging',
     category: 'communication',
     icon: <Globe className="h-6 w-6" />,
-    url: 'https://ai-personalized-content.videoremix.io',
+    url: 'https://ai-personalized-content.videoremix.vip',
     popular: true,
     new: false
   },
@@ -198,7 +198,7 @@ const personalizationTools = [
     description: 'Character-by-character translation preserving marketing terminology',
     category: 'communication',
     icon: <Globe className="h-6 w-6" />,
-    url: 'https://ai-personalized-content.videoremix.io',
+    url: 'https://ai-personalized-content.videoremix.vip',
     popular: false,
     new: true
   },
@@ -210,7 +210,7 @@ const personalizationTools = [
     description: 'Create marketing with cutting-edge multimodal AI models',
     category: 'advanced-ai',
     icon: <Bot className="h-6 w-6" />,
-    url: 'https://ai-personalized-content.videoremix.io',
+    url: 'https://ai-personalized-content.videoremix.vip',
     popular: true,
     new: true
   },
@@ -220,7 +220,7 @@ const personalizationTools = [
     description: 'Leverage multiple AI models in a single marketing workflow',
     category: 'advanced-ai',
     icon: <Wand2 className="h-6 w-6" />,
-    url: 'https://ai-personalized-content.videoremix.io',
+    url: 'https://ai-personalized-content.videoremix.vip',
     popular: false,
     new: true
   },
@@ -230,7 +230,7 @@ const personalizationTools = [
     description: 'Use the latest AI capabilities for marketing personalization',
     category: 'advanced-ai',
     icon: <Sparkles className="h-6 w-6" />,
-    url: 'https://ai-personalized-content.videoremix.io',
+    url: 'https://ai-personalized-content.videoremix.vip',
     popular: false,
     new: true
   }

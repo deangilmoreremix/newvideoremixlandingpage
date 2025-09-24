@@ -38,8 +38,8 @@ const SpecialHeader: React.FC<SpecialHeaderProps> = ({ topOffset = 0 }) => {
     { name: 'Personalized AI Image Generation', url: '/features/ai-image', description: 'Create AI-generated images', icon: <span className="text-lg">🎨</span> },
     { name: 'Personalized Video Generator', url: '/editor/:templateId', description: 'Generate personalized videos', icon: <span className="text-lg">🎬</span> },
     { name: 'Personalized Multimodal AI Creator', url: '/gemini-features', description: 'Create with text and visual inputs', icon: <span className="text-lg">🔮</span> },
-    { name: 'Personalized Sales Proposal Generator', url: 'https://proposal-ai.videoremix.io', description: 'Create tailored proposals', icon: <span className="text-lg">📝</span> },
-    { name: 'Personalized Sales Page Builder', url: 'https://sales-page-builder.videoremix.io', description: 'Build high-converting pages', icon: <span className="text-lg">🏗️</span> },
+    { name: 'Personalized Sales Proposal Generator', url: 'https://proposal-ai.videoremix.vip', description: 'Create tailored proposals', icon: <span className="text-lg">📝</span> },
+    { name: 'Personalized Sales Page Builder', url: 'https://sales-page-builder.videoremix.vip', description: 'Build high-converting pages', icon: <span className="text-lg">🏗️</span> },
     { name: 'Personalized Client Research', url: '/features/client-research', description: 'Research clients automatically', icon: <span className="text-lg">🔍</span> }
   ];
 

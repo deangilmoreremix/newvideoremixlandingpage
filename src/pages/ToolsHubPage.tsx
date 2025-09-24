@@ -339,8 +339,8 @@ const ToolsHubPage: React.FC = () => {
       <Helmet>
         <title>Tools Hub | VideoRemix.io</title>
         <meta 
-          name="description" 
-          content="Explore all personalized tools offered by VideoRemix.io. Find the perfect tools for your video creation, editing, and marketing needs." 
+          name="description"
+          content="Explore all personalized tools offered by VideoRemix.io. Find the perfect tools for your marketing personalization and campaign optimization needs."
         />
       </Helmet>
 
@@ -619,7 +619,7 @@ const ToolsHubPage: React.FC = () => {
                 </MagicSparkles>
                 
                 <p className="text-xl text-gray-300 mb-8">
-                  Access all our professional tools and features with a premium subscription
+                  Get unlimited access to all 50+ personalization tools and create content that delivers 3x better results than generic content.
                 </p>
                 
                 <motion.a 

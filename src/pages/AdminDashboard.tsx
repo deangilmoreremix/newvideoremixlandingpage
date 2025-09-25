@@ -5,10 +5,11 @@ import { Shield, Settings, Users, BarChart3, ToggleLeft, ToggleRight } from 'luc
 import { useAdmin } from '../context/AdminContext';
 import AdminAppsManagement from '../components/admin/AdminAppsManagement';
 import AdminFeaturesManagement from '../components/admin/AdminFeaturesManagement';
+import AdminUsersManagement from '../components/admin/AdminUsersManagement';
 
 const AdminDashboard: React.FC = () => {
   const { user, isAuthenticated, logout } = useAdmin();
-  const [activeTab, setActiveTab] = useState<'apps' | 'features'>('apps');
+  const [activeTab, setActiveTab] = useState<'apps' | 'features' | 'users'>('apps');
 
   if (!isAuthenticated) {
     return (
@@ -25,6 +26,7 @@ const AdminDashboard: React.FC = () => {
   const tabs = [
     { id: 'apps', label: 'Apps Management', icon: Settings },
     { id: 'features', label: 'Features Management', icon: ToggleLeft },
+    { id: 'users', label: 'Users Management', icon: Users },
   ];
 
   return (
@@ -122,7 +124,7 @@ const AdminDashboard: React.FC = () => {
                     return (
                       <button
                         key={tab.id}
-                        onClick={() => setActiveTab(tab.id as 'apps' | 'features')}
+                        onClick={() => setActiveTab(tab.id as 'apps' | 'features' | 'users')}
                         className={`flex-1 flex items-center justify-center px-4 py-3 rounded-md text-sm font-medium transition-all duration-200 ${
                           activeTab === tab.id
                             ? 'bg-red-600 text-white shadow-lg'
@@ -146,6 +148,7 @@ const AdminDashboard: React.FC = () => {
               >
                 {activeTab === 'apps' && <AdminAppsManagement />}
                 {activeTab === 'features' && <AdminFeaturesManagement />}
+                {activeTab === 'users' && <AdminUsersManagement />}
               </motion.div>
             </div>
           </div>

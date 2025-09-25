@@ -29,7 +29,7 @@ import {
 } from 'lucide-react';
 import MagicSparkles from './MagicSparkles';
 import { useInView } from 'react-intersection-observer';
-import { appsData } from '../data/appsData';
+import { useApps } from '../hooks/useApps';
 
 // Define TrendingUp component before it's used
 const TrendingUp: React.FC<{ className?: string }> = (props) => (
@@ -61,14 +61,14 @@ const toolCategories = [
   { id: 'creative', label: 'Personalized Creative', icon: React.createElement(Package, { className: "w-4 h-4" }) }
 ];
 
-// Featured apps to highlight
+// Featured apps to highlight (by slug)
 const featuredApps = [
-  'video-creator',
-  'landing-page',
-  'thumbnail-generator',
-  'ai-art',
-  'storyboard',
-  'rebrander-ai'
+  'ai-personalized-content',
+  'ai-referral-maximizer',
+  'ai-sales-maximizer',
+  'smart-crm-closer',
+  'video-ai-editor',
+  'ai-video-image'
 ];
 
 // Fallback image URLs to use when an app image fails to load
@@ -137,6 +137,7 @@ const toolUrlMap: {[key: string]: string} = {
 };
 
 const AppGallerySection: React.FC = () => {
+  const { apps: appsData, loading: appsLoading, error: appsError } = useApps();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredApps, setFilteredApps] = useState(appsData);
@@ -148,28 +149,28 @@ const AppGallerySection: React.FC = () => {
     threshold: 0.1,
     triggerOnce: true
   });
-  
+
   // Image loading error handling state
   const [imageErrors, setImageErrors] = useState<Record<string, number>>({});
 
   // Update filtered tools when category or search query changes
   useEffect(() => {
     let result = [...appsData];
-    
+
     // Apply category filter
     if (selectedCategory !== 'all') {
       result = result.filter(app => app.category === selectedCategory);
     }
-    
+
     // Apply search filter
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
       result = result.filter(
-        app => app.name.toLowerCase().includes(query) || 
-               app.description.toLowerCase().includes(query)
+        app => app.name.toLowerCase().includes(query) ||
+                app.description.toLowerCase().includes(query)
       );
     }
-    
+
     // Apply sorting
     switch (sortOrder) {
       case 'popular':
@@ -190,9 +191,41 @@ const AppGallerySection: React.FC = () => {
         result.sort((a, b) => a.name.localeCompare(b.name));
         break;
     }
-    
+
     setFilteredApps(result);
-  }, [selectedCategory, searchQuery, sortOrder]);
+  }, [selectedCategory, searchQuery, sortOrder, appsData]);
+
+  // Show loading state
+  if (appsLoading) {
+    return (
+      <section id="tools" className="py-20 bg-black relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-center items-center py-20">
+            <div className="w-8 h-8 border-t-2 border-primary-500 border-solid rounded-full animate-spin"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Show error state
+  if (appsError) {
+    return (
+      <section id="tools" className="py-20 bg-black relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="text-center py-20">
+            <div className="text-gray-400 text-lg mb-4">Failed to load applications</div>
+            <button
+              onClick={() => window.location.reload()}
+              className="text-primary-400 hover:text-primary-300 font-medium"
+            >
+              Try Again
+            </button>
+          </div>
+        </div>
+      </section>
+    );
+  }
   
   // Handle image load errors
   const handleImageError = (appId: string) => {
@@ -268,10 +301,10 @@ const AppGallerySection: React.FC = () => {
     }
   };
 
-  // Get URL for an app (use custom URL if available)
-  const getAppUrl = (appId: string) => {
-    return toolUrlMap[appId] || `/app/${appId}`;
-  };
+  // Get URL for an app (use deployment URL if available)
+    const getAppUrl = (app: any) => {
+      return app.url || `/app/${app.id}`;
+    };
 
   return (
     <section id="tools" className="py-20 bg-black relative overflow-hidden">
@@ -416,7 +449,7 @@ const AppGallerySection: React.FC = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="bg-white text-gray-900 px-6 py-3 rounded-lg font-bold flex items-center"
-                    onClick={() => window.location.href = getAppUrl(app.id)}
+                    onClick={() => window.location.href = getAppUrl(app)}
                   >
                     <Wand2 className="mr-2 h-5 w-5" />
                     Personalize Now
@@ -546,8 +579,8 @@ const AppGallerySection: React.FC = () => {
           <div className="overflow-x-auto pb-6 hide-scrollbar" style={{ scrollbarWidth: 'none' }}>
             <div className="flex space-x-4 px-1" style={{ width: 'max-content' }}>
               {filteredApps.map(app => {
-                // Determine custom URL if available
-                const appUrl = toolUrlMap[app.id] || `/app/${app.id}`;
+                // Use deployment URL from database
+                const appUrl = getAppUrl(app);
                 
                 return (
                 <motion.div
@@ -625,8 +658,8 @@ const AppGallerySection: React.FC = () => {
               }
             >
               {filteredApps.map((app) => {
-                // Determine custom URL if available
-                const appUrl = toolUrlMap[app.id] || `/app/${app.id}`;
+                // Use deployment URL from database
+                const appUrl = getAppUrl(app);
                 
                 return (
                 <motion.div

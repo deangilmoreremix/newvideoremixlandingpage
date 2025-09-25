@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Video, ChevronDown, ArrowRight, Sparkles } from 'lucide-react';
+import { Video, ChevronDown, ArrowRight, Sparkles, User, LogOut } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import SignInModal from './SignInModal';
+import SignUpModal from './SignUpModal';
 
 interface SpecialHeaderProps {
   topOffset?: number;
 }
 
 const SpecialHeader: React.FC<SpecialHeaderProps> = ({ topOffset = 0 }) => {
+  const { user, signOut } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [showSignInModal, setShowSignInModal] = useState(false);
+  const [showSignUpModal, setShowSignUpModal] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -147,21 +153,60 @@ const SpecialHeader: React.FC<SpecialHeaderProps> = ({ topOffset = 0 }) => {
           <Link to="/help" className="text-white/80 hover:text-white px-3 py-2 text-sm font-medium">
             Help Center
           </Link>
-          <motion.Link 
-            to="/get-started" 
-            className="ml-3 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 px-4 py-2 rounded-full text-sm font-medium text-white"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            GET ACCESS NOW
-            <motion.div
-              animate={{ x: [0, 5, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="inline-block ml-1"
-            >
-              <ChevronDown className="h-4 w-4 -rotate-90 inline-block" />
-            </motion.div>
-          </motion.Link>
+
+          {user ? (
+            <div className="relative ml-3">
+              <button
+                onClick={() => handleDropdownToggle('user')}
+                className="flex items-center space-x-2 text-white/80 hover:text-white px-3 py-2 text-sm font-medium"
+              >
+                <User className="h-4 w-4" />
+                <span>{user.user_metadata?.first_name || user.email}</span>
+                <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${activeDropdown === 'user' ? 'rotate-180' : ''}`} />
+              </button>
+
+              {activeDropdown === 'user' && (
+                <div className="absolute right-0 mt-2 w-48 bg-black/90 backdrop-blur-md border border-gray-700 rounded-lg shadow-lg z-[100]">
+                  <div className="py-1">
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 text-white hover:bg-gray-800 transition-colors"
+                      onClick={closeDropdowns}
+                    >
+                      Profile Settings
+                    </Link>
+                    <button
+                      onClick={() => {
+                        signOut();
+                        closeDropdowns();
+                      }}
+                      className="w-full text-left px-4 py-2 text-white hover:bg-gray-800 transition-colors flex items-center"
+                    >
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Sign Out
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="ml-3 flex items-center space-x-2">
+              <button
+                onClick={() => setShowSignInModal(true)}
+                className="text-white/80 hover:text-white px-3 py-2 text-sm font-medium"
+              >
+                Sign In
+              </button>
+              <motion.button
+                onClick={() => setShowSignUpModal(true)}
+                className="bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 px-4 py-2 rounded-full text-sm font-medium text-white"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Sign Up
+              </motion.button>
+            </div>
+          )}
         </motion.div>
 
         {/* Mobile Menu Button */}
@@ -245,13 +290,71 @@ const SpecialHeader: React.FC<SpecialHeaderProps> = ({ topOffset = 0 }) => {
               <Link to="/help" className="block text-white hover:bg-gray-800 px-3 py-2 rounded-md">
                 Help Center
               </Link>
-              <Link to="/get-started" className="block text-white bg-primary-600 hover:bg-primary-700 px-3 py-2 rounded-md mt-2">
-                GET ACCESS NOW
-              </Link>
+
+              {user ? (
+                <div className="border-t border-gray-700 pt-2 mt-2">
+                  <div className="px-3 py-2 text-white text-sm">
+                    Signed in as: {user.user_metadata?.first_name || user.email}
+                  </div>
+                  <Link to="/profile" className="block text-white hover:bg-gray-800 px-3 py-2 rounded-md">
+                    Profile Settings
+                  </Link>
+                  <button
+                    onClick={() => {
+                      signOut();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="w-full text-left text-white hover:bg-gray-800 px-3 py-2 rounded-md flex items-center"
+                  >
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Sign Out
+                  </button>
+                </div>
+              ) : (
+                <div className="border-t border-gray-700 pt-2 mt-2 space-y-2">
+                  <button
+                    onClick={() => {
+                      setShowSignInModal(true);
+                      setMobileMenuOpen(false);
+                    }}
+                    className="block w-full text-left text-white hover:bg-gray-800 px-3 py-2 rounded-md"
+                  >
+                    Sign In
+                  </button>
+                  <button
+                    onClick={() => {
+                      setShowSignUpModal(true);
+                      setMobileMenuOpen(false);
+                    }}
+                    className="block w-full text-left text-white bg-primary-600 hover:bg-primary-700 px-3 py-2 rounded-md"
+                  >
+                    Sign Up
+                  </button>
+                </div>
+              )}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Auth Modals */}
+      <SignInModal
+        isOpen={showSignInModal}
+        onClose={() => setShowSignInModal(false)}
+        onSwitchToSignUp={() => {
+          setShowSignInModal(false);
+          setShowSignUpModal(true);
+        }}
+      />
+
+      <SignUpModal
+        isOpen={showSignUpModal}
+        onClose={() => setShowSignUpModal(false)}
+        onSwitchToSignIn={() => {
+          setShowSignUpModal(false);
+          setShowSignInModal(true);
+        }}
+      />
     </motion.header>
   );
 };

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, memo } from 'react';
 import { motion } from 'framer-motion';
-import { Settings, Plus, Edit, Trash2, ToggleLeft, ToggleRight, Eye, EyeOff, ChevronDown } from 'lucide-react';
+import { Settings, Plus, Edit, Trash2, ToggleLeft, ToggleRight, Eye, EyeOff, ChevronDown, AlertTriangle, X, CheckCircle } from 'lucide-react';
 
 interface App {
   id: string;
@@ -24,44 +24,97 @@ const AdminAppsManagement: React.FC = () => {
   const [selectedApp, setSelectedApp] = useState<string>('all');
   const [showAppDropdown, setShowAppDropdown] = useState(false);
 
+  // Enhanced state for UX
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [notifications, setNotifications] = useState<Array<{
+    id: string;
+    type: 'success' | 'error';
+    message: string;
+  }>>([]);
+  const [showDeleteModal, setShowDeleteModal] = useState<{
+    show: boolean;
+    app: App | null;
+  }>({ show: false, app: null });
+  const [operationLoading, setOperationLoading] = useState<{ [key: string]: boolean }>({});
+
+  // Utility functions
+  const addNotification = useCallback((type: 'success' | 'error', message: string) => {
+    const id = Date.now().toString();
+    setNotifications(prev => [...prev, { id, type, message }]);
+
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+      setNotifications(prev => prev.filter(n => n.id !== id));
+    }, 5000);
+  }, []);
+
+  const clearMessages = useCallback(() => {
+    setError(null);
+    setSuccess(null);
+  }, []);
+
+  // Memoized filtering for better performance
+  const filteredApps = useMemo(() => {
+    return selectedApp === 'all'
+      ? allApps
+      : allApps.filter(app => app.slug === selectedApp);
+  }, [allApps, selectedApp]);
+
   useEffect(() => {
     fetchApps();
   }, []);
 
+  // Update apps when filtered results change
   useEffect(() => {
-    // Filter apps based on selection
-    if (selectedApp === 'all') {
-      setApps(allApps);
-    } else {
-      setApps(allApps.filter(app => app.slug === selectedApp));
-    }
-  }, [selectedApp, allApps]);
+    setApps(filteredApps);
+  }, [filteredApps]);
 
-  const fetchApps = async () => {
+  const fetchApps = useCallback(async () => {
     try {
+      clearMessages();
       const token = localStorage.getItem('admin_token');
+      if (!token) {
+        setError('Authentication required. Please log in again.');
+        return;
+      }
+
       const response = await fetch('/functions/v1/admin-apps', {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json();
       if (data.success) {
-        setAllApps(data.data);
-        setApps(data.data); // Initially show all apps
+        setAllApps(data.data || []);
+      } else {
+        setError(data.error || 'Failed to load applications');
       }
     } catch (error) {
       console.error('Error fetching apps:', error);
+      setError('Failed to load applications. Please check your connection and try again.');
     } finally {
       setLoading(false);
     }
-  };
+  }, [clearMessages]);
 
-  const toggleApp = async (appId: string, currentStatus: boolean) => {
+  const toggleApp = useCallback(async (appId: string, currentStatus: boolean) => {
     setToggling(appId);
+    clearMessages();
+    setOperationLoading(prev => ({ ...prev, [appId]: true }));
+
     try {
       const token = localStorage.getItem('admin_token');
+      if (!token) {
+        setError('Authentication required. Please log in again.');
+        return;
+      }
+
       const response = await fetch(`/functions/v1/admin-apps/${appId}/toggle`, {
         method: 'POST',
         headers: {
@@ -70,24 +123,39 @@ const AdminAppsManagement: React.FC = () => {
         },
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json();
       if (data.success) {
-        setApps(apps.map(app =>
+        setAllApps(prevApps => prevApps.map(app =>
           app.id === appId ? { ...app, is_active: !currentStatus } : app
         ));
+        addNotification('success', `App ${currentStatus ? 'deactivated' : 'activated'} successfully`);
+      } else {
+        setError(data.error || 'Failed to toggle app status');
       }
     } catch (error) {
       console.error('Error toggling app:', error);
+      setError('Failed to toggle app status. Please try again.');
     } finally {
       setToggling(null);
+      setOperationLoading(prev => ({ ...prev, [appId]: false }));
     }
-  };
+  }, [clearMessages, addNotification]);
 
-  const deleteApp = async (appId: string) => {
-    if (!confirm('Are you sure you want to delete this app?')) return;
+  const deleteApp = useCallback(async (appId: string) => {
+    clearMessages();
+    setOperationLoading(prev => ({ ...prev, [appId]: true }));
 
     try {
       const token = localStorage.getItem('admin_token');
+      if (!token) {
+        setError('Authentication required. Please log in again.');
+        return;
+      }
+
       const response = await fetch(`/functions/v1/admin-apps/${appId}`, {
         method: 'DELETE',
         headers: {
@@ -95,14 +163,29 @@ const AdminAppsManagement: React.FC = () => {
         },
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json();
       if (data.success) {
-        setApps(apps.filter(app => app.id !== appId));
+        setAllApps(prevApps => prevApps.filter(app => app.id !== appId));
+        addNotification('success', 'App deleted successfully');
+        setShowDeleteModal({ show: false, app: null });
+      } else {
+        setError(data.error || 'Failed to delete app');
       }
     } catch (error) {
       console.error('Error deleting app:', error);
+      setError('Failed to delete app. Please try again.');
+    } finally {
+      setOperationLoading(prev => ({ ...prev, [appId]: false }));
     }
-  };
+  }, [clearMessages, addNotification]);
+
+  const openDeleteModal = useCallback((app: App) => {
+    setShowDeleteModal({ show: true, app });
+  }, []);
 
   if (loading) {
     return (
@@ -114,6 +197,49 @@ const AdminAppsManagement: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      {/* Notifications */}
+      {notifications.map((notification) => (
+        <motion.div
+          key={notification.id}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className={`p-4 rounded-lg flex items-center justify-between ${
+            notification.type === 'success'
+              ? 'bg-green-500/20 border border-green-500/50 text-green-400'
+              : 'bg-red-500/20 border border-red-500/50 text-red-400'
+          }`}
+        >
+          <div className="flex items-center">
+            {notification.type === 'success' ? (
+              <CheckCircle className="h-5 w-5 mr-2" />
+            ) : (
+              <X className="h-5 w-5 mr-2" />
+            )}
+            <span>{notification.message}</span>
+          </div>
+          <button
+            onClick={() => setNotifications(prev => prev.filter(n => n.id !== notification.id))}
+            className="text-gray-400 hover:text-white"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </motion.div>
+      ))}
+
+      {/* Error Message */}
+      {error && (
+        <div className="bg-red-500/20 border border-red-500/50 text-red-400 p-4 rounded-lg flex items-center justify-between">
+          <div className="flex items-center">
+            <AlertTriangle className="h-5 w-5 mr-2" />
+            <span>{error}</span>
+          </div>
+          <button onClick={() => setError(null)} className="text-red-400 hover:text-red-300">
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -235,10 +361,15 @@ const AdminAppsManagement: React.FC = () => {
                   <Edit className="h-4 w-4" />
                 </button>
                 <button
-                  onClick={() => deleteApp(app.id)}
-                  className="p-2 text-gray-400 hover:text-red-400 hover:bg-gray-700 rounded-lg transition-colors"
+                  onClick={() => openDeleteModal(app)}
+                  disabled={operationLoading[app.id]}
+                  className="p-2 text-gray-400 hover:text-red-400 hover:bg-gray-700 rounded-lg transition-colors disabled:opacity-50"
                 >
-                  <Trash2 className="h-4 w-4" />
+                  {operationLoading[app.id] ? (
+                    <div className="w-4 h-4 border-t border-red-400 border-solid rounded-full animate-spin"></div>
+                  ) : (
+                    <Trash2 className="h-4 w-4" />
+                  )}
                 </button>
               </div>
 
@@ -271,6 +402,41 @@ const AdminAppsManagement: React.FC = () => {
           <Settings className="h-16 w-16 text-gray-600 mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-white mb-2">No applications found</h3>
           <p className="text-gray-400">Get started by adding your first application.</p>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal.show && showDeleteModal.app && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-gray-800 rounded-lg p-6 max-w-md mx-4 border border-gray-700"
+          >
+            <div className="flex items-center mb-4">
+              <AlertTriangle className="h-6 w-6 text-red-400 mr-3" />
+              <h3 className="text-lg font-semibold text-white">Delete Application</h3>
+            </div>
+            <p className="text-gray-300 mb-6">
+              Are you sure you want to delete <strong>{showDeleteModal.app.name}</strong>?
+              This action cannot be undone and will remove all associated data.
+            </p>
+            <div className="flex space-x-3">
+              <button
+                onClick={() => setShowDeleteModal({ show: false, app: null })}
+                className="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-lg transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => showDeleteModal.app && deleteApp(showDeleteModal.app.id)}
+                disabled={operationLoading[showDeleteModal.app.id]}
+                className="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors disabled:opacity-50"
+              >
+                {operationLoading[showDeleteModal.app.id] ? 'Deleting...' : 'Delete App'}
+              </button>
+            </div>
+          </motion.div>
         </div>
       )}
     </div>

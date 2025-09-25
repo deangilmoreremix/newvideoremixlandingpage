@@ -11,6 +11,7 @@ import UrgencyBanner from './components/UrgencyBanner';
 import ErrorBoundary from './components/ErrorBoundary';
 import AIAssistant from './components/AIAssistant';
 import { AdminProvider } from './context/AdminContext';
+import { AuthProvider } from './context/AuthContext';
 
 // Lazy loaded components for better performance
 const LandingPage = lazy(() => import('./pages/LandingPage'));
@@ -35,11 +36,13 @@ const BlogPage = lazy(() => import('./pages/BlogPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
+const AdminLogin = lazy(() => import('./components/admin/AdminLogin'));
 const SpecialFooter = lazy(() => import('./components/SpecialFooter'));
 
 // Help Center pages
 const HelpCenterPage = lazy(() => import('./pages/HelpCenterPage'));
 const HelpArticlePage = lazy(() => import('./pages/HelpArticlePage'));
+const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 
 // Loading fallback component
 const SectionLoader = () => (
@@ -133,8 +136,9 @@ function App() {
   };
 
   return (
-    <AdminProvider>
-      <div className="flex flex-col min-h-screen bg-gray-900">
+    <AuthProvider>
+      <AdminProvider>
+        <div className="flex flex-col min-h-screen bg-gray-900">
         <Helmet>
           <title>VideoRemix.io - AI-Powered Marketing Personalization Platform</title>
           <meta name="description" content="Create personalized marketing content that converts with AI-powered tools. Transform your campaigns with VideoRemix.io's marketing personalization platform." />
@@ -396,7 +400,24 @@ function App() {
           </ErrorBoundary>
         } />
 
-        {/* Admin Dashboard Route */}
+        {/* Profile Route */}
+        <Route path="/profile" element={
+          <ErrorBoundary onError={handleError}>
+            <Suspense fallback={<SectionLoader />}>
+              <ProfilePage />
+            </Suspense>
+          </ErrorBoundary>
+        } />
+
+        {/* Admin Routes */}
+        <Route path="/admin/login" element={
+          <ErrorBoundary onError={handleError}>
+            <Suspense fallback={<SectionLoader />}>
+              <AdminLogin />
+            </Suspense>
+          </ErrorBoundary>
+        } />
+
         <Route path="/admin" element={
           <ErrorBoundary onError={handleError}>
             <Suspense fallback={<SectionLoader />}>
@@ -405,9 +426,10 @@ function App() {
           </ErrorBoundary>
         } />
       </Routes>
-    </div>
+      </div>
     </AdminProvider>
-  );
+  </AuthProvider>
+);
 }
 
 export default App;

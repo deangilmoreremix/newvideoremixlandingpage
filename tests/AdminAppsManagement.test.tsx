@@ -23,7 +23,9 @@ describe('AdminAppsManagement Component', () => {
 
     render(<AdminAppsManagement />);
 
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
+    // Check for loading spinner (the div with animate-spin class)
+    const spinner = document.querySelector('.animate-spin');
+    expect(spinner).toBeInTheDocument();
   });
 
   it('should fetch and display apps successfully', async () => {

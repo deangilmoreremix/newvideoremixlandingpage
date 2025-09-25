@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, memo } from 'react';
 import { motion } from 'framer-motion';
-import { ToggleLeft, ToggleRight, Plus, Edit, Trash2, Settings, ChevronDown } from 'lucide-react';
+import { ToggleLeft, ToggleRight, Plus, Edit, Trash2, Settings, ChevronDown, AlertTriangle, X, CheckCircle } from 'lucide-react';
 
 interface Feature {
   id: string;
@@ -23,63 +23,122 @@ const AdminFeaturesManagement: React.FC = () => {
   const [selectedApp, setSelectedApp] = useState<string>('all');
   const [showAppDropdown, setShowAppDropdown] = useState(false);
 
+  // Enhanced state for UX
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [notifications, setNotifications] = useState<Array<{
+    id: string;
+    type: 'success' | 'error';
+    message: string;
+  }>>([]);
+  const [showDeleteModal, setShowDeleteModal] = useState<{
+    show: boolean;
+    feature: Feature | null;
+  }>({ show: false, feature: null });
+  const [operationLoading, setOperationLoading] = useState<{ [key: string]: boolean }>({});
+
+  // Utility functions
+  const addNotification = useCallback((type: 'success' | 'error', message: string) => {
+    const id = Date.now().toString();
+    setNotifications(prev => [...prev, { id, type, message }]);
+
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+      setNotifications(prev => prev.filter(n => n.id !== id));
+    }, 5000);
+  }, []);
+
+  const clearMessages = useCallback(() => {
+    setError(null);
+    setSuccess(null);
+  }, []);
+
+  // Memoized filtering for better performance
+  const filteredFeatures = useMemo(() => {
+    return selectedApp === 'all'
+      ? allFeatures
+      : allFeatures.filter(feature => feature.app_slug === selectedApp || !feature.app_slug);
+  }, [allFeatures, selectedApp]);
+
   useEffect(() => {
     fetchFeatures();
     fetchApps();
   }, []);
 
+  // Update features when filtered results change
   useEffect(() => {
-    // Filter features based on selected app
-    if (selectedApp === 'all') {
-      setFeatures(allFeatures);
-    } else {
-      setFeatures(allFeatures.filter(feature => feature.app_slug === selectedApp || !feature.app_slug));
-    }
-  }, [selectedApp, allFeatures]);
+    setFeatures(filteredFeatures);
+  }, [filteredFeatures]);
 
-  const fetchFeatures = async () => {
+  const fetchFeatures = useCallback(async () => {
     try {
+      clearMessages();
       const token = localStorage.getItem('admin_token');
+      if (!token) {
+        setError('Authentication required. Please log in again.');
+        return;
+      }
+
       const response = await fetch('/functions/v1/admin-features', {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json();
       if (data.success) {
-        setAllFeatures(data.data);
-        setFeatures(data.data); // Initially show all features
+        setAllFeatures(data.data || []);
+      } else {
+        setError(data.error || 'Failed to load features');
       }
     } catch (error) {
       console.error('Error fetching features:', error);
+      setError('Failed to load features. Please check your connection and try again.');
     } finally {
       setLoading(false);
     }
-  };
+  }, [clearMessages]);
 
-  const fetchApps = async () => {
+  const fetchApps = useCallback(async () => {
     try {
       const token = localStorage.getItem('admin_token');
+      if (!token) return;
+
       const response = await fetch('/functions/v1/admin-apps', {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json();
       if (data.success) {
-        setApps(data.data);
+        setApps(data.data || []);
       }
     } catch (error) {
       console.error('Error fetching apps:', error);
     }
-  };
+  }, []);
 
-  const toggleFeature = async (featureId: string, currentStatus: boolean) => {
+  const toggleFeature = useCallback(async (featureId: string, currentStatus: boolean) => {
     setToggling(featureId);
+    clearMessages();
+    setOperationLoading(prev => ({ ...prev, [featureId]: true }));
+
     try {
       const token = localStorage.getItem('admin_token');
+      if (!token) {
+        setError('Authentication required. Please log in again.');
+        return;
+      }
+
       const response = await fetch(`/functions/v1/admin-features/${featureId}/toggle`, {
         method: 'POST',
         headers: {
@@ -88,24 +147,39 @@ const AdminFeaturesManagement: React.FC = () => {
         },
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json();
       if (data.success) {
-        setFeatures(features.map(feature =>
+        setAllFeatures(prevFeatures => prevFeatures.map(feature =>
           feature.id === featureId ? { ...feature, is_enabled: !currentStatus } : feature
         ));
+        addNotification('success', `Feature ${currentStatus ? 'disabled' : 'enabled'} successfully`);
+      } else {
+        setError(data.error || 'Failed to toggle feature status');
       }
     } catch (error) {
       console.error('Error toggling feature:', error);
+      setError('Failed to toggle feature status. Please try again.');
     } finally {
       setToggling(null);
+      setOperationLoading(prev => ({ ...prev, [featureId]: false }));
     }
-  };
+  }, [clearMessages, addNotification]);
 
-  const deleteFeature = async (featureId: string) => {
-    if (!confirm('Are you sure you want to delete this feature?')) return;
+  const deleteFeature = useCallback(async (featureId: string) => {
+    clearMessages();
+    setOperationLoading(prev => ({ ...prev, [featureId]: true }));
 
     try {
       const token = localStorage.getItem('admin_token');
+      if (!token) {
+        setError('Authentication required. Please log in again.');
+        return;
+      }
+
       const response = await fetch(`/functions/v1/admin-features/${featureId}`, {
         method: 'DELETE',
         headers: {
@@ -113,14 +187,29 @@ const AdminFeaturesManagement: React.FC = () => {
         },
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json();
       if (data.success) {
-        setFeatures(features.filter(feature => feature.id !== featureId));
+        setAllFeatures(prevFeatures => prevFeatures.filter(feature => feature.id !== featureId));
+        addNotification('success', 'Feature deleted successfully');
+        setShowDeleteModal({ show: false, feature: null });
+      } else {
+        setError(data.error || 'Failed to delete feature');
       }
     } catch (error) {
       console.error('Error deleting feature:', error);
+      setError('Failed to delete feature. Please try again.');
+    } finally {
+      setOperationLoading(prev => ({ ...prev, [featureId]: false }));
     }
-  };
+  }, [clearMessages, addNotification]);
+
+  const openDeleteModal = useCallback((feature: Feature) => {
+    setShowDeleteModal({ show: true, feature });
+  }, []);
 
   if (loading) {
     return (
@@ -132,6 +221,49 @@ const AdminFeaturesManagement: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      {/* Notifications */}
+      {notifications.map((notification) => (
+        <motion.div
+          key={notification.id}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className={`p-4 rounded-lg flex items-center justify-between ${
+            notification.type === 'success'
+              ? 'bg-green-500/20 border border-green-500/50 text-green-400'
+              : 'bg-red-500/20 border border-red-500/50 text-red-400'
+          }`}
+        >
+          <div className="flex items-center">
+            {notification.type === 'success' ? (
+              <CheckCircle className="h-5 w-5 mr-2" />
+            ) : (
+              <X className="h-5 w-5 mr-2" />
+            )}
+            <span>{notification.message}</span>
+          </div>
+          <button
+            onClick={() => setNotifications(prev => prev.filter(n => n.id !== notification.id))}
+            className="text-gray-400 hover:text-white"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </motion.div>
+      ))}
+
+      {/* Error Message */}
+      {error && (
+        <div className="bg-red-500/20 border border-red-500/50 text-red-400 p-4 rounded-lg flex items-center justify-between">
+          <div className="flex items-center">
+            <AlertTriangle className="h-5 w-5 mr-2" />
+            <span>{error}</span>
+          </div>
+          <button onClick={() => setError(null)} className="text-red-400 hover:text-red-300">
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -252,10 +384,15 @@ const AdminFeaturesManagement: React.FC = () => {
                   <Edit className="h-4 w-4" />
                 </button>
                 <button
-                  onClick={() => deleteFeature(feature.id)}
-                  className="p-2 text-gray-400 hover:text-red-400 hover:bg-gray-700 rounded-lg transition-colors"
+                  onClick={() => openDeleteModal(feature)}
+                  disabled={operationLoading[feature.id]}
+                  className="p-2 text-gray-400 hover:text-red-400 hover:bg-gray-700 rounded-lg transition-colors disabled:opacity-50"
                 >
-                  <Trash2 className="h-4 w-4" />
+                  {operationLoading[feature.id] ? (
+                    <div className="w-4 h-4 border-t border-red-400 border-solid rounded-full animate-spin"></div>
+                  ) : (
+                    <Trash2 className="h-4 w-4" />
+                  )}
                 </button>
 
                 {/* Toggle Switch */}
@@ -288,6 +425,41 @@ const AdminFeaturesManagement: React.FC = () => {
           <ToggleLeft className="h-16 w-16 text-gray-600 mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-white mb-2">No features found</h3>
           <p className="text-gray-400">Get started by adding your first feature.</p>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal.show && showDeleteModal.feature && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-gray-800 rounded-lg p-6 max-w-md mx-4 border border-gray-700"
+          >
+            <div className="flex items-center mb-4">
+              <AlertTriangle className="h-6 w-6 text-red-400 mr-3" />
+              <h3 className="text-lg font-semibold text-white">Delete Feature</h3>
+            </div>
+            <p className="text-gray-300 mb-6">
+              Are you sure you want to delete <strong>{showDeleteModal.feature.name}</strong>?
+              This action cannot be undone and will affect all associated applications.
+            </p>
+            <div className="flex space-x-3">
+              <button
+                onClick={() => setShowDeleteModal({ show: false, feature: null })}
+                className="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-lg transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => showDeleteModal.feature && deleteFeature(showDeleteModal.feature.id)}
+                disabled={operationLoading[showDeleteModal.feature.id]}
+                className="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors disabled:opacity-50"
+              >
+                {operationLoading[showDeleteModal.feature.id] ? 'Deleting...' : 'Delete Feature'}
+              </button>
+            </div>
+          </motion.div>
         </div>
       )}
     </div>

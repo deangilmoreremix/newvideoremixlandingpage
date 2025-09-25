@@ -128,7 +128,8 @@ describe('AdminUsersManagement Component', () => {
       {
         id: '1',
         email: 'user1@example.com',
-        name: 'John Doe',
+        first_name: 'John',
+        last_name: 'Doe',
         role: 'user',
         is_active: true,
         created_at: '2024-01-01T00:00:00Z',
@@ -148,9 +149,6 @@ describe('AdminUsersManagement Component', () => {
       json: async () => ({ success: true, message: 'User deleted successfully' })
     });
 
-    // Mock window.confirm
-    const confirmSpy = vi.spyOn(window, 'confirm').mockReturnValue(true);
-
     render(<AdminUsersManagement />);
 
     await waitFor(() => {
@@ -158,16 +156,19 @@ describe('AdminUsersManagement Component', () => {
     });
 
     // Find and click the delete button (trash icon)
-    const deleteButtons = screen.getAllByRole('button');
-    const deleteButton = deleteButtons.find(button =>
-      button.querySelector && button.querySelector('svg')
+    const deleteButton = screen.getByTestId('delete-user-1') || screen.getAllByRole('button').find(button =>
+      button.querySelector('svg') && button.querySelector('svg').classList.contains('lucide-trash2')
     );
-    if (deleteButton) {
-      fireEvent.click(deleteButton);
-    }
+    fireEvent.click(deleteButton);
 
-    // Verify confirm was called
-    expect(confirmSpy).toHaveBeenCalledWith('Are you sure you want to delete this user?');
+    // Wait for modal to appear
+    await waitFor(() => {
+      expect(screen.getByText('Delete User')).toBeInTheDocument();
+    });
+
+    // Click the confirm delete button
+    const confirmButton = screen.getByText('Delete User');
+    fireEvent.click(confirmButton);
 
     // Verify the delete API was called
     expect(mockFetch).toHaveBeenCalledWith(
@@ -179,8 +180,6 @@ describe('AdminUsersManagement Component', () => {
         })
       })
     );
-
-    confirmSpy.mockRestore();
   });
 
   it('should filter users based on selected role', async () => {

@@ -8,7 +8,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
   console.error('Supabase credentials are not set. Please check your environment variables.');
 }
 
-const supabase: SupabaseClient = createClient(
+export const supabase: SupabaseClient = createClient(
   supabaseUrl || '',
   supabaseAnonKey || ''
 );

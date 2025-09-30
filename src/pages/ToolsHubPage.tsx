@@ -337,10 +337,10 @@ const ToolsHubPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Tools Hub | VideoRemix.io</title>
+        <title>Tools Hub | VideoRemix.vip</title>
         <meta 
           name="description"
-          content="Explore all personalized tools offered by VideoRemix.io. Find the perfect tools for your marketing personalization and campaign optimization needs."
+          content="Explore all personalized tools offered by VideoRemix.vip. Find the perfect tools for your marketing personalization and campaign optimization needs."
         />
       </Helmet>
 
@@ -614,7 +614,7 @@ const ToolsHubPage: React.FC = () => {
               <div className="max-w-3xl mx-auto">
                 <MagicSparkles minSparkles={3} maxSparkles={6}>
                   <h2 className="text-2xl font-bold text-white mb-4">
-                    Unlock the Full Power of VideoRemix.io
+                    Unlock the Full Power of VideoRemix.vip
                   </h2>
                 </MagicSparkles>
                 

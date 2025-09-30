@@ -50,13 +50,13 @@ const helpCategories: HelpCategory[] = [
   {
     id: 'getting-started',
     name: 'Getting Started',
-    description: 'New to VideoRemix.io? Start here to learn the basics and get up and running quickly.',
+    description: 'New to VideoRemix.vip? Start here to learn the basics and get up and running quickly.',
     icon: <Book className="h-6 w-6 text-primary-400" />,
     articles: [
       {
         id: 'what-is-videoremix',
-        title: 'What is VideoRemix.io?',
-        excerpt: 'An introduction to VideoRemix.io and how it can transform your video creation process.',
+        title: 'What is VideoRemix.vip?',
+        excerpt: 'An introduction to VideoRemix.vip and how it can transform your video creation process.',
         category: 'getting-started',
         popular: true,
         tags: ['basics', 'introduction']
@@ -64,7 +64,7 @@ const helpCategories: HelpCategory[] = [
       {
         id: 'create-first-video',
         title: 'Creating Your First Video',
-        excerpt: 'A step-by-step guide to creating your first video with VideoRemix.io in under 15 minutes.',
+        excerpt: 'A step-by-step guide to creating your first video with VideoRemix.vip in under 15 minutes.',
         category: 'getting-started',
         popular: true,
         tags: ['tutorial', 'basics']
@@ -86,7 +86,7 @@ const helpCategories: HelpCategory[] = [
       {
         id: 'importing-media',
         title: 'Importing Your Media',
-        excerpt: 'Learn how to upload and import your videos, images, and audio files into VideoRemix.io.',
+        excerpt: 'Learn how to upload and import your videos, images, and audio files into VideoRemix.vip.',
         category: 'getting-started',
         tags: ['upload', 'media', 'import']
       }
@@ -109,7 +109,7 @@ const helpCategories: HelpCategory[] = [
       {
         id: 'manage-subscription',
         title: 'Managing Your Subscription',
-        excerpt: 'How to upgrade, downgrade, or cancel your subscription with VideoRemix.io.',
+        excerpt: 'How to upgrade, downgrade, or cancel your subscription with VideoRemix.vip.',
         category: 'account-billing',
         tags: ['billing', 'subscription', 'cancel']
       },
@@ -139,7 +139,7 @@ const helpCategories: HelpCategory[] = [
   {
     id: 'platform-usage',
     name: 'Using the Platform',
-    description: 'Learn how to use the core functionality of VideoRemix.io effectively.',
+    description: 'Learn how to use the core functionality of VideoRemix.vip effectively.',
     icon: <Video className="h-6 w-6 text-primary-400" />,
     articles: [
       {
@@ -183,7 +183,7 @@ const helpCategories: HelpCategory[] = [
   {
     id: 'features-tools',
     name: 'Features & Tools',
-    description: 'Detailed guides for specific features and tools available in VideoRemix.io.',
+    description: 'Detailed guides for specific features and tools available in VideoRemix.vip.',
     icon: <Sparkles className="h-6 w-6 text-primary-400" />,
     articles: [
       {
@@ -233,7 +233,7 @@ const helpCategories: HelpCategory[] = [
       {
         id: 'common-issues',
         title: 'Common Issues & Solutions',
-        excerpt: 'Fixes for the most frequently encountered problems on VideoRemix.io.',
+        excerpt: 'Fixes for the most frequently encountered problems on VideoRemix.vip.',
         category: 'troubleshooting',
         popular: true,
         tags: ['problems', 'fixes', 'solutions']
@@ -321,7 +321,7 @@ const helpCategories: HelpCategory[] = [
       {
         id: 'api-introduction',
         title: 'API Introduction & Authentication',
-        excerpt: 'Getting started with the VideoRemix.io API and authentication process.',
+        excerpt: 'Getting started with the VideoRemix.vip API and authentication process.',
         category: 'api-integrations',
         tags: ['API', 'authentication', 'development']
       },
@@ -336,7 +336,7 @@ const helpCategories: HelpCategory[] = [
       {
         id: 'cms-integration',
         title: 'CMS & Website Integrations',
-        excerpt: 'Integrating VideoRemix.io with content management systems and websites.',
+        excerpt: 'Integrating VideoRemix.vip with content management systems and websites.',
         category: 'api-integrations',
         tags: ['CMS', 'WordPress', 'website']
       },
@@ -350,7 +350,7 @@ const helpCategories: HelpCategory[] = [
       {
         id: 'third-party-tools',
         title: 'Third-Party Tool Connections',
-        excerpt: 'Connecting VideoRemix.io with other tools in your workflow.',
+        excerpt: 'Connecting VideoRemix.vip with other tools in your workflow.',
         category: 'api-integrations',
         tags: ['integrations', 'tools', 'workflow']
       }
@@ -466,10 +466,10 @@ const HelpCenterPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Help Center | VideoRemix.io</title>
+        <title>Help Center | VideoRemix.vip</title>
         <meta 
           name="description" 
-          content="Find answers to your questions about VideoRemix.io. Browse our comprehensive help articles, tutorials, and guides." 
+          content="Find answers to your questions about VideoRemix.vip. Browse our comprehensive help articles, tutorials, and guides." 
         />
       </Helmet>
 
@@ -495,7 +495,7 @@ const HelpCenterPage: React.FC = () => {
                 </MagicSparkles>
                 
                 <p className="text-xl text-gray-300 mb-8">
-                  Find answers, tutorials, and guides for using VideoRemix.io
+                  Find answers, tutorials, and guides for using VideoRemix.vip
                 </p>
               </motion.div>
 
@@ -691,7 +691,7 @@ const HelpCenterPage: React.FC = () => {
               <div className="text-center mb-12">
                 <h2 className="text-2xl font-bold text-white mb-4">Featured Help Guides</h2>
                 <p className="text-gray-300 max-w-3xl mx-auto">
-                  Comprehensive guides to help you master different aspects of VideoRemix.io
+                  Comprehensive guides to help you master different aspects of VideoRemix.vip
                 </p>
               </div>
 
@@ -746,7 +746,7 @@ const HelpCenterPage: React.FC = () => {
               <div className="text-center mb-12">
                 <h2 className="text-2xl font-bold text-white mb-4">Video Tutorials</h2>
                 <p className="text-gray-300 max-w-3xl mx-auto">
-                  Watch step-by-step video guides to learn how to use VideoRemix.io
+                  Watch step-by-step video guides to learn how to use VideoRemix.vip
                 </p>
               </div>
 
@@ -844,7 +844,7 @@ const HelpCenterPage: React.FC = () => {
                 </MagicSparkles>
                 
                 <p className="text-xl text-gray-300 mb-8">
-                  Connect with other VideoRemix.io users to share tips, get inspiration, and solve challenges together.
+                  Connect with other VideoRemix.vip users to share tips, get inspiration, and solve challenges together.
                 </p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">

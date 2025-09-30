@@ -10,7 +10,7 @@ interface FeatureMapProps {
 // This component maps all the functionality areas from the information provided
 const FeatureMap: React.FC<FeatureMapProps> = ({ 
   title = "Comprehensive Marketing Personalization Features",
-  subtitle = "Explore the powerful personalization capabilities of VideoRemix.io's marketing platform"
+  subtitle = "Explore the powerful personalization capabilities of VideoRemix.vip's marketing platform"
 }) => {
   
   const featureCategories = [

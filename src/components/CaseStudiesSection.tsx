@@ -51,7 +51,7 @@ const caseStudies: CaseStudyType[] = [
     industry: 'E-Commerce Fashion',
     logo: 'https://images.unsplash.com/photo-1579762593175-20c9062ccc59?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&q=80',
     challenge: 'StyleTrend was sending the same generic product videos to all customers, resulting in low engagement rates (2.3%) and poor conversion (1.7%). Their marketing team couldn\'t create personalized content at scale.',
-    solution: 'Implemented audience segmentation by style preference, browsing history, and purchase behavior. Created personalized marketing videos for each segment using VideoRemix.io\'s AI personalization tools.',
+    solution: 'Implemented audience segmentation by style preference, browsing history, and purchase behavior. Created personalized marketing videos for each segment using VideoRemix.vip\'s AI personalization tools.',
     results: [
       {
         metric: 'Engagement',
@@ -93,7 +93,7 @@ const caseStudies: CaseStudyType[] = [
     industry: 'SaaS / Enterprise Software',
     logo: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&q=80',
     challenge: 'CloudSphere\'s generic product demo videos had a 9-minute average view time (only 27% completion rate). Their sales cycle was 92 days, with sales teams spending hours creating custom demos for each prospect.',
-    solution: 'Implemented role-based video personalization for different decision-makers (CTO, CFO, end users). Created industry-specific templates with VideoRemix.io\'s AI personalization that sales teams could customize in minutes.',
+    solution: 'Implemented role-based video personalization for different decision-makers (CTO, CFO, end users). Created industry-specific templates with VideoRemix.vip\'s AI personalization that sales teams could customize in minutes.',
     results: [
       {
         metric: 'Demo Completion',
@@ -135,7 +135,7 @@ const caseStudies: CaseStudyType[] = [
     industry: 'Educational Technology',
     logo: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&q=80',
     challenge: 'EduVista was struggling with high course abandonment rates (72%) and low engagement in their educational content despite high-quality material. Generic course introductions failed to connect with diverse learning styles.',
-    solution: 'Implemented personalized course introduction videos based on learning preference profiles and previous course history. Used VideoRemix.io to create adaptive learning path videos that change based on student progress.',
+    solution: 'Implemented personalized course introduction videos based on learning preference profiles and previous course history. Used VideoRemix.vip to create adaptive learning path videos that change based on student progress.',
     results: [
       {
         metric: 'Course Completion',
@@ -177,7 +177,7 @@ const caseStudies: CaseStudyType[] = [
     industry: 'Financial Services',
     logo: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&q=80',
     challenge: 'Meridian was sending the same investment advice videos to all clients regardless of portfolio size, risk tolerance, or investment goals, resulting in low client satisfaction and high advisor workload explaining strategies.',
-    solution: 'Developed a personalized client communication system using VideoRemix.io that automatically creates portfolio review videos customized to each client\'s specific financial situation, goals, and preferences.',
+    solution: 'Developed a personalized client communication system using VideoRemix.vip that automatically creates portfolio review videos customized to each client\'s specific financial situation, goals, and preferences.',
     results: [
       {
         metric: 'Client Retention',
@@ -219,7 +219,7 @@ const caseStudies: CaseStudyType[] = [
     industry: 'Healthcare',
     logo: 'https://images.unsplash.com/photo-1612531385446-f7e6d131e1d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=120&q=80',
     challenge: 'Vitality Health was sending generic pre and post-procedure videos to all patients, resulting in low compliance with preparation instructions (68%) and post-care guidelines (72%).',
-    solution: 'Implemented personalized patient education videos based on procedure type, patient age, medical history, and learning preferences using VideoRemix.io\'s healthcare personalization features.',
+    solution: 'Implemented personalized patient education videos based on procedure type, patient age, medical history, and learning preferences using VideoRemix.vip\'s healthcare personalization features.',
     results: [
       {
         metric: 'Prep Compliance',
@@ -478,7 +478,7 @@ const CaseStudiesSection: React.FC = () => {
                     
                     {/* Call-to-action overlay */}
                     <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center">
-                      <span className="text-white font-medium">VideoRemix.io Solution</span>
+                      <span className="text-white font-medium">VideoRemix.vip Solution</span>
                       <motion.a 
                         href="https://ai-personalized-content.videoremix.vip"
                         className="flex items-center bg-primary-600/80 backdrop-blur-sm text-white px-3 py-1 rounded-lg text-sm"

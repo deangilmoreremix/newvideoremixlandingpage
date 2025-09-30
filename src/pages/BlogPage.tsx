@@ -112,10 +112,10 @@ const BlogPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Blog | VideoRemix.io</title>
+        <title>Blog | VideoRemix.vip</title>
         <meta 
           name="description" 
-          content="Explore articles, tips, and insights about video creation, editing, and marketing from the VideoRemix.io team." 
+          content="Explore articles, tips, and insights about video creation, editing, and marketing from the VideoRemix.vip team." 
         />
       </Helmet>
 
@@ -136,7 +136,7 @@ const BlogPage: React.FC = () => {
               >
                 <MagicSparkles minSparkles={5} maxSparkles={8}>
                   <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                    VideoRemix.io Blog
+                    VideoRemix.vip Blog
                   </h1>
                 </MagicSparkles>
                 

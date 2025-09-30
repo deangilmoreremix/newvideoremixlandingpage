@@ -62,7 +62,7 @@ const SpecialFooter: React.FC = () => {
           <div className="md:col-span-5">
             <div className="flex items-center mb-4">
               <Video className="h-6 w-6 text-primary-500 mr-2" />
-              <span className="text-xl font-bold text-white">VideoRemix.io</span>
+              <span className="text-xl font-bold text-white">VideoRemix.vip</span>
             </div>
             <p className="mb-4">
               Create personalized videos in minutes with our AI-powered platform. Perfect for marketers, content creators, and businesses of all sizes.
@@ -268,7 +268,7 @@ const SpecialFooter: React.FC = () => {
         {/* Bottom section - Copyright and Legal */}
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0 text-sm">
-            &copy; {currentYear} VideoRemix.io. All rights reserved.
+            &copy; {currentYear} VideoRemix.vip. All rights reserved.
           </div>
           <div className="flex flex-wrap gap-4 justify-center text-sm">
             {footerSections.legal.map((link, i) => (
@@ -286,7 +286,7 @@ const SpecialFooter: React.FC = () => {
         {/* Cookie notice */}
         <div className="mt-6 text-xs text-center text-gray-500">
           <p>
-            VideoRemix.io uses cookies to ensure you get the best experience on our website.
+            VideoRemix.vip uses cookies to ensure you get the best experience on our website.
             By continuing to browse, you agree to our <Link to="/privacy" className="text-primary-400 hover:text-primary-300">privacy policy</Link>.
           </p>
         </div>

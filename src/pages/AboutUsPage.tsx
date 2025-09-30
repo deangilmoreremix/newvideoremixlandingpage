@@ -9,10 +9,10 @@ const AboutUsPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>About VideoRemix.io | Our Story, Mission & Team</title>
+        <title>About VideoRemix.vip | Our Story, Mission & Team</title>
         <meta 
           name="description"
-          content="Learn about VideoRemix.io's mission to democratize marketing personalization with AI-powered tools. Meet our team and discover the story behind our platform."
+          content="Learn about VideoRemix.vip's mission to democratize marketing personalization with AI-powered tools. Meet our team and discover the story behind our platform."
         />
       </Helmet>
       
@@ -32,7 +32,7 @@ const AboutUsPage: React.FC = () => {
               >
                 <MagicSparkles minSparkles={5} maxSparkles={8}>
                   <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                    About <span className="text-primary-400">VideoRemix.io</span>
+                    About <span className="text-primary-400">VideoRemix.vip</span>
                   </h1>
                 </MagicSparkles>
                 
@@ -54,7 +54,7 @@ const AboutUsPage: React.FC = () => {
                   <div className="relative">
                     <img 
                       src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80" 
-                      alt="VideoRemix.io Team" 
+                      alt="VideoRemix.vip Team" 
                       className="rounded-lg shadow-xl"
                     />
                   </div>
@@ -68,13 +68,13 @@ const AboutUsPage: React.FC = () => {
               >
                 <h2 className="text-3xl font-bold text-white mb-6">Our Story</h2>
                 <p className="text-gray-300 mb-4">
-                  VideoRemix.io was born from a simple observation: marketing personalization was still too complex, time-consuming, and technical for most businesses. Despite the growing importance of personalized marketing, the tools remained stuck in the past.
+                  VideoRemix.vip was born from a simple observation: marketing personalization was still too complex, time-consuming, and technical for most businesses. Despite the growing importance of personalized marketing, the tools remained stuck in the past.
                 </p>
                 <p className="text-gray-300 mb-4">
                   Founded in 2022 by a team of AI engineers and marketing experts, we set out to build a platform that would make professional marketing personalization accessible to everyone, regardless of technical skill or budget constraints.
                 </p>
                 <p className="text-gray-300">
-                  Today, VideoRemix.io serves thousands of marketers and businesses worldwide, helping them create personalized marketing campaigns in a fraction of the time it would traditionally take.
+                  Today, VideoRemix.vip serves thousands of marketers and businesses worldwide, helping them create personalized marketing campaigns in a fraction of the time it would traditionally take.
                 </p>
               </motion.div>
             </div>
@@ -179,7 +179,7 @@ const AboutUsPage: React.FC = () => {
               >
                 <h2 className="text-3xl font-bold text-white mb-6">Meet Our Leadership Team</h2>
                 <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                  The passionate people behind VideoRemix.io working to transform marketing personalization.
+                  The passionate people behind VideoRemix.vip working to transform marketing personalization.
                 </p>
               </motion.div>
               
@@ -188,7 +188,7 @@ const AboutUsPage: React.FC = () => {
                   {
                     name: "Alex Morgan",
                     role: "Founder & CEO",
-                    bio: "Former AI Research Lead at Google, Alex founded VideoRemix.io to democratize marketing personalization.",
+                    bio: "Former AI Research Lead at Google, Alex founded VideoRemix.vip to democratize marketing personalization.",
                     image: "https://randomuser.me/api/portraits/men/32.jpg"
                   },
                   {
@@ -261,7 +261,7 @@ const AboutUsPage: React.FC = () => {
                     to="/get-started" 
                     className="bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-bold py-4 px-8 rounded-lg w-full sm:w-auto inline-flex items-center justify-center"
                   >
-                    Try VideoRemix.io Free
+                    Try VideoRemix.vip Free
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </motion.div>

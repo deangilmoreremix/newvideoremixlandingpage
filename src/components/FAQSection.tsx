@@ -14,12 +14,12 @@ export const FAQSection: React.FC = () => {
   // Default FAQs in case data hasn't loaded yet
   const defaultFaqs = [
     {
-      question: "How does VideoRemix.io work?",
-      answer: "VideoRemix.io uses artificial intelligence to automate the video editing process. Upload your footage, choose a template, make any customizations you want, and our AI will handle the tedious parts of editing. You can export the final video in minutes instead of hours."
+      question: "How does VideoRemix.vip work?",
+      answer: "VideoRemix.vip uses artificial intelligence to automate the video editing process. Upload your footage, choose a template, make any customizations you want, and our AI will handle the tedious parts of editing. You can export the final video in minutes instead of hours."
     },
     {
-      question: "Do I need any technical skills to use VideoRemix.io?",
-      answer: "Not at all! VideoRemix.io is designed for users with zero video editing experience. Our intuitive interface and AI-powered features make it easy for anyone to create professional-looking videos without technical skills."
+      question: "Do I need any technical skills to use VideoRemix.vip?",
+      answer: "Not at all! VideoRemix.vip is designed for users with zero video editing experience. Our intuitive interface and AI-powered features make it easy for anyone to create professional-looking videos without technical skills."
     },
     {
       question: "What types of videos can I create?",
@@ -61,7 +61,7 @@ export const FAQSection: React.FC = () => {
           </h2>
           
           <p className="text-xl text-gray-300 mb-0">
-            Everything you need to know about VideoRemix.io
+            Everything you need to know about VideoRemix.vip
           </p>
         </motion.div>
         

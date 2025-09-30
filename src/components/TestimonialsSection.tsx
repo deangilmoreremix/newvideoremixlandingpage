@@ -131,7 +131,7 @@ const TestimonialsSection: React.FC = () => {
           </MagicSparkles>
           
           <p className="text-xl text-gray-300">
-            Hear directly from creators and businesses who've transformed their video production with VideoRemix.io
+            Hear directly from creators and businesses who've transformed their video production with VideoRemix.vip
           </p>
         </motion.div>
         
@@ -331,7 +331,7 @@ const TestimonialsSection: React.FC = () => {
                         >
                           <div className="text-sm text-gray-400 mb-2 flex items-center">
                             <TrendingUp className="h-4 w-4 mr-1 text-green-400" />
-                            <span>Results after using VideoRemix.io:</span>
+                            <span>Results after using VideoRemix.vip:</span>
                           </div>
                           <div className="grid grid-cols-3 gap-3">
                             <motion.div 

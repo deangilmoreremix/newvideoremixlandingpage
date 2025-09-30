@@ -69,9 +69,9 @@ class TabErrorBoundary extends React.Component<
   render() {
     if (this.state.hasError) {
       return (
-        <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-6 text-center">
-          <AlertTriangle className="h-12 w-12 text-red-400 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-red-400 mb-2">
+        <div className="bg-blue-500/20 border border-blue-500/50 rounded-lg p-6 text-center">
+          <AlertTriangle className="h-12 w-12 text-blue-400 mx-auto mb-4" />
+          <h3 className="text-lg font-semibold text-blue-400 mb-2">
             Failed to load {this.props.tabId} management
           </h3>
           <p className="text-gray-300 mb-4">
@@ -79,7 +79,7 @@ class TabErrorBoundary extends React.Component<
           </p>
           <button
             onClick={() => window.location.reload()}
-            className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
           >
             Refresh Page
           </button>
@@ -292,10 +292,10 @@ const AdminDashboard: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Admin Dashboard | VideoRemix.io</title>
+        <title>Admin Dashboard | VideoRemix.vip</title>
         <meta
           name="description"
-          content="Admin dashboard for managing VideoRemix.io applications and features."
+          content="Admin dashboard for managing VideoRemix.vip applications and features."
         />
       </Helmet>
 
@@ -303,8 +303,8 @@ const AdminDashboard: React.FC = () => {
         {/* Admin Header */}
         <section className="py-16 relative overflow-hidden">
           <div className="absolute inset-0">
-            <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-red-600/10 rounded-full blur-[100px] -z-10"></div>
-            <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-red-600/10 rounded-full blur-[100px] -z-10"></div>
+            <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-600/10 rounded-full blur-[100px] -z-10"></div>
+            <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-blue-600/10 rounded-full blur-[100px] -z-10"></div>
           </div>
 
           <div className="container mx-auto px-4">
@@ -317,19 +317,19 @@ const AdminDashboard: React.FC = () => {
                 className="text-center mb-8"
               >
                 <div className="flex items-center justify-center mb-4">
-                  <Shield className="h-8 w-8 text-red-500 mr-3" />
+                  <Shield className="h-8 w-8 text-blue-500 mr-3" />
                   <h1 className="text-4xl md:text-5xl font-bold text-white">
-                    Admin <span className="text-red-400">Dashboard</span>
+                    Admin <span className="text-blue-400">Dashboard</span>
                   </h1>
                 </div>
                 <p className="text-xl text-gray-300 mb-4">
-                  Manage applications and features for VideoRemix.io
+                  Manage applications and features for VideoRemix.vip
                 </p>
                 <div className="flex items-center justify-center space-x-4 text-sm text-gray-400">
                   <span>Logged in as: {user?.email}</span>
                   <button
                     onClick={logout}
-                    className="text-red-400 hover:text-red-300 underline"
+                    className="text-blue-400 hover:text-blue-300 underline"
                   >
                     Logout
                   </button>
@@ -358,9 +358,9 @@ const AdminDashboard: React.FC = () => {
                           aria-controls={`panel-${tab.id}`}
                           id={`tab-${tab.id}`}
                           onClick={() => handleTabChange(tab.id)}
-                          className={`flex-1 flex items-center justify-center px-4 py-3 rounded-md text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800 ${
+                          className={`flex-1 flex items-center justify-center px-4 py-3 rounded-md text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 ${
                             activeTab === tab.id
-                              ? 'bg-red-600 text-white shadow-lg'
+                              ? 'bg-blue-600 text-white shadow-lg'
                               : 'text-gray-300 hover:text-white hover:bg-gray-700/50'
                           }`}
                         >
@@ -430,7 +430,7 @@ const AdminDashboard: React.FC = () => {
               </button>
               <button
                 onClick={logout}
-                className="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors"
+                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition-colors"
               >
                 Logout Now
               </button>

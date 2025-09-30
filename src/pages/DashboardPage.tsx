@@ -10,10 +10,10 @@ const DashboardPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Dashboard | VideoRemix.io</title>
+        <title>Dashboard | VideoRemix.vip</title>
         <meta 
           name="description" 
-          content="Access your personalized VideoRemix.io dashboard with all your favorite tools and account settings." 
+          content="Access your personalized VideoRemix.vip dashboard with all your favorite tools and account settings." 
         />
       </Helmet>
 

@@ -30,12 +30,12 @@ const AutoCaptionsPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>{feature.title} | VideoRemix.io Features</title>
+        <title>{feature.title} | VideoRemix.vip Features</title>
         <meta name="description" content={feature.description} />
-        <meta property="og:title" content={`${feature.title} | VideoRemix.io Features`} />
+        <meta property="og:title" content={`${feature.title} | VideoRemix.vip Features`} />
         <meta property="og:description" content={feature.description} />
         <meta property="og:image" content={feature.image} />
-        <meta name="twitter:title" content={`${feature.title} | VideoRemix.io Features`} />
+        <meta name="twitter:title" content={`${feature.title} | VideoRemix.vip Features`} />
         <meta name="twitter:description" content={feature.description} />
         <meta name="twitter:image" content={feature.image} />
         <meta name="keywords" content="automatic captions, video subtitles, multilingual captions, video accessibility, subtitle generator" />

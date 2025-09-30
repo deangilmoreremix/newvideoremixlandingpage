@@ -18,7 +18,7 @@ interface Testimonial {
 export const testimonialsData: Testimonial[] = [
   {
     id: "testimonial-1",
-    quote: "VideoRemix.io transformed our social media strategy. We're creating 3x more content in half the time, and our engagement has increased by 200%.",
+    quote: "VideoRemix.vip transformed our social media strategy. We're creating 3x more content in half the time, and our engagement has increased by 200%.",
     name: "Sarah Johnson",
     role: "Social Media Manager",
     company: "Global Marketing Inc.",
@@ -29,7 +29,7 @@ export const testimonialsData: Testimonial[] = [
   },
   {
     id: "testimonial-2",
-    quote: "As a YouTuber, editing used to take me days. With VideoRemix.io, I can edit an entire video in just hours, and the quality is even better. Total game-changer!",
+    quote: "As a YouTuber, editing used to take me days. With VideoRemix.vip, I can edit an entire video in just hours, and the quality is even better. Total game-changer!",
     name: "Marcus Chen",
     role: "Content Creator",
     company: "TechReviews Channel",
@@ -40,7 +40,7 @@ export const testimonialsData: Testimonial[] = [
   },
   {
     id: "testimonial-3",
-    quote: "The AI features in VideoRemix.io are truly next level. It automatically extracted the best clips from our 2-hour webinar for social media. This tool is worth every penny.",
+    quote: "The AI features in VideoRemix.vip are truly next level. It automatically extracted the best clips from our 2-hour webinar for social media. This tool is worth every penny.",
     name: "Emma Rodriguez",
     role: "Director of Content",
     company: "E-Learning Solutions",
@@ -51,7 +51,7 @@ export const testimonialsData: Testimonial[] = [
   },
   {
     id: "testimonial-4",
-    quote: "Our agency has saved over 200 hours per month since switching to VideoRemix.io. The client approval process is also smoother with their collaboration features.",
+    quote: "Our agency has saved over 200 hours per month since switching to VideoRemix.vip. The client approval process is also smoother with their collaboration features.",
     name: "David Park",
     role: "Creative Director",
     company: "Visionary Agency",
@@ -73,7 +73,7 @@ export const testimonialsData: Testimonial[] = [
   },
   {
     id: "testimonial-6",
-    quote: "I went from creating 1-2 videos a month to 2-3 videos per WEEK! My channel growth has exploded since I started using VideoRemix.io.",
+    quote: "I went from creating 1-2 videos a month to 2-3 videos per WEEK! My channel growth has exploded since I started using VideoRemix.vip.",
     name: "James Wilson",
     role: "YouTube Creator",
     company: "1.2M Subscribers",
@@ -106,7 +106,7 @@ export const testimonialsData: Testimonial[] = [
   },
   {
     id: "testimonial-9",
-    quote: "We've reduced our video production costs by 70% while actually increasing our output. The ROI on VideoRemix.io has been incredible for our marketing department.",
+    quote: "We've reduced our video production costs by 70% while actually increasing our output. The ROI on VideoRemix.vip has been incredible for our marketing department.",
     name: "Robert Thompson",
     role: "Marketing Director",
     company: "Enterprise Solutions Inc.",
@@ -128,7 +128,7 @@ export const testimonialsData: Testimonial[] = [
   },
   {
     id: "testimonial-11",
-    quote: "I've tried every video editing tool on the market, and nothing comes close to the ease and power of VideoRemix.io. The AI features are truly revolutionary.",
+    quote: "I've tried every video editing tool on the market, and nothing comes close to the ease and power of VideoRemix.vip. The AI features are truly revolutionary.",
     name: "Carlos Sanchez",
     role: "Videographer",
     company: "Visual Story Studios",
@@ -172,7 +172,7 @@ export const testimonialsData: Testimonial[] = [
   },
   {
     id: "testimonial-15",
-    quote: "I use VideoRemix.io daily for my TikTok and Instagram content. The vertical video templates and quick export options are perfect for social media creators.",
+    quote: "I use VideoRemix.vip daily for my TikTok and Instagram content. The vertical video templates and quick export options are perfect for social media creators.",
     name: "Tyler Evans",
     role: "Social Media Influencer",
     company: "2.5M Followers",
@@ -194,7 +194,7 @@ export const testimonialsData: Testimonial[] = [
   },
   {
     id: "testimonial-17",
-    quote: "Our real estate listings with VideoRemix.io created property videos sell 35% faster. The AI automatically highlights the best features of each property.",
+    quote: "Our real estate listings with VideoRemix.vip created property videos sell 35% faster. The AI automatically highlights the best features of each property.",
     name: "Daniel Morgan",
     role: "Real Estate Agent",
     company: "Premium Properties",
@@ -216,7 +216,7 @@ export const testimonialsData: Testimonial[] = [
   },
   {
     id: "testimonial-19",
-    quote: "As a non-profit with limited resources, VideoRemix.io has been invaluable. We now create professional fundraising videos at a fraction of what we used to spend.",
+    quote: "As a non-profit with limited resources, VideoRemix.vip has been invaluable. We now create professional fundraising videos at a fraction of what we used to spend.",
     name: "Mark Thompson",
     role: "Executive Director",
     company: "Global Relief Initiative",

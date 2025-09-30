@@ -55,7 +55,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ isMobile, isTablet }) => {
       <Suspense fallback={<SectionLoader />}>
         <FeatureMap 
           title="Comprehensive Marketing Personalization Features"
-          subtitle="Explore the powerful personalization capabilities of VideoRemix.io's marketing platform"
+          subtitle="Explore the powerful personalization capabilities of VideoRemix.vip's marketing platform"
         />
       </Suspense>
       

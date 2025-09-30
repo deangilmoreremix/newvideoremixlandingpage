@@ -22,27 +22,27 @@ const categories = [
 const faqData = [
   // Getting Started
   {
-    question: "What is VideoRemix.io?",
-    answer: "VideoRemix.io is an AI-powered marketing personalization platform designed to help marketers and businesses create personalized marketing content that drives results. Our platform combines artificial intelligence with intuitive design to eliminate the technical barriers of traditional marketing content creation, enabling you to create personalized videos, images, and campaigns in minutes instead of hours.",
+    question: "What is VideoRemix.vip?",
+    answer: "VideoRemix.vip is an AI-powered marketing personalization platform designed to help marketers and businesses create personalized marketing content that drives results. Our platform combines artificial intelligence with intuitive design to eliminate the technical barriers of traditional marketing content creation, enabling you to create personalized videos, images, and campaigns in minutes instead of hours.",
     category: "getting-started"
   },
   {
-    question: "How does VideoRemix.io work?",
-    answer: "VideoRemix.io uses artificial intelligence to automate the video editing process. Upload your footage, choose a template, make any customizations you want, and our AI will handle the technical aspects of editing. You can export the final video in minutes instead of hours.",
+    question: "How does VideoRemix.vip work?",
+    answer: "VideoRemix.vip uses artificial intelligence to automate the video editing process. Upload your footage, choose a template, make any customizations you want, and our AI will handle the technical aspects of editing. You can export the final video in minutes instead of hours.",
     category: "getting-started"
   },
   {
-    question: "Do I need any technical skills to use VideoRemix.io?",
-    answer: "Not at all! VideoRemix.io is designed for users with zero video editing experience. Our intuitive interface and AI-powered features make it easy for anyone to create professional-looking videos without technical skills.",
+    question: "Do I need any technical skills to use VideoRemix.vip?",
+    answer: "Not at all! VideoRemix.vip is designed for users with zero video editing experience. Our intuitive interface and AI-powered features make it easy for anyone to create professional-looking videos without technical skills.",
     category: "getting-started"
   },
   {
-    question: "How long does it take to learn VideoRemix.io?",
+    question: "How long does it take to learn VideoRemix.vip?",
     answer: "Most users can create their first professional-quality video within 15 minutes of signing up. Our platform is designed to be intuitive with a minimal learning curve. We also provide interactive tutorials, tooltips, and a comprehensive help center to guide you through the process.",
     category: "getting-started"
   },
   {
-    question: "What types of videos can I create with VideoRemix.io?",
+    question: "What types of videos can I create with VideoRemix.vip?",
     answer: "You can create virtually any type of video including social media content, marketing videos, product demos, educational content, YouTube videos, testimonials, webinar recordings, explainer videos, and much more. Our template library covers dozens of use cases across all major industries.",
     category: "getting-started"
   },
@@ -54,8 +54,8 @@ const faqData = [
   
   // Accounts & Billing
   {
-    question: "How much does VideoRemix.io cost?",
-    answer: "VideoRemix.io offers several pricing tiers to fit different needs. We have a Free plan with basic features, a Pro plan starting at $29/month, and a Business plan at $79/month. We also offer custom Enterprise solutions. Annual subscriptions receive a 20% discount. Check our pricing page for the most current pricing and feature details.",
+    question: "How much does VideoRemix.vip cost?",
+    answer: "VideoRemix.vip offers several pricing tiers to fit different needs. We have a Free plan with basic features, a Pro plan starting at $29/month, and a Business plan at $79/month. We also offer custom Enterprise solutions. Annual subscriptions receive a 20% discount. Check our pricing page for the most current pricing and feature details.",
     category: "accounts"
   },
   {
@@ -75,7 +75,7 @@ const faqData = [
   },
   {
     question: "How does the 14-day money-back guarantee work?",
-    answer: "If you're not completely satisfied with VideoRemix.io within 14 days of your initial purchase, contact our support team for a full refund. No questions asked. This guarantee applies to first-time purchases only and does not apply to renewals or subscription changes.",
+    answer: "If you're not completely satisfied with VideoRemix.vip within 14 days of your initial purchase, contact our support team for a full refund. No questions asked. This guarantee applies to first-time purchases only and does not apply to renewals or subscription changes.",
     category: "accounts"
   },
   {
@@ -112,7 +112,7 @@ const faqData = [
   },
   {
     question: "Can I add custom transitions and effects?",
-    answer: "Yes! VideoRemix.io includes a library of professional transitions and effects that you can apply with a single click. Pro and Business users can also create custom transitions and save them for future use.",
+    answer: "Yes! VideoRemix.vip includes a library of professional transitions and effects that you can apply with a single click. Pro and Business users can also create custom transitions and save them for future use.",
     category: "features"
   },
   {
@@ -122,14 +122,14 @@ const faqData = [
   },
   {
     question: "Can I add background music to my videos?",
-    answer: "Yes, VideoRemix.io includes a royalty-free music library with thousands of tracks categorized by mood, genre, and tempo. Pro and Business users can also upload their own music files. Our AI can even suggest music that matches the mood and pacing of your video content.",
+    answer: "Yes, VideoRemix.vip includes a royalty-free music library with thousands of tracks categorized by mood, genre, and tempo. Pro and Business users can also upload their own music files. Our AI can even suggest music that matches the mood and pacing of your video content.",
     category: "features"
   },
 
   // Technical Questions
   {
-    question: "What browsers does VideoRemix.io support?",
-    answer: "VideoRemix.io works on all modern browsers including Chrome, Firefox, Safari, and Edge. For optimal performance, we recommend using the latest version of Chrome or Firefox. Our platform is primarily cloud-based, so you don't need a powerful computer to create professional videos.",
+    question: "What browsers does VideoRemix.vip support?",
+    answer: "VideoRemix.vip works on all modern browsers including Chrome, Firefox, Safari, and Edge. For optimal performance, we recommend using the latest version of Chrome or Firefox. Our platform is primarily cloud-based, so you don't need a powerful computer to create professional videos.",
     category: "technical"
   },
   {
@@ -139,17 +139,17 @@ const faqData = [
   },
   {
     question: "What are the minimum system requirements?",
-    answer: "Since VideoRemix.io is cloud-based, the system requirements are minimal. You need a computer with a modern web browser and a stable internet connection (at least 5 Mbps download speed). For video uploading, a faster connection is recommended. 4GB of RAM and any modern processor should be sufficient.",
+    answer: "Since VideoRemix.vip is cloud-based, the system requirements are minimal. You need a computer with a modern web browser and a stable internet connection (at least 5 Mbps download speed). For video uploading, a faster connection is recommended. 4GB of RAM and any modern processor should be sufficient.",
     category: "technical"
   },
   {
-    question: "Is VideoRemix.io compatible with my existing video editing software?",
-    answer: "VideoRemix.io can import project files from some popular video editing platforms. We currently support importing from Adobe Premiere (XML), Final Cut Pro (XML), and DaVinci Resolve (EDL). We can also import media assets from these platforms, even if the project structure itself isn't imported.",
+    question: "Is VideoRemix.vip compatible with my existing video editing software?",
+    answer: "VideoRemix.vip can import project files from some popular video editing platforms. We currently support importing from Adobe Premiere (XML), Final Cut Pro (XML), and DaVinci Resolve (EDL). We can also import media assets from these platforms, even if the project structure itself isn't imported.",
     category: "technical"
   },
   {
-    question: "Do I need an internet connection to use VideoRemix.io?",
-    answer: "Yes, VideoRemix.io is a cloud-based platform that requires an internet connection to access and use. This allows us to leverage powerful cloud computing resources for AI processing and rendering, without taxing your local machine. Pro and Business plans include a limited offline mode that allows you to make basic edits without connectivity and sync changes when you're back online.",
+    question: "Do I need an internet connection to use VideoRemix.vip?",
+    answer: "Yes, VideoRemix.vip is a cloud-based platform that requires an internet connection to access and use. This allows us to leverage powerful cloud computing resources for AI processing and rendering, without taxing your local machine. Pro and Business plans include a limited offline mode that allows you to make basic edits without connectivity and sync changes when you're back online.",
     category: "technical"
   },
   {
@@ -187,13 +187,13 @@ const faqData = [
 
   // Privacy & Security
   {
-    question: "How secure is my content on VideoRemix.io?",
+    question: "How secure is my content on VideoRemix.vip?",
     answer: "We take security extremely seriously. All content is encrypted both in transit and at rest using bank-grade encryption. Our infrastructure is hosted on secure cloud providers with SOC 2 Type II compliance. We implement strict access controls, regular security audits, and follow security best practices across our entire platform.",
     category: "security"
   },
   {
-    question: "Who owns the videos I create with VideoRemix.io?",
-    answer: "You retain full ownership of all content you create with VideoRemix.io. We do not claim any rights to your videos or the assets you upload. You're free to use your videos for any purpose aligned with our terms of service.",
+    question: "Who owns the videos I create with VideoRemix.vip?",
+    answer: "You retain full ownership of all content you create with VideoRemix.vip. We do not claim any rights to your videos or the assets you upload. You're free to use your videos for any purpose aligned with our terms of service.",
     category: "security"
   },
   {
@@ -202,8 +202,8 @@ const faqData = [
     category: "security"
   },
   {
-    question: "Can I use VideoRemix.io in compliance with GDPR/CCPA/HIPAA?",
-    answer: "Yes. VideoRemix.io is compliant with GDPR and CCPA requirements. For HIPAA compliance, our Business Associate Agreement (BAA) is available for Enterprise customers. We provide the tools and documentation needed to use our platform in a compliant manner, though ultimate compliance responsibility remains with your organization.",
+    question: "Can I use VideoRemix.vip in compliance with GDPR/CCPA/HIPAA?",
+    answer: "Yes. VideoRemix.vip is compliant with GDPR and CCPA requirements. For HIPAA compliance, our Business Associate Agreement (BAA) is available for Enterprise customers. We provide the tools and documentation needed to use our platform in a compliant manner, though ultimate compliance responsibility remains with your organization.",
     category: "security"
   },
   {
@@ -250,7 +250,7 @@ const faqData = [
   },
   {
     question: "Will the AI replace my existing editing team?",
-    answer: "VideoRemix.io is designed to augment human creativity, not replace it. Many professional teams use our platform to handle routine editing tasks, allowing their creative staff to focus on higher-value work. The AI handles technical aspects while humans provide creative direction and final approval.",
+    answer: "VideoRemix.vip is designed to augment human creativity, not replace it. Many professional teams use our platform to handle routine editing tasks, allowing their creative staff to focus on higher-value work. The AI handles technical aspects while humans provide creative direction and final approval.",
     category: "ai"
   },
 
@@ -262,7 +262,7 @@ const faqData = [
   },
   {
     question: "What export formats are available?",
-    answer: "VideoRemix.io supports exporting to all major video formats including MP4, MOV, and WebM. You can select various quality presets optimized for different uses (web, social media, professional) or customize settings like bitrate, frame rate, and compression.",
+    answer: "VideoRemix.vip supports exporting to all major video formats including MP4, MOV, and WebM. You can select various quality presets optimized for different uses (web, social media, professional) or customize settings like bitrate, frame rate, and compression.",
     category: "publishing"
   },
   {
@@ -294,7 +294,7 @@ const faqData = [
   // Templates & Content
   {
     question: "How many templates are available?",
-    answer: "VideoRemix.io offers 500+ professionally designed templates across dozens of categories including social media, marketing, education, real estate, e-commerce, and more. We add new templates weekly based on current trends and user requests.",
+    answer: "VideoRemix.vip offers 500+ professionally designed templates across dozens of categories including social media, marketing, education, real estate, e-commerce, and more. We add new templates weekly based on current trends and user requests.",
     category: "templates"
   },
   {
@@ -303,8 +303,8 @@ const faqData = [
     category: "templates"
   },
   {
-    question: "Can I use stock footage and music from VideoRemix.io in my videos?",
-    answer: "Yes, VideoRemix.io includes access to a vast library of royalty-free stock footage, images, and music that you can use in your videos. All stock content is licensed for commercial use, so you can safely use it in both personal and business projects without attribution.",
+    question: "Can I use stock footage and music from VideoRemix.vip in my videos?",
+    answer: "Yes, VideoRemix.vip includes access to a vast library of royalty-free stock footage, images, and music that you can use in your videos. All stock content is licensed for commercial use, so you can safely use it in both personal and business projects without attribution.",
     category: "templates"
   },
   {
@@ -436,10 +436,10 @@ const FAQPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Frequently Asked Questions | VideoRemix.io</title>
+        <title>Frequently Asked Questions | VideoRemix.vip</title>
         <meta 
           name="description" 
-          content="Find answers to your questions about VideoRemix.io's AI-powered video creation platform. Learn about features, pricing, technical requirements, and more." 
+          content="Find answers to your questions about VideoRemix.vip's AI-powered video creation platform. Learn about features, pricing, technical requirements, and more." 
         />
       </Helmet>
 
@@ -464,7 +464,7 @@ const FAQPage: React.FC = () => {
                 </MagicSparkles>
                 
                 <p className="text-xl text-gray-300 mb-8">
-                  Find answers to common questions about VideoRemix.io's features, pricing, and capabilities.
+                  Find answers to common questions about VideoRemix.vip's features, pricing, and capabilities.
                 </p>
               </motion.div>
               
@@ -605,10 +605,10 @@ const FAQPage: React.FC = () => {
                       {categories.find(c => c.id === activeCategory)?.name}
                     </h2>
                     <p className="text-gray-300">
-                      {activeCategory === 'getting-started' && "Everything you need to know to get up and running with VideoRemix.io."}
+                      {activeCategory === 'getting-started' && "Everything you need to know to get up and running with VideoRemix.vip."}
                       {activeCategory === 'accounts' && "Information about accounts, subscriptions, billing, and payments."}
                       {activeCategory === 'features' && "Learn about the key features and capabilities of our platform."}
-                      {activeCategory === 'technical' && "Technical specifications and requirements for using VideoRemix.io."}
+                      {activeCategory === 'technical' && "Technical specifications and requirements for using VideoRemix.vip."}
                       {activeCategory === 'collaboration' && "How to work with team members and clients on video projects."}
                       {activeCategory === 'security' && "Details about our privacy practices and security measures."}
                       {activeCategory === 'ai' && "Learn how our AI-powered features work to enhance your videos."}
@@ -771,7 +771,7 @@ const FAQPage: React.FC = () => {
                 {[
                   {
                     title: "Video Tutorials",
-                    description: "Watch step-by-step video guides on using VideoRemix.io's features",
+                    description: "Watch step-by-step video guides on using VideoRemix.vip's features",
                     icon: <Video className="h-8 w-8 text-primary-400" />,
                     link: "/tutorials"
                   },
@@ -823,7 +823,7 @@ const FAQPage: React.FC = () => {
               className="mt-20 text-center"
             >
               <MagicSparkles minSparkles={3} maxSparkles={6}>
-                <h2 className="text-2xl font-bold text-white mb-4">Ready to Experience VideoRemix.io?</h2>
+                <h2 className="text-2xl font-bold text-white mb-4">Ready to Experience VideoRemix.vip?</h2>
               </MagicSparkles>
               
               <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">

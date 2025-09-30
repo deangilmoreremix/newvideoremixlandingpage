@@ -10,10 +10,10 @@ const ContactPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Contact Us | VideoRemix.io</title>
+        <title>Contact Us | VideoRemix.vip</title>
         <meta 
           name="description" 
-          content="Have questions about VideoRemix.io? Contact our team for support, sales inquiries, or partnership opportunities. We're here to help!" 
+          content="Have questions about VideoRemix.vip? Contact our team for support, sales inquiries, or partnership opportunities. We're here to help!" 
         />
       </Helmet>
       

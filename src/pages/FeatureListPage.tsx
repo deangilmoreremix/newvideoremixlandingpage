@@ -176,10 +176,10 @@ const FeatureListPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Features | VideoRemix.io</title>
+        <title>Features | VideoRemix.vip</title>
         <meta 
           name="description"
-          content="Explore the powerful AI-driven marketing personalization features of VideoRemix.io. Learn how our tools can transform your marketing campaigns."
+          content="Explore the powerful AI-driven marketing personalization features of VideoRemix.vip. Learn how our tools can transform your marketing campaigns."
         />
       </Helmet>
 
@@ -205,7 +205,7 @@ const FeatureListPage: React.FC = () => {
                 </MagicSparkles>
                 
                 <p className="text-xl text-gray-300 mb-8">
-                  Discover the industry-leading tools that make VideoRemix.io the ultimate platform for marketing personalization and campaign optimization.
+                  Discover the industry-leading tools that make VideoRemix.vip the ultimate platform for marketing personalization and campaign optimization.
                 </p>
               </motion.div>
 
@@ -429,7 +429,7 @@ const FeatureListPage: React.FC = () => {
               </MagicSparkles>
               
               <p className="text-xl text-gray-300 mb-8">
-                Join thousands of creators and businesses who have revolutionized their workflow with VideoRemix.io's powerful features.
+                Join thousands of creators and businesses who have revolutionized their workflow with VideoRemix.vip's powerful features.
               </p>
               
               <motion.div
@@ -462,7 +462,7 @@ const FeatureListPage: React.FC = () => {
                 How Our Features Compare
               </h2>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                VideoRemix.io offers capabilities that outshine traditional marketing tools and other online platforms
+                VideoRemix.vip offers capabilities that outshine traditional marketing tools and other online platforms
               </p>
             </div>
             
@@ -471,7 +471,7 @@ const FeatureListPage: React.FC = () => {
                 <thead>
                   <tr className="bg-primary-900 text-white">
                     <th className="py-4 px-6 text-left">Feature</th>
-                    <th className="py-4 px-6 text-center">VideoRemix.io</th>
+                    <th className="py-4 px-6 text-center">VideoRemix.vip</th>
                     <th className="py-4 px-6 text-center">Traditional Editors</th>
                     <th className="py-4 px-6 text-center">Other Online Tools</th>
                   </tr>

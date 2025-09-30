@@ -64,8 +64,8 @@ const ProfilePage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Profile | VideoRemix.io</title>
-        <meta name="description" content="Manage your VideoRemix.io profile settings." />
+        <title>Profile | VideoRemix.vip</title>
+        <meta name="description" content="Manage your VideoRemix.vip profile settings." />
       </Helmet>
 
       <div className="min-h-screen bg-gray-900 py-20">

@@ -8,8 +8,8 @@ const PricingPage: React.FC = () => {
   return (
     <main className="w-full">
       <Helmet>
-        <title>Pricing | VideoRemix.io</title>
-        <meta name="description" content="Choose the perfect plan for your marketing personalization needs with VideoRemix.io. From free to enterprise, we have the right pricing for you." />
+        <title>Pricing | VideoRemix.vip</title>
+        <meta name="description" content="Choose the perfect plan for your marketing personalization needs with VideoRemix.vip. From free to enterprise, we have the right pricing for you." />
       </Helmet>
       
       <section id="pricing-hero" className="py-20 md:py-28">
@@ -37,7 +37,7 @@ const PricingPage: React.FC = () => {
           },
           { 
             question: "Is there a free trial available?", 
-            answer: "Yes! We offer a 14-day free trial on all paid plans so you can experience the full power of VideoRemix.io before committing." 
+            answer: "Yes! We offer a 14-day free trial on all paid plans so you can experience the full power of VideoRemix.vip before committing." 
           },
           { 
             question: "Do you offer refunds?", 

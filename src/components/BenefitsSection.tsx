@@ -110,7 +110,7 @@ const BenefitsSection: React.FC = () => {
       }
     },
     {
-      quote: "Our B2B marketing completely transformed after using VideoRemix's personalization tools. We now create custom pitches for each industry segment in minutes rather than days.",
+      quote: "Our B2B marketing completely transformed after using VideoRemix.vip's personalization tools. We now create custom pitches for each industry segment in minutes rather than days.",
       name: "Michael Chen",
       role: "VP of Sales",
       company: "Enterprise Solutions",
@@ -146,7 +146,7 @@ const BenefitsSection: React.FC = () => {
       }
     },
     {
-      quote: "Real estate marketing needs personalization, and VideoRemix delivers. We create neighborhood-specific videos that increased property inquiries by 214% in the first month.",
+      quote: "Real estate marketing needs personalization, and VideoRemix.vip delivers. We create neighborhood-specific videos that increased property inquiries by 214% in the first month.",
       name: "Jessica Martinez",
       role: "Digital Marketing Manager",
       company: "Premier Properties",

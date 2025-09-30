@@ -16,6 +16,7 @@ interface AdminContextType {
   isLoading: boolean;
   isAuthenticated: boolean;
   login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
+  signup: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<void>;
   verifyAuth: () => Promise<void>;
 }
@@ -66,6 +67,34 @@ export const AdminProvider: React.FC<AdminProviderProps> = ({ children }) => {
       }
     } catch (error) {
       console.error('Login error:', error);
+      return { success: false, error: 'Network error occurred' };
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const signup = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
+    try {
+      setIsLoading(true);
+
+      const response = await fetch('/functions/v1/admin-auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Don't auto-login after signup, redirect to login
+        return { success: true };
+      } else {
+        return { success: false, error: data.error || 'Sign up failed' };
+      }
+    } catch (error) {
+      console.error('Sign up error:', error);
       return { success: false, error: 'Network error occurred' };
     } finally {
       setIsLoading(false);
@@ -126,6 +155,7 @@ export const AdminProvider: React.FC<AdminProviderProps> = ({ children }) => {
     isLoading,
     isAuthenticated: !!user,
     login,
+    signup,
     logout,
     verifyAuth,
   };

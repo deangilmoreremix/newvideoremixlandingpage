@@ -414,7 +414,7 @@ const AppDetailPage: React.FC = () => {
                     onClick={() => {
                       if (navigator.share) {
                         navigator.share({
-                          title: `${app.name} | VideoRemix.io`,
+                          title: `${app.name} | VideoRemix.vip`,
                           text: app.description,
                           url: window.location.href,
                         })
@@ -1101,7 +1101,7 @@ const AppDetailPage: React.FC = () => {
                             className="flex flex-col items-center"
                             whileHover={{ y: -2 }}
                           >
-                            <span className="text-lg font-bold text-primary-300 mb-1">VideoRemix.io</span>
+                            <span className="text-lg font-bold text-primary-300 mb-1">VideoRemix.vip</span>
                             <span className="text-xs text-gray-300">AI-Powered Platform</span>
                           </motion.span>
                         </th>
@@ -1559,7 +1559,7 @@ const AppDetailPage: React.FC = () => {
                 {(app.faqs || [
                   {
                     question: `What is ${app.name}?`,
-                    answer: `${app.name} is a specialized app within the VideoRemix.io platform that focuses on ${app.description.toLowerCase()}. It provides a streamlined workflow for this specific use case, making it easier than ever to create professional content.`
+                    answer: `${app.name} is a specialized app within the VideoRemix.vip platform that focuses on ${app.description.toLowerCase()}. It provides a streamlined workflow for this specific use case, making it easier than ever to create professional content.`
                   },
                   {
                     question: "Do I need any technical skills to use this app?",
@@ -1578,7 +1578,7 @@ const AppDetailPage: React.FC = () => {
                     answer: "You can export your videos in all standard formats including MP4, MOV, and more. We also offer presets optimized for different platforms like YouTube, Instagram, TikTok, Facebook, and LinkedIn."
                   },
                   {
-                    question: "Is this included in my VideoRemix.io subscription?",
+                    question: "Is this included in my VideoRemix.vip subscription?",
                     answer: "Yes! All apps are included in the Pro and Business subscription plans. The Free plan offers limited access to certain apps and features."
                   }
                 ]).map((faq, index) => (
@@ -1727,7 +1727,7 @@ const AppDetailPage: React.FC = () => {
               </h2>
             </MagicSparkles>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto break-words">
-              Discover other powerful tools in the VideoRemix.io ecosystem
+              Discover other powerful tools in the VideoRemix.vip ecosystem
             </p>
           </motion.div>
           

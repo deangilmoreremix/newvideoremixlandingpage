@@ -62,7 +62,7 @@ const SolutionSection: React.FC = () => {
           
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
             Introducing <span className="text-gradient relative">
-              VideoRemix.io
+              VideoRemix.vip
               <motion.div 
                 className="absolute -inset-1 opacity-30 blur-md -z-10" 
                 animate={{
@@ -227,7 +227,7 @@ const SolutionSection: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <h3 className="text-2xl font-bold text-white mb-6">
-              How VideoRemix.io Transforms Your Marketing With Personalization
+              How VideoRemix.vip Transforms Your Marketing With Personalization
             </h3>
             
             <div className="space-y-6 mb-8">

@@ -28,7 +28,7 @@ const DashboardContactSection: React.FC = () => {
           </MagicSparkles>
           
           <p className="text-xl text-gray-300 mb-8">
-            We're here to help you make the most of VideoRemix.io
+            We're here to help you make the most of VideoRemix.vip
           </p>
         </motion.div>
         
@@ -126,7 +126,7 @@ const DashboardContactSection: React.FC = () => {
             },
             {
               title: "Feature Requests",
-              description: "Suggest new features for VideoRemix.io",
+              description: "Suggest new features for VideoRemix.vip",
               link: "/feature-requests",
               icon: <Settings className="h-6 w-6 text-primary-400" />
             }

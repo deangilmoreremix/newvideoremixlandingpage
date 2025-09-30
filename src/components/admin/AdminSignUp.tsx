@@ -58,20 +58,20 @@ const validatePassword = (password: string): { isValid: boolean; strength: numbe
   };
 };
 
-const AdminLogin: React.FC = () => {
-  const { login, isLoading } = useAdmin();
+const AdminSignUp: React.FC = () => {
+  const { signup, isLoading } = useAdmin();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
-    password: ''
+    password: '',
+    confirmPassword: ''
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
-  const [loginAttempts, setLoginAttempts] = useState(0);
-  const [lockoutUntil, setLockoutUntil] = useState<Date | null>(null);
   const [announcements, setAnnouncements] = useState<string>('');
 
   // Focus management
@@ -88,9 +88,9 @@ const AdminLogin: React.FC = () => {
   // Screen reader announcements
   useEffect(() => {
     if (error) {
-      setAnnouncements(`Login failed: ${error}`);
+      setAnnouncements(`Sign up failed: ${error}`);
     } else if (success) {
-      setAnnouncements('Login successful');
+      setAnnouncements('Sign up successful');
     } else {
       setAnnouncements('');
     }
@@ -117,11 +117,18 @@ const AdminLogin: React.FC = () => {
           }
         }
         break;
+      case 'confirmPassword':
+        if (!value.trim()) {
+          errors.confirmPassword = 'Please confirm your password';
+        } else if (value !== formData.password) {
+          errors.confirmPassword = 'Passwords do not match';
+        }
+        break;
     }
 
     setFieldErrors(prev => ({ ...prev, [field]: errors[field] || '' }));
     return Object.keys(errors).length === 0;
-  }, []);
+  }, [formData.password]);
 
   const handleInputChange = useCallback((field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -143,43 +150,26 @@ const AdminLogin: React.FC = () => {
     setError(null);
     setSuccess(null);
 
-    // Check rate limiting
-    if (lockoutUntil && new Date() < lockoutUntil) {
-      const remainingTime = Math.ceil((lockoutUntil.getTime() - Date.now()) / 1000 / 60);
-      setError(`Too many login attempts. Please try again in ${remainingTime} minutes.`);
-      return;
-    }
-
     // Mark all fields as touched for validation
-    setTouched({ email: true, password: true });
+    setTouched({ email: true, password: true, confirmPassword: true });
 
     // Validate all fields
     const isEmailValid = validateField('email', formData.email);
     const isPasswordValid = validateField('password', formData.password);
+    const isConfirmValid = validateField('confirmPassword', formData.confirmPassword);
 
-    if (!isEmailValid || !isPasswordValid) {
+    if (!isEmailValid || !isPasswordValid || !isConfirmValid) {
       setError('Please correct the errors below');
       return;
     }
 
     try {
-      const result = await login(formData.email, formData.password);
+      const result = await signup(formData.email, formData.password);
       if (result.success) {
-        setSuccess('Login successful! Redirecting...');
-        setLoginAttempts(0); // Reset attempts on success
-        setTimeout(() => navigate('/admin'), 1000);
+        setSuccess('Account created successfully! Redirecting to login...');
+        setTimeout(() => navigate('/admin/login'), 2000);
       } else {
-        const newAttempts = loginAttempts + 1;
-        setLoginAttempts(newAttempts);
-
-        // Implement progressive lockout
-        if (newAttempts >= 5) {
-          const lockoutMinutes = Math.min(newAttempts - 4, 30); // Max 30 minutes
-          setLockoutUntil(new Date(Date.now() + lockoutMinutes * 60 * 1000));
-          setError(`Too many failed attempts. Account locked for ${lockoutMinutes} minutes.`);
-        } else {
-          setError(result.error || 'Login failed');
-        }
+        setError(result.error || 'Sign up failed');
       }
     } catch (err) {
       setError('Network error occurred. Please try again.');
@@ -189,8 +179,8 @@ const AdminLogin: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Admin Login | VideoRemix.io</title>
-        <meta name="description" content="Admin login for VideoRemix.io dashboard." />
+        <title>Admin Sign Up | VideoRemix.io</title>
+        <meta name="description" content="Create admin account for VideoRemix.io dashboard." />
       </Helmet>
 
       <div className="min-h-screen bg-gray-900 flex items-center justify-center px-4">
@@ -204,12 +194,12 @@ const AdminLogin: React.FC = () => {
           <div className="text-center mb-8">
             <div className="flex items-center justify-center mb-4">
               <Shield className="h-12 w-12 text-blue-500 mr-3" />
-              <h1 className="text-3xl font-bold text-white">Admin Login</h1>
+              <h1 className="text-3xl font-bold text-white">Admin Sign Up</h1>
             </div>
-            <p className="text-gray-400">Access the VideoRemix.io admin dashboard</p>
+            <p className="text-gray-400">Create your admin account for VideoRemix.io</p>
           </div>
 
-          {/* Login Form */}
+          {/* Sign Up Form */}
           <div className="bg-gray-800/70 backdrop-blur-sm rounded-xl p-8 border border-gray-700">
             <form onSubmit={handleSubmit} className="space-y-6" noValidate>
               {/* Status Messages */}
@@ -217,7 +207,7 @@ const AdminLogin: React.FC = () => {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="bg-blue-500/20 border border-blue-500/50 text-blue-400 p-4 rounded-lg flex items-center"
+                  className="bg-red-500/20 border border-red-500/50 text-red-400 p-4 rounded-lg flex items-center"
                   role="alert"
                 >
                   <XCircle className="h-5 w-5 mr-2 flex-shrink-0" />
@@ -240,7 +230,7 @@ const AdminLogin: React.FC = () => {
               {/* Email Field */}
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                  Email Address <span className="text-blue-400">*</span>
+                  Email Address <span className="text-red-400">*</span>
                 </label>
                 <input
                   id="email"
@@ -249,7 +239,7 @@ const AdminLogin: React.FC = () => {
                   onChange={handleInputChange('email')}
                   onBlur={handleBlur('email')}
                   className={`w-full bg-gray-700 border rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-                    fieldErrors.email ? 'border-blue-500' : 'border-gray-600'
+                    fieldErrors.email ? 'border-red-500' : 'border-gray-600'
                   }`}
                   placeholder="admin@videoremix.vip"
                   disabled={isLoading}
@@ -258,7 +248,7 @@ const AdminLogin: React.FC = () => {
                   aria-invalid={!!fieldErrors.email}
                 />
                 {fieldErrors.email && (
-                  <p id="email-error" className="text-blue-400 text-sm mt-1 flex items-center" role="alert">
+                  <p id="email-error" className="text-red-400 text-sm mt-1 flex items-center" role="alert">
                     <XCircle className="h-4 w-4 mr-1" />
                     {fieldErrors.email}
                   </p>
@@ -268,7 +258,7 @@ const AdminLogin: React.FC = () => {
               {/* Password Field */}
               <div>
                 <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
-                  Password <span className="text-blue-400">*</span>
+                  Password <span className="text-red-400">*</span>
                 </label>
                 <div className="relative">
                   <input
@@ -278,9 +268,9 @@ const AdminLogin: React.FC = () => {
                     onChange={handleInputChange('password')}
                     onBlur={handleBlur('password')}
                     className={`w-full bg-gray-700 border rounded-lg px-4 py-3 pr-12 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-                      fieldErrors.password ? 'border-blue-500' : 'border-gray-600'
+                      fieldErrors.password ? 'border-red-500' : 'border-gray-600'
                     }`}
-                    placeholder="Enter your password"
+                    placeholder="Create a password"
                     disabled={isLoading}
                     required
                     aria-describedby={fieldErrors.password ? "password-error password-strength" : "password-strength"}
@@ -304,7 +294,7 @@ const AdminLogin: React.FC = () => {
                       <div className="flex-1 bg-gray-700 rounded-full h-2">
                         <div
                           className={`h-2 rounded-full transition-all duration-300 ${
-                            validatePassword(formData.password).strength <= 1 ? 'bg-blue-500' :
+                            validatePassword(formData.password).strength <= 1 ? 'bg-red-500' :
                             validatePassword(formData.password).strength <= 2 ? 'bg-orange-500' :
                             validatePassword(formData.password).strength <= 3 ? 'bg-yellow-500' :
                             validatePassword(formData.password).strength <= 4 ? 'bg-blue-500' : 'bg-green-500'
@@ -313,7 +303,7 @@ const AdminLogin: React.FC = () => {
                         />
                       </div>
                       <span className={`text-xs font-medium ${
-                        validatePassword(formData.password).strength <= 1 ? 'text-blue-400' :
+                        validatePassword(formData.password).strength <= 1 ? 'text-red-400' :
                         validatePassword(formData.password).strength <= 2 ? 'text-orange-400' :
                         validatePassword(formData.password).strength <= 3 ? 'text-yellow-400' :
                         validatePassword(formData.password).strength <= 4 ? 'text-blue-400' : 'text-green-400'
@@ -328,7 +318,7 @@ const AdminLogin: React.FC = () => {
                       <ul className="text-xs text-gray-400 mt-1 space-y-1">
                         {validatePassword(formData.password).feedback.map((requirement, index) => (
                           <li key={index} className="flex items-center">
-                            <XCircle className="h-3 w-3 mr-1 text-blue-400" />
+                            <XCircle className="h-3 w-3 mr-1 text-red-400" />
                             {requirement}
                           </li>
                         ))}
@@ -338,9 +328,49 @@ const AdminLogin: React.FC = () => {
                 )}
 
                 {fieldErrors.password && (
-                  <p id="password-error" className="text-blue-400 text-sm mt-1 flex items-center" role="alert">
+                  <p id="password-error" className="text-red-400 text-sm mt-1 flex items-center" role="alert">
                     <XCircle className="h-4 w-4 mr-1" />
                     {fieldErrors.password}
+                  </p>
+                )}
+              </div>
+
+              {/* Confirm Password Field */}
+              <div>
+                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-300 mb-2">
+                  Confirm Password <span className="text-red-400">*</span>
+                </label>
+                <div className="relative">
+                  <input
+                    id="confirmPassword"
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    value={formData.confirmPassword}
+                    onChange={handleInputChange('confirmPassword')}
+                    onBlur={handleBlur('confirmPassword')}
+                    className={`w-full bg-gray-700 border rounded-lg px-4 py-3 pr-12 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+                      fieldErrors.confirmPassword ? 'border-red-500' : 'border-gray-600'
+                    }`}
+                    placeholder="Confirm your password"
+                    disabled={isLoading}
+                    required
+                    aria-describedby={fieldErrors.confirmPassword ? "confirm-password-error" : undefined}
+                    aria-invalid={!!fieldErrors.confirmPassword}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-700 rounded"
+                    disabled={isLoading}
+                    aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                  >
+                    {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                  </button>
+                </div>
+
+                {fieldErrors.confirmPassword && (
+                  <p id="confirm-password-error" className="text-red-400 text-sm mt-1 flex items-center" role="alert">
+                    <XCircle className="h-4 w-4 mr-1" />
+                    {fieldErrors.confirmPassword}
                   </p>
                 )}
               </div>
@@ -348,41 +378,29 @@ const AdminLogin: React.FC = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                disabled={isLoading || !!lockoutUntil}
-                className="w-full bg-blue-600 hover:bg-red-700 disabled:bg-red-800 disabled:opacity-50 text-white py-3 px-4 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 disabled:cursor-not-allowed"
-                aria-describedby={lockoutUntil ? "lockout-info" : undefined}
+                disabled={isLoading}
+                className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800 disabled:opacity-50 text-white py-3 px-4 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 disabled:cursor-not-allowed"
               >
                 {isLoading ? (
                   <div className="flex items-center justify-center">
                     <div className="w-5 h-5 border-t-2 border-white border-solid rounded-full animate-spin mr-2"></div>
-                    Signing In...
+                    Creating Account...
                   </div>
-                ) : lockoutUntil ? (
-                  'Account Temporarily Locked'
                 ) : (
-                  'Sign In'
+                  'Sign Up'
                 )}
               </button>
-
-              {lockoutUntil && (
-                <p id="lockout-info" className="text-yellow-400 text-sm text-center mt-2">
-                  Account locked due to too many failed attempts
-                </p>
-              )}
             </form>
 
             {/* Footer */}
             <div className="mt-6 text-center">
-              <p className="text-sm text-gray-400 mb-2">
-                This area is restricted to authorized administrators only.
-              </p>
               <p className="text-sm text-gray-400">
-                Don't have an account?{' '}
+                Already have an account?{' '}
                 <button
-                  onClick={() => navigate('/admin/signup')}
+                  onClick={() => navigate('/admin/login')}
                   className="text-blue-400 hover:text-blue-300 underline"
                 >
-                  Sign up
+                  Sign in
                 </button>
               </p>
             </div>
@@ -398,4 +416,4 @@ const AdminLogin: React.FC = () => {
   );
 };
 
-export default AdminLogin;
+export default AdminSignUp;

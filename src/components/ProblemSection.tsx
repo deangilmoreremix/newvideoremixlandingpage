@@ -338,7 +338,7 @@ const ProblemSection: React.FC = () => {
                 href="#solution" 
                 className="inline-flex items-center bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-bold px-6 py-3 rounded-lg"
               >
-                <span>Discover How VideoRemix Personalizes Your Marketing</span>
+                <span>Discover How VideoRemix.vip Personalizes Your Marketing</span>
                 <Zap className="ml-2 h-5 w-5" />
               </a>
             </motion.div>

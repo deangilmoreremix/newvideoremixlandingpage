@@ -302,7 +302,7 @@ const DashboardToolsSection: React.FC = () => {
           </h2>
           
           <p className="text-xl text-gray-300 mb-8">
-            VideoRemix.io offers 50+ personalization tools that help you create highly targeted, engaging content that resonates with each specific viewer segment.
+            VideoRemix.vip offers 50+ personalization tools that help you create highly targeted, engaging content that resonates with each specific viewer segment.
           </p>
           
           {/* Personalization benefits */}

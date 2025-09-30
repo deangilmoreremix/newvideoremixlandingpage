@@ -72,10 +72,10 @@ const quickActions: QuickAction[] = [
 // Knowledge base created from landing page content
 const knowledgeBase = [
   {
-    question: "What is VideoRemix.io?",
-    answer: "VideoRemix.io is an AI-powered video creation and editing platform designed to make professional video production accessible to everyone. Whether you're a content creator, marketer, educator, or business owner, our platform provides the tools you need to create stunning videos without technical expertise.",
+    question: "What is VideoRemix.vip?",
+    answer: "VideoRemix.vip is an AI-powered video creation and editing platform designed to make professional video production accessible to everyone. Whether you're a content creator, marketer, educator, or business owner, our platform provides the tools you need to create stunning videos without technical expertise.",
     links: [
-      { text: "Read more about VideoRemix.io", url: "/help/what-is-videoremix" },
+      { text: "Read more about VideoRemix.vip", url: "/help/what-is-videoremix" },
       { text: "Create your first video", url: "/help/create-first-video" }
     ]
   },
@@ -89,14 +89,14 @@ const knowledgeBase = [
   },
   {
     question: "What are the pricing plans?",
-    answer: "VideoRemix.io offers three plans: Free, Pro ($29/month), and Business ($79/month). The Free plan allows 5 video exports per month at 720p quality. The Pro plan includes unlimited video exports, 4K quality, all editing features, 50GB storage, and more. The Business plan adds 500GB storage, all AI features, advanced analytics, and team collaboration features.",
+    answer: "VideoRemix.vip offers three plans: Free, Pro ($29/month), and Business ($79/month). The Free plan allows 5 video exports per month at 720p quality. The Pro plan includes unlimited video exports, 4K quality, all editing features, 50GB storage, and more. The Business plan adds 500GB storage, all AI features, advanced analytics, and team collaboration features.",
     links: [
       { text: "View all pricing details", url: "/pricing" }
     ]
   },
   {
     question: "Do you offer a free trial?",
-    answer: "Yes! We offer a 14-day free trial on our Pro plan with no credit card required. This gives you full access to all our premium features so you can experience the full power of VideoRemix.io before committing.",
+    answer: "Yes! We offer a 14-day free trial on our Pro plan with no credit card required. This gives you full access to all our premium features so you can experience the full power of VideoRemix.vip before committing.",
     links: [
       { text: "Start your free trial", url: "#pricing" }
     ]
@@ -125,29 +125,29 @@ const knowledgeBase = [
   },
   {
     question: "What collaboration features are available?",
-    answer: "VideoRemix.io offers robust collaboration features including real-time collaborative editing, comment and feedback systems, version history and comparison, role-based permissions, and approval workflows. Team members can work together on projects regardless of their location, streamlining the video production process.",
+    answer: "VideoRemix.vip offers robust collaboration features including real-time collaborative editing, comment and feedback systems, version history and comparison, role-based permissions, and approval workflows. Team members can work together on projects regardless of their location, streamlining the video production process.",
     links: [
       { text: "Team Collaboration feature guide", url: "/features/collaboration" },
       { text: "Working with Team Projects", url: "/help/team-projects" }
     ]
   },
   {
-    question: "How much time can I save using VideoRemix.io?",
-    answer: "Users typically save 80-90% of their video production time using VideoRemix.io. What used to take days can be accomplished in minutes or hours, allowing you to create more content with less effort. Our AI tools handle the technical aspects of video creation so you can focus on creativity and strategy.",
+    question: "How much time can I save using VideoRemix.vip?",
+    answer: "Users typically save 80-90% of their video production time using VideoRemix.vip. What used to take days can be accomplished in minutes or hours, allowing you to create more content with less effort. Our AI tools handle the technical aspects of video creation so you can focus on creativity and strategy.",
     links: [
       { text: "See success stories", url: "#testimonials" }
     ]
   },
   {
     question: "What types of videos can I create?",
-    answer: "You can create virtually any type of video with VideoRemix.io, including social media content, marketing videos, product demonstrations, educational content, YouTube videos, testimonials, webinar recordings, and much more. Our template library covers dozens of use cases across all major industries.",
+    answer: "You can create virtually any type of video with VideoRemix.vip, including social media content, marketing videos, product demonstrations, educational content, YouTube videos, testimonials, webinar recordings, and much more. Our template library covers dozens of use cases across all major industries.",
     links: [
       { text: "Explore our templates", url: "#features" }
     ]
   },
   {
     question: "Is there a mobile app available?",
-    answer: "Yes! VideoRemix.io works on any modern browser, including mobile browsers. We also offer dedicated apps for iOS and Android for an optimized mobile editing experience, allowing you to create and edit videos on the go.",
+    answer: "Yes! VideoRemix.vip works on any modern browser, including mobile browsers. We also offer dedicated apps for iOS and Android for an optimized mobile editing experience, allowing you to create and edit videos on the go.",
     links: [
       { text: "Get the mobile app", url: "#download" }
     ]
@@ -168,7 +168,7 @@ const knowledgeBase = [
   },
   {
     question: "How do I create my first video?",
-    answer: "Creating your first video with VideoRemix.io is easy! Start by selecting a template or AI-generation method, then customize with your content, branding, and preferred style. Our step-by-step wizard guides you through the entire process, and you can have a professional video ready in minutes.",
+    answer: "Creating your first video with VideoRemix.vip is easy! Start by selecting a template or AI-generation method, then customize with your content, branding, and preferred style. Our step-by-step wizard guides you through the entire process, and you can have a professional video ready in minutes.",
     links: [
       { text: "Step-by-step tutorial", url: "/help/create-first-video" },
       { text: "Try the AI video creator", url: "/features/ai-video-creator" }
@@ -179,8 +179,8 @@ const knowledgeBase = [
 // Default greeting messages
 const greetings = [
   "👋 Hi there! I'm VideoRemix AI Assistant. How can I help you create amazing videos today?",
-  "Hello! I'm here to answer your questions about VideoRemix.io. What would you like to know?",
-  "Welcome to VideoRemix.io! I'm your AI assistant, ready to help with any questions about our platform."
+  "Hello! I'm here to answer your questions about VideoRemix.vip. What would you like to know?",
+  "Welcome to VideoRemix.vip! I'm your AI assistant, ready to help with any questions about our platform."
 ];
 
 // Function to generate a random greeting
@@ -381,7 +381,7 @@ const AIAssistant: React.FC = () => {
       
       switch(action.text) {
         case "Create your first video":
-          response.answer = "Great choice! Creating your first video with VideoRemix.io is easy and straightforward. I'll guide you through the process step by step. Our intuitive interface and AI assistance make video creation simple even if you have no prior experience.";
+          response.answer = "Great choice! Creating your first video with VideoRemix.vip is easy and straightforward. I'll guide you through the process step by step. Our intuitive interface and AI assistance make video creation simple even if you have no prior experience.";
           response.links = [
             { text: "Step-by-step tutorial", url: "/help/create-first-video" },
             { text: "Watch video walkthrough", url: "/tutorials/getting-started" }
@@ -709,7 +709,7 @@ const AIAssistant: React.FC = () => {
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
                         onKeyDown={handleKeyDown}
-                        placeholder="Ask me anything about VideoRemix.io..."
+                        placeholder="Ask me anything about VideoRemix.vip..."
                         className="w-full px-4 py-2 pr-12 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
                         rows={1}
                         style={{
@@ -753,7 +753,7 @@ const AIAssistant: React.FC = () => {
                       </div>
                       <div className="flex items-center">
                         <FileSearch className="h-3 w-3 mr-1" />
-                        <span>Trained on VideoRemix.io content</span>
+                        <span>Trained on VideoRemix.vip content</span>
                       </div>
                     </div>
                   </div>

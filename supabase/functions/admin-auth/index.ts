@@ -2,10 +2,17 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 import * as jose from 'https://deno.land/x/jose@v4.14.4/index.ts'
 import { corsHeaders } from '../_shared/cors.ts'
+import * as bcrypt from "https://deno.land/x/bcrypt@v0.4.1/mod.ts"
 
 interface AdminLoginRequest {
   email: string
   password: string
+}
+
+interface AdminSignupRequest {
+  email: string
+  password: string
+  role?: string
 }
 
 interface AdminUser {
@@ -36,6 +43,8 @@ serve(async (req) => {
     switch (path) {
       case 'login':
         return await handleLogin(req, supabaseClient)
+      case 'signup':
+        return await handleSignup(req, supabaseClient)
       case 'logout':
         return await handleLogout(req)
       case 'verify':
@@ -82,9 +91,8 @@ async function handleLogin(req: Request, supabaseClient: any) {
     })
   }
 
-  // Verify password (in production, use proper password hashing)
-  // For now, we'll assume password verification is handled
-  const isValidPassword = password === 'admin123' // TODO: Replace with proper password verification
+  // Verify password
+  const isValidPassword = await bcrypt.compare(password, adminUser.password_hash)
 
   if (!isValidPassword) {
     return new Response(JSON.stringify({ error: 'Invalid credentials' }), {
@@ -111,6 +119,66 @@ async function handleLogin(req: Request, supabaseClient: any) {
     token
   }), {
     status: 200,
+    headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+  })
+}
+
+async function handleSignup(req: Request, supabaseClient: any) {
+  const { email, password, role = 'admin' }: AdminSignupRequest = await req.json()
+
+  if (!email || !password) {
+    return new Response(JSON.stringify({ error: 'Email and password are required' }), {
+      status: 400,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+    })
+  }
+
+  // Check if user already exists
+  const { data: existingUser } = await supabaseClient
+    .from('admin_users')
+    .select('id')
+    .eq('email', email)
+    .single()
+
+  if (existingUser) {
+    return new Response(JSON.stringify({ error: 'User already exists' }), {
+      status: 409,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+    })
+  }
+
+  // Hash password
+  const saltRounds = 10
+  const passwordHash = await bcrypt.hash(password, saltRounds)
+
+  // Create new admin user
+  const { data: newUser, error } = await supabaseClient
+    .from('admin_users')
+    .insert({
+      email,
+      password_hash: passwordHash,
+      role,
+      is_active: true
+    })
+    .select('id, email, role, is_active, permissions, created_at')
+    .single()
+
+  if (error) {
+    return new Response(JSON.stringify({ error: 'Failed to create user' }), {
+      status: 500,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+    })
+  }
+
+  // Generate JWT token
+  const token = await generateJWT(newUser)
+
+  return new Response(JSON.stringify({
+    success: true,
+    user: newUser,
+    token
+  }), {
+    status: 201,
     headers: { ...corsHeaders, 'Content-Type': 'application/json' }
   })
 }

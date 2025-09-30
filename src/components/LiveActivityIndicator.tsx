@@ -39,7 +39,7 @@ const LiveActivityIndicator: React.FC = () => {
     
     switch (type) {
       case 'signup':
-        return `${name} just signed up for VideoRemix.io`;
+        return `${name} just signed up for VideoRemix.vip`;
       case 'purchase':
         return `${name} from ${location} just purchased Pro`;
       case 'activity':

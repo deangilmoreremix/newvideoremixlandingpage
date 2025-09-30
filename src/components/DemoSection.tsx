@@ -65,7 +65,7 @@ const DemoSection: React.FC = () => {
           </h2>
           
           <p className="text-xl text-gray-300 mb-8">
-            VideoRemix.io makes professional video creation accessible to everyone, regardless of technical skills or experience.
+            VideoRemix.vip makes professional video creation accessible to everyone, regardless of technical skills or experience.
           </p>
           
           {/* Video preview */}
@@ -82,7 +82,7 @@ const DemoSection: React.FC = () => {
           >
             <img
               src="https://images.unsplash.com/photo-1593697821028-7cc59cfd7399?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-              alt="VideoRemix.io Demo"
+              alt="VideoRemix.vip Demo"
               className="w-full h-full object-cover opacity-80"
             />
             
@@ -258,7 +258,7 @@ const DemoSection: React.FC = () => {
           </motion.a>
           
           <p className="mt-4 text-gray-500 text-sm">
-            Join 10,000+ creators and businesses already using VideoRemix.io
+            Join 10,000+ creators and businesses already using VideoRemix.vip
           </p>
         </motion.div>
       </div>

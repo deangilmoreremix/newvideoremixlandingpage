@@ -1010,7 +1010,7 @@ export const PricingSection: React.FC = () => {
             {[
               {
                 question: "How does the 14-day guarantee work?",
-                answer: "If you're not completely satisfied with VideoRemix.io within 14 days of purchase, simply email our support team and we'll issue a full refund, no questions asked."
+                answer: "If you're not completely satisfied with VideoRemix.vip within 14 days of purchase, simply email our support team and we'll issue a full refund, no questions asked."
               },
               {
                 question: "Can I upgrade or downgrade my plan later?",
@@ -1018,7 +1018,7 @@ export const PricingSection: React.FC = () => {
               },
               {
                 question: "What happens after I purchase the lifetime plan?",
-                answer: "After purchasing the lifetime plan, you'll have permanent access to all features included in that plan for the lifetime of VideoRemix.io. You'll also receive all major updates to those features."
+                answer: "After purchasing the lifetime plan, you'll have permanent access to all features included in that plan for the lifetime of VideoRemix.vip. You'll also receive all major updates to those features."
               },
               {
                 question: "Will I be charged automatically after the trial?",

@@ -16,18 +16,18 @@ const AppPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>{app ? `${app.name} | VideoRemix.io` : 'App Details | VideoRemix.io'}</title>
+        <title>{app ? `${app.name} | VideoRemix.vip` : 'App Details | VideoRemix.vip'}</title>
         <meta 
           name="description" 
           content={app ? app.description : 'Explore our powerful video creation applications.'} 
         />
         {app && (
           <>
-            <meta property="og:title" content={`${app.name} | VideoRemix.io`} />
+            <meta property="og:title" content={`${app.name} | VideoRemix.vip`} />
             <meta property="og:description" content={app.description} />
             <meta property="og:image" content={app.image} />
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={`${app.name} | VideoRemix.io`} />
+            <meta name="twitter:title" content={`${app.name} | VideoRemix.vip`} />
             <meta name="twitter:description" content={app.description} />
             <meta name="twitter:image" content={app.image} />
           </>

@@ -240,7 +240,7 @@ VALUES
 INSERT INTO testimonials (content, name, role, company, image_url, rating, category, featured) 
 VALUES 
 (
-  'VideoRemix.io transformed our social media strategy. We''re creating 3x more content in half the time, and our engagement has increased by 200%.',
+  'VideoRemix.vip transformed our social media strategy. We''re creating 3x more content in half the time, and our engagement has increased by 200%.',
   'Sarah Johnson',
   'Social Media Manager',
   'Global Marketing Inc.',
@@ -250,7 +250,7 @@ VALUES
   true
 ),
 (
-  'As a YouTuber, editing used to take me days. With VideoRemix.io, I can edit an entire video in just hours, and the quality is even better. Total game-changer!',
+  'As a YouTuber, editing used to take me days. With VideoRemix.vip, I can edit an entire video in just hours, and the quality is even better. Total game-changer!',
   'Marcus Chen',
   'Content Creator',
   'TechReviews Channel',
@@ -260,7 +260,7 @@ VALUES
   true
 ),
 (
-  'The AI features in VideoRemix.io are truly next level. It automatically extracted the best clips from our 2-hour webinar for social media. This tool is worth every penny.',
+  'The AI features in VideoRemix.vip are truly next level. It automatically extracted the best clips from our 2-hour webinar for social media. This tool is worth every penny.',
   'Emma Rodriguez',
   'Director of Content',
   'E-Learning Solutions',
@@ -274,14 +274,14 @@ VALUES
 INSERT INTO faqs (question, answer, category, list_order) 
 VALUES 
 (
-  'How does VideoRemix.io work?',
-  'VideoRemix.io uses artificial intelligence to automate the video editing process. Upload your footage, choose a template, make any customizations you want, and our AI will handle the tedious parts of editing. You can export the final video in minutes instead of hours.',
+  'How does VideoRemix.vip work?',
+  'VideoRemix.vip uses artificial intelligence to automate the video editing process. Upload your footage, choose a template, make any customizations you want, and our AI will handle the tedious parts of editing. You can export the final video in minutes instead of hours.',
   'general',
   1
 ),
 (
-  'Do I need any technical skills to use VideoRemix.io?',
-  'Not at all! VideoRemix.io is designed for users with zero video editing experience. Our intuitive interface and AI-powered features make it easy for anyone to create professional-looking videos without technical skills.',
+  'Do I need any technical skills to use VideoRemix.vip?',
+  'Not at all! VideoRemix.vip is designed for users with zero video editing experience. Our intuitive interface and AI-powered features make it easy for anyone to create professional-looking videos without technical skills.',
   'general',
   2
 ),

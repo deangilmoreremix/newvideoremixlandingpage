@@ -22,19 +22,19 @@ import {
 const articles = [
   {
     id: 'what-is-videoremix',
-    title: 'What is VideoRemix.io?',
-    excerpt: 'An introduction to VideoRemix.io and how it can transform your video creation process.',
+    title: 'What is VideoRemix.vip?',
+    excerpt: 'An introduction to VideoRemix.vip and how it can transform your video creation process.',
     category: 'getting-started',
     categoryName: 'Getting Started',
     reading_time: '3 min read',
     last_updated: 'May 15, 2025',
     author: 'VideoRemix Team',
     content: `
-      <h2>Introduction to VideoRemix.io</h2>
-      <p>VideoRemix.io is an AI-powered video creation and editing platform designed to make professional video production accessible to everyone. Whether you're a content creator, marketer, educator, or business owner, our platform provides the tools you need to create stunning videos without technical expertise.</p>
+      <h2>Introduction to VideoRemix.vip</h2>
+      <p>VideoRemix.vip is an AI-powered video creation and editing platform designed to make professional video production accessible to everyone. Whether you're a content creator, marketer, educator, or business owner, our platform provides the tools you need to create stunning videos without technical expertise.</p>
       
       <h2>Key Features</h2>
-      <p>VideoRemix.io combines several powerful capabilities into one intuitive platform:</p>
+      <p>VideoRemix.vip combines several powerful capabilities into one intuitive platform:</p>
       
       <h3>AI-Powered Video Creation</h3>
       <p>Our advanced artificial intelligence enables you to generate professional videos from simple text prompts, templates, or raw footage. The AI analyzes your content, selects appropriate visuals, and applies professional editing techniques automatically.</p>
@@ -51,7 +51,7 @@ const articles = [
       <h3>Collaboration Tools</h3>
       <p>Work together with team members in real-time, share feedback, and manage approval workflows efficiently, regardless of location.</p>
       
-      <h2>Who is VideoRemix.io For?</h2>
+      <h2>Who is VideoRemix.vip For?</h2>
       <p>Our platform is designed to serve a wide range of users:</p>
       
       <ul>
@@ -62,7 +62,7 @@ const articles = [
         <li><strong>Corporate Communications:</strong> Create internal communications, training materials, and company announcements.</li>
       </ul>
       
-      <h2>Benefits of Using VideoRemix.io</h2>
+      <h2>Benefits of Using VideoRemix.vip</h2>
       
       <h3>Time Savings</h3>
       <p>Reduce video production time by up to 90% compared to traditional methods. What used to take days can now be accomplished in minutes or hours.</p>
@@ -77,7 +77,7 @@ const articles = [
       <p>Maintain visual consistency across all your videos with templates and brand kits that ensure your content always looks polished and on-brand.</p>
       
       <h2>Getting Started</h2>
-      <p>Ready to begin creating videos with VideoRemix.io? Check out our <a href="/help/create-first-video">Creating Your First Video</a> guide to get started quickly.</p>
+      <p>Ready to begin creating videos with VideoRemix.vip? Check out our <a href="/help/create-first-video">Creating Your First Video</a> guide to get started quickly.</p>
     `,
     related_articles: [
       'create-first-video', 
@@ -87,15 +87,15 @@ const articles = [
     tags: ['introduction', 'overview', 'basics'],
     video_tutorial: 'https://example.com/tutorials/intro-to-videoremix',
     toc: [
-      { id: 'introduction-to-videoremix-io', title: 'Introduction to VideoRemix.io', level: 2 },
+      { id: 'introduction-to-videoremix-io', title: 'Introduction to VideoRemix.vip', level: 2 },
       { id: 'key-features', title: 'Key Features', level: 2 },
       { id: 'ai-powered-video-creation', title: 'AI-Powered Video Creation', level: 3 },
       { id: 'intuitive-editing-tools', title: 'Intuitive Editing Tools', level: 3 },
       { id: 'professional-templates', title: 'Professional Templates', level: 3 },
       { id: 'content-repurposing', title: 'Content Repurposing', level: 3 },
       { id: 'collaboration-tools', title: 'Collaboration Tools', level: 3 },
-      { id: 'who-is-videoremix-io-for', title: 'Who is VideoRemix.io For?', level: 2 },
-      { id: 'benefits-of-using-videoremix-io', title: 'Benefits of Using VideoRemix.io', level: 2 },
+      { id: 'who-is-videoremix-io-for', title: 'Who is VideoRemix.vip For?', level: 2 },
+      { id: 'benefits-of-using-videoremix-io', title: 'Benefits of Using VideoRemix.vip', level: 2 },
       { id: 'time-savings', title: 'Time Savings', level: 3 },
       { id: 'cost-efficiency', title: 'Cost Efficiency', level: 3 },
       { id: 'professional-quality', title: 'Professional Quality', level: 3 },
@@ -106,7 +106,7 @@ const articles = [
   {
     id: 'create-first-video',
     title: 'Creating Your First Video',
-    excerpt: 'A step-by-step guide to creating your first video with VideoRemix.io in under 15 minutes.',
+    excerpt: 'A step-by-step guide to creating your first video with VideoRemix.vip in under 15 minutes.',
     category: 'getting-started',
     categoryName: 'Getting Started',
     reading_time: '8 min read',
@@ -114,18 +114,18 @@ const articles = [
     author: 'Sarah Johnson',
     content: `
       <h2>Introduction</h2>
-      <p>In this guide, we'll walk you through the process of creating your first video with VideoRemix.io. By the end, you'll have a professional-quality video ready to share or publish.</p>
+      <p>In this guide, we'll walk you through the process of creating your first video with VideoRemix.vip. By the end, you'll have a professional-quality video ready to share or publish.</p>
       
       <h2>Before You Start</h2>
       <p>Make sure you have:</p>
       <ul>
-        <li>Created your VideoRemix.io account</li>
+        <li>Created your VideoRemix.vip account</li>
         <li>Any media assets you want to include (optional, as we provide stock footage)</li>
         <li>A general idea of what your video will be about</li>
       </ul>
       
       <h2>Step 1: Start a New Project</h2>
-      <p>Begin by logging into your VideoRemix.io dashboard and clicking the "Create New Video" button in the top-right corner. This will open the project creation screen.</p>
+      <p>Begin by logging into your VideoRemix.vip dashboard and clicking the "Create New Video" button in the top-right corner. This will open the project creation screen.</p>
       
       <h3>Choose Your Starting Point</h3>
       <p>You'll see several options for starting your project:</p>
@@ -150,7 +150,7 @@ const articles = [
       <p>Once you've found a template you like, hover over it and click "Use This Template" to proceed to the editor.</p>
       
       <h2>Step 3: Customize Your Video</h2>
-      <p>Now you'll see the VideoRemix.io editor interface with your selected template loaded. Here's how to customize it:</p>
+      <p>Now you'll see the VideoRemix.vip editor interface with your selected template loaded. Here's how to customize it:</p>
       
       <h3>Replace Text Elements</h3>
       <p>Click on any text in the preview window to edit it. You can change the content, font, size, color, and animations from the right sidebar.</p>
@@ -202,7 +202,7 @@ const articles = [
       <p>Depending on the length and complexity of your video, export can take anywhere from a few seconds to several minutes.</p>
       
       <h2>Congratulations!</h2>
-      <p>You've created your first video with VideoRemix.io! Your exported video will be available in the "My Videos" section of your dashboard, where you can download it or share it directly.</p>
+      <p>You've created your first video with VideoRemix.vip! Your exported video will be available in the "My Videos" section of your dashboard, where you can download it or share it directly.</p>
       
       <h2>Next Steps</h2>
       <p>Now that you've created your first video, consider exploring these resources:</p>
@@ -251,7 +251,7 @@ const articles = [
     author: 'David Chen',
     content: `
       <h2>Introduction to AI Editing</h2>
-      <p>VideoRemix.io's AI editing capabilities represent the cutting edge of video production technology. Our AI systems can analyze your footage, understand context, and apply professional editing techniques automatically. This guide will help you leverage these powerful features to their fullest potential.</p>
+      <p>VideoRemix.vip's AI editing capabilities represent the cutting edge of video production technology. Our AI systems can analyze your footage, understand context, and apply professional editing techniques automatically. This guide will help you leverage these powerful features to their fullest potential.</p>
       
       <h2>What the AI Can Do</h2>
       <p>Our AI editing system can perform numerous tasks that traditionally required hours of manual work:</p>
@@ -388,7 +388,7 @@ const articles = [
       </ul>
       
       <h2>Conclusion</h2>
-      <p>AI editing represents a paradigm shift in video production, allowing you to create professional-quality content in a fraction of the time. By understanding and effectively using VideoRemix.io's AI features, you can dramatically improve both your workflow efficiency and output quality.</p>
+      <p>AI editing represents a paradigm shift in video production, allowing you to create professional-quality content in a fraction of the time. By understanding and effectively using VideoRemix.vip's AI features, you can dramatically improve both your workflow efficiency and output quality.</p>
       
       <h2>Further Resources</h2>
       <ul>
@@ -531,7 +531,7 @@ const HelpArticlePage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>{article.title} | Help Center | VideoRemix.io</title>
+        <title>{article.title} | Help Center | VideoRemix.vip</title>
         <meta name="description" content={article.excerpt} />
       </Helmet>
       

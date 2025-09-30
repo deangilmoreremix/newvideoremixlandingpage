@@ -37,6 +37,7 @@ const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 const AdminLogin = lazy(() => import('./components/admin/AdminLogin'));
+const AdminSignUp = lazy(() => import('./components/admin/AdminSignUp'));
 const SpecialFooter = lazy(() => import('./components/SpecialFooter'));
 
 // Help Center pages
@@ -122,7 +123,7 @@ function App() {
         }
       }
       
-      document.title = `VideoRemix.io | ${currentSection.charAt(0).toUpperCase() + currentSection.slice(1)}`;
+      document.title = `VideoRemix.vip | ${currentSection.charAt(0).toUpperCase() + currentSection.slice(1)}`;
     };
     
     window.addEventListener('scroll', updateTitle);
@@ -140,8 +141,8 @@ function App() {
       <AdminProvider>
         <div className="flex flex-col min-h-screen bg-gray-900">
         <Helmet>
-          <title>VideoRemix.io - AI-Powered Marketing Personalization Platform</title>
-          <meta name="description" content="Create personalized marketing content that converts with AI-powered tools. Transform your campaigns with VideoRemix.io's marketing personalization platform." />
+          <title>VideoRemix.vip - AI-Powered Marketing Personalization Platform</title>
+          <meta name="description" content="Create personalized marketing content that converts with AI-powered tools. Transform your campaigns with VideoRemix.vip's marketing personalization platform." />
         </Helmet>
       
       {/* Urgency Banner - Always at the top */}
@@ -414,6 +415,14 @@ function App() {
           <ErrorBoundary onError={handleError}>
             <Suspense fallback={<SectionLoader />}>
               <AdminLogin />
+            </Suspense>
+          </ErrorBoundary>
+        } />
+
+        <Route path="/admin/signup" element={
+          <ErrorBoundary onError={handleError}>
+            <Suspense fallback={<SectionLoader />}>
+              <AdminSignUp />
             </Suspense>
           </ErrorBoundary>
         } />

@@ -1,6 +1,6 @@
-# VideoRemix.io Landing Page
+# VideoRemix.vip Landing Page
 
-This repository contains the landing page for VideoRemix.io, an AI-powered video creation and editing platform.
+This repository contains the landing page for VideoRemix.vip, an AI-powered video creation and editing platform.
 
 ## Features
 

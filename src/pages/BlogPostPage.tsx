@@ -108,7 +108,7 @@ const blogPosts = [
     category: 'Technology',
     author: 'Sarah Johnson',
     authorImage: 'https://randomuser.me/api/portraits/women/44.jpg',
-    authorBio: 'Sarah is the Head of Content at VideoRemix.io with over 10 years of experience in digital media and video production.',
+    authorBio: 'Sarah is the Head of Content at VideoRemix.vip with over 10 years of experience in digital media and video production.',
     date: 'May 15, 2025',
     readTime: '8 min read',
     image: 'https://images.unsplash.com/photo-1616469829941-c7200edec809?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
@@ -201,9 +201,9 @@ const BlogPostPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>{post.title} | VideoRemix.io Blog</title>
+        <title>{post.title} | VideoRemix.vip Blog</title>
         <meta name="description" content={post.excerpt} />
-        <meta property="og:title" content={`${post.title} | VideoRemix.io Blog`} />
+        <meta property="og:title" content={`${post.title} | VideoRemix.vip Blog`} />
         <meta property="og:description" content={post.excerpt} />
         <meta property="og:image" content={post.image} />
         <meta property="og:type" content="article" />
@@ -558,7 +558,7 @@ const BlogPostPage: React.FC = () => {
                   whileTap={{ scale: 0.95 }}
                   className="bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-bold py-4 px-8 rounded-lg inline-flex items-center"
                 >
-                  Try VideoRemix.io Free
+                  Try VideoRemix.vip Free
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </motion.button>
               </motion.div>

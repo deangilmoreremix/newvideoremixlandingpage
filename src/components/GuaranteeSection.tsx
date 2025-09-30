@@ -62,7 +62,7 @@ const GuaranteeSection: React.FC = () => {
                   </h3>
                   
                   <p className="text-gray-300 mb-6">
-                    We're so confident you'll love VideoRemix.io that we're offering a full 14-day money-back guarantee. If you're not completely satisfied with our platform for any reason, simply contact our support team and we'll refund 100% of your payment.
+                    We're so confident you'll love VideoRemix.vip that we're offering a full 14-day money-back guarantee. If you're not completely satisfied with our platform for any reason, simply contact our support team and we'll refund 100% of your payment.
                   </p>
                   
                   <div className="space-y-3 mb-6">

@@ -74,7 +74,7 @@ const SpecialHeader: React.FC<SpecialHeaderProps> = ({ topOffset = 0 }) => {
               <Video className="h-8 w-8 text-white relative z-10" />
             </div>
             <div>
-              <span className="text-xl font-bold text-white leading-none">VideoRemix.io</span>
+              <span className="text-xl font-bold text-white leading-none">VideoRemix.vip</span>
               <div className="text-xs text-primary-300">SPECIAL OFFER</div>
             </div>
           </Link>

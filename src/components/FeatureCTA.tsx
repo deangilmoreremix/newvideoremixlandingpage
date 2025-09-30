@@ -44,7 +44,7 @@ const FeatureCTA: React.FC<FeatureCTAProps> = ({
           </MagicSparkles>
           
           <p className="text-gray-300 mb-8">
-            Join thousands of creators and businesses who have revolutionized their video production with VideoRemix.io's powerful features.
+            Join thousands of creators and businesses who have revolutionized their video production with VideoRemix.vip's powerful features.
           </p>
           
           <motion.div
@@ -62,7 +62,7 @@ const FeatureCTA: React.FC<FeatureCTAProps> = ({
                 to="/get-started" 
                 className="inline-flex items-center bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-bold px-8 py-4 rounded-lg shadow-lg shadow-primary-600/20"
               >
-                <span>Try VideoRemix.io Today</span>
+                <span>Try VideoRemix.vip Today</span>
                 <motion.div 
                   animate={{ 
                     x: [0, 5, 0],

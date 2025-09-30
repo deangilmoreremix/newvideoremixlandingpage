@@ -65,7 +65,7 @@ const SpecialFooter: React.FC = () => {
               <span className="text-xl font-bold text-white">VideoRemix.vip</span>
             </div>
             <p className="mb-4">
-              Create personalized videos in minutes with our AI-powered platform. Perfect for marketers, content creators, and businesses of all sizes.
+              Create personalized content in minutes with our AI-powered platform. Perfect for marketers, content creators, and businesses of all sizes.
             </p>
             
             {/* Social Media */}

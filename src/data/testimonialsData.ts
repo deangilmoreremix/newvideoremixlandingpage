@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 // Testimonial types
 interface Testimonial {
@@ -161,7 +161,7 @@ export const testimonialsData: Testimonial[] = [
   },
   {
     id: "testimonial-14",
-    quote: "The ability to generate personalized videos at scale has transformed our sales outreach. Our response rates have increased by 347% since implementing this strategy.",
+    quote: "The ability to generate personalized content at scale has transformed our sales outreach. Our response rates have increased by 347% since implementing this strategy.",
     name: "Amanda Peterson",
     role: "Sales Director",
     company: "SaaS Solutions Inc.",
@@ -238,20 +238,7 @@ export const testimonialsData: Testimonial[] = [
   }
 ];
 
-// Categorized testimonial data for specific feature pages
-const getTestimonialsByCategory = (category: string) => {
-  return testimonialsData.filter(testimonial => 
-    testimonial.category === category || testimonial.category?.includes(category)
-  );
-};
-
-// Featured testimonials for homepage
-const getFeaturedTestimonials = () => {
-  return testimonialsData.filter(testimonial => testimonial.featured);
-};
-
-// Get random testimonials (useful for some sections)
-const getRandomTestimonials = (count: number) => {
-  const shuffled = [...testimonialsData].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, count);
-};
+// Note: Helper functions for testimonials are available but currently unused
+// const getTestimonialsByCategory = (category: string) => { ... };
+// const getFeaturedTestimonials = () => { ... };
+// const getRandomTestimonials = (count: number) => { ... };

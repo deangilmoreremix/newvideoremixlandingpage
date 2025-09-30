@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Clock, DollarSign, Frown, AlertTriangle, BarChart, Zap, ThumbsDown, Users, Target, UserRoundX, MessageSquareOff, TrendingDown, Coins, EyeOff, Share2, LineChart, HandCoins, Presentation as PresentationChart, Megaphone, PercentCircle, CircleDollarSign as CurrencyCircleDollar } from 'lucide-react';
+import { Clock, DollarSign, AlertTriangle, BarChart, Zap, Target, UserRoundX, MessageSquareOff, TrendingDown, Coins, EyeOff, Share2, LineChart, HandCoins, Presentation as PresentationChart, Megaphone, CircleDollarSign as CurrencyCircleDollar } from 'lucide-react';
 
 const ProblemSection: React.FC = () => {
   return (
@@ -14,7 +14,7 @@ const ProblemSection: React.FC = () => {
           className="max-w-4xl mx-auto text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
-            Are You Still Creating <span className="text-primary-400">Generic, One-Size-Fits-All</span> Marketing Videos?
+            Are You Still Creating <span className="text-primary-400">Generic, One-Size-Fits-All</span> Marketing Content?
           </h2>
           
           <p className="text-xl text-gray-300">

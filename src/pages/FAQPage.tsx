@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { Check, Search, X, ChevronDown, ChevronRight, ArrowRight, MessageSquare, HelpCircle, Mail, Video, Sparkles, Clock, Users, DollarSign, Laptop, Shield, Lock, Globe, Zap, LayoutTemplate, FileText, Database, Play, Mic, PanelTop } from 'lucide-react';
+import { Search, X, ChevronDown, ChevronRight, ArrowRight, MessageSquare, HelpCircle, Mail, Video, Sparkles, Clock, Users, DollarSign, Laptop, Shield, Globe, Zap, LayoutTemplate, FileText, Database, Play, PanelTop } from 'lucide-react';
 import MagicSparkles from '../components/MagicSparkles';
 
 // Define FAQ categories
@@ -23,7 +23,7 @@ const faqData = [
   // Getting Started
   {
     question: "What is VideoRemix.vip?",
-    answer: "VideoRemix.vip is an AI-powered marketing personalization platform designed to help marketers and businesses create personalized marketing content that drives results. Our platform combines artificial intelligence with intuitive design to eliminate the technical barriers of traditional marketing content creation, enabling you to create personalized videos, images, and campaigns in minutes instead of hours.",
+    answer: "VideoRemix.vip is an AI-powered marketing personalization platform designed to help marketers and businesses create personalized marketing content that drives results. Our platform combines artificial intelligence with intuitive design to eliminate the technical barriers of traditional marketing content creation, enabling you to create personalized content, images, and campaigns in minutes instead of hours.",
     category: "getting-started"
   },
   {

@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { Link, useParams } from 'react-router-dom';
-import { ChevronLeft, Calendar, Clock, Share2, Twitter, Facebook, Linkedin, Copy, ArrowRight, MessageSquare } from 'lucide-react';
+import { ChevronLeft, Calendar, Clock, Twitter, Facebook, Linkedin, Copy, ArrowRight, MessageSquare } from 'lucide-react';
 import MagicSparkles from '../components/MagicSparkles';
 
 // Sample blog post data
@@ -86,8 +86,8 @@ const blogPosts = [
       <p>As we continue through 2025 and beyond, several trends are emerging that will further transform video creation:</p>
       
       <h3>Hyper-Personalization</h3>
-      
-      <p>AI is enabling the creation of dynamically personalized videos that adapt their content based on the viewer's preferences, behavior, or demographic information.</p>
+
+      <p>AI is enabling the creation of dynamically personalized content that adapt their content based on the viewer's preferences, behavior, or demographic information.</p>
       
       <h3>Real-Time Collaboration</h3>
       

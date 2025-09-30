@@ -322,7 +322,7 @@ const CaseStudiesSection: React.FC = () => {
           </MagicSparkles>
           
           <p className="text-xl text-gray-300 mb-8">
-            See how companies across industries have transformed their marketing performance with personalized videos
+            See how companies across industries have transformed their marketing performance with personalized content
           </p>
         </div>
         
@@ -746,7 +746,7 @@ const CaseStudiesSection: React.FC = () => {
         </motion.div>
       </div>
       
-      <style jsx>{`
+      <style>{`
         .hide-scrollbar::-webkit-scrollbar {
           display: none;
         }

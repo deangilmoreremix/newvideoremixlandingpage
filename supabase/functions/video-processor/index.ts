@@ -1,8 +1,7 @@
-interface VideoMetadata {
-  videoUrl: string;
-  title?: string;
-  description?: string;
-  duration?: number;
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+interface VideoProcessRequest {
+  videoId: string;
   thumbnailTimestamp?: number;
 }
 
@@ -23,12 +22,12 @@ Deno.serve(async (req: Request) => {
 
   try {
     // Parse request body
-    const videoData: VideoMetadata = await req.json();
+    const requestData: VideoProcessRequest = await req.json();
 
     // Validate required field
-    if (!videoData.videoUrl) {
+    if (!requestData.videoId) {
       return new Response(
-        JSON.stringify({ error: "Video URL is required" }),
+        JSON.stringify({ error: "Video ID is required" }),
         {
           status: 400,
           headers: {
@@ -42,40 +41,84 @@ Deno.serve(async (req: Request) => {
     // Initialize Supabase client
     const supabaseUrl = Deno.env.get("SUPABASE_URL") || "";
     const supabaseServiceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
-    
-    const supabaseAdmin = new Supabase.SupabaseClient(supabaseUrl, supabaseServiceRoleKey);
+
+    const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey);
+
+    // Get video record
+    const { data: video, error: fetchError } = await supabaseAdmin
+      .from("videos")
+      .select("*")
+      .eq("id", requestData.videoId)
+      .single();
+
+    if (fetchError || !video) {
+      return new Response(
+        JSON.stringify({ error: "Video not found" }),
+        {
+          status: 404,
+          headers: {
+            "Content-Type": "application/json",
+            ...corsHeaders,
+          },
+        }
+      );
+    }
+
+    // Update status to processing
+    await supabaseAdmin
+      .from("videos")
+      .update({
+        status: 'processing',
+        processing_started_at: new Date().toISOString()
+      })
+      .eq("id", requestData.videoId);
 
     // In a real implementation, we would:
-    // 1. Generate a thumbnail at the specified timestamp
-    // 2. Extract additional metadata from the video
-    // 3. Optimize the video for web playback
-    // 4. Create different resolution versions
+    // 1. Download the video from storage
+    // 2. Extract metadata (duration, etc.)
+    // 3. Generate thumbnail at specified timestamp
+    // 4. Upload thumbnail to storage
+    // 5. Update video record with metadata and thumbnail path
 
-    // Here we'll simulate these operations with a delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Simulate processing delay
+    await new Promise(resolve => setTimeout(resolve, 2000));
 
-    // Generate a thumbnail URL (in production this would be a real thumbnail)
-    const thumbnailUrl = videoData.videoUrl.replace(/\.[^/.]+$/, "_thumbnail.jpg");
+    // For now, create a placeholder thumbnail path
+    const thumbnailPath = `${video.user_id}/${requestData.videoId}_thumbnail.jpg`;
 
-    // Store video metadata
-    const { data, error } = await supabaseAdmin
-      .from("video_metadata")
-      .insert([
-        {
-          video_url: videoData.videoUrl,
-          title: videoData.title || "Untitled Video",
-          description: videoData.description || "",
-          duration: videoData.duration || 0,
-          thumbnail_url: thumbnailUrl,
-          processed: true,
-          processing_date: new Date().toISOString()
-        },
-      ]);
+    // Simulate metadata extraction
+    const duration = 120; // seconds
+    const fileSize = video.file_size || 0;
 
-    if (error) {
-      console.error("Error storing video metadata:", error);
+    // Update video record with processed data
+    const { error: updateError } = await supabaseAdmin
+      .from("videos")
+      .update({
+        status: 'completed',
+        duration: duration,
+        thumbnail_path: thumbnailPath,
+        completed_at: new Date().toISOString(),
+        metadata: {
+          ...video.metadata,
+          processed_at: new Date().toISOString(),
+          thumbnail_timestamp: requestData.thumbnailTimestamp || 1
+        }
+      })
+      .eq("id", requestData.videoId);
+
+    if (updateError) {
+      console.error("Error updating video:", updateError);
+      // Mark as failed
+      await supabaseAdmin
+        .from("videos")
+        .update({
+          status: 'failed',
+          error_message: updateError.message
+        })
+        .eq("id", requestData.videoId);
+
       return new Response(
-        JSON.stringify({ error: "Failed to process video metadata" }),
+        JSON.stringify({ error: "Failed to update video metadata" }),
         {
           status: 500,
           headers: {
@@ -87,12 +130,13 @@ Deno.serve(async (req: Request) => {
     }
 
     return new Response(
-      JSON.stringify({ 
-        success: true, 
+      JSON.stringify({
+        success: true,
         message: "Video processed successfully",
-        metadata: {
-          thumbnailUrl,
-          // Additional metadata would be returned here
+        video: {
+          id: requestData.videoId,
+          thumbnail_path: thumbnailPath,
+          duration: duration
         }
       }),
       {

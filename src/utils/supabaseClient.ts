@@ -86,6 +86,38 @@ export interface PricingPlan {
   updated_at: string;
 }
 
+// Video types
+export interface Video {
+  id: string;
+  user_id: string;
+  title?: string;
+  description?: string;
+  original_filename: string;
+  file_path: string;
+  thumbnail_path?: string;
+  status: 'uploaded' | 'processing' | 'completed' | 'failed';
+  duration?: number;
+  file_size?: number;
+  mime_type?: string;
+  processing_started_at?: string;
+  completed_at?: string;
+  error_message?: string;
+  metadata?: Record<string, any>;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface VideoUploadData {
+  file: File;
+  title?: string;
+  description?: string;
+}
+
+export interface VideoUpdateData {
+  title?: string;
+  description?: string;
+}
+
 // Data fetching functions
 async function getHeroContent() {
   try {
@@ -188,7 +220,7 @@ export async function getAllLandingPageContent() {
       getFAQs(),
       getPricingPlans()
     ]);
-    
+
     return {
       hero,
       benefits,
@@ -207,3 +239,44 @@ export async function getAllLandingPageContent() {
     };
   }
 }
+
+// Video-related utility functions
+async function getUserVideos(): Promise<Video[]> {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) throw new Error('User not authenticated');
+
+  const { data, error } = await supabase
+    .from('videos')
+    .select('*')
+    .eq('user_id', user.id)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Error fetching videos:', error);
+    return [];
+  }
+
+  return data as Video[];
+}
+
+async function getVideoById(id: string): Promise<Video | null> {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) throw new Error('User not authenticated');
+
+  const { data, error } = await supabase
+    .from('videos')
+    .select('*')
+    .eq('id', id)
+    .eq('user_id', user.id)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') return null;
+    console.error('Error fetching video:', error);
+    return null;
+  }
+
+  return data as Video;
+}
+
+export { getUserVideos, getVideoById };

@@ -28,19 +28,17 @@ const mountApp = () => {
   const root = document.getElementById('root');
   if (root) {
     createRoot(root).render(
-      <StrictMode>
-        <BrowserRouter>
-          <HelmetProvider>
-            <AnimationProvider>
-              <ModalsProvider>
-                <Suspense fallback={<LoadingScreen />}>
-                  <App />
-                </Suspense>
-              </ModalsProvider>
-            </AnimationProvider>
-          </HelmetProvider>
-        </BrowserRouter>
-      </StrictMode>
+      <BrowserRouter>
+        <HelmetProvider>
+          <AnimationProvider>
+            <ModalsProvider>
+              <Suspense fallback={<LoadingScreen />}>
+                <App />
+              </Suspense>
+            </ModalsProvider>
+          </AnimationProvider>
+        </HelmetProvider>
+      </BrowserRouter>
     );
   }
 };

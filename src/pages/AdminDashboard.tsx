@@ -2,11 +2,14 @@ import React, { useState, useEffect, memo, useCallback } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Navigate } from 'react-router-dom';
-import { Shield, Settings, Users, BarChart3, ToggleLeft, ToggleRight, AlertTriangle, Clock } from 'lucide-react';
+import { Shield, Settings, Users, BarChart3, ToggleLeft, ToggleRight, AlertTriangle, Clock, Package, Upload } from 'lucide-react';
 import { useAdmin } from '../context/AdminContext';
 import AdminAppsManagement from '../components/admin/AdminAppsManagement';
 import AdminFeaturesManagement from '../components/admin/AdminFeaturesManagement';
 import AdminUsersManagement from '../components/admin/AdminUsersManagement';
+import AdminSubscriptionsManagement from '../components/admin/AdminSubscriptionsManagement';
+import AdminProductsManagement from '../components/admin/AdminProductsManagement';
+import AdminPurchaseImport from '../components/admin/AdminPurchaseImport';
 
 // Types and Interfaces
 interface DashboardStats {
@@ -16,7 +19,7 @@ interface DashboardStats {
 }
 
 interface TabConfig {
-  id: 'apps' | 'features' | 'users';
+  id: 'apps' | 'features' | 'users' | 'subscriptions' | 'products' | 'import';
   label: string;
   icon: React.ComponentType<{ className?: string }>;
   component: React.ComponentType;
@@ -45,7 +48,10 @@ const DASHBOARD_STATS: DashboardStats = {
 const TAB_CONFIG: TabConfig[] = [
   { id: 'apps', label: 'Apps Management', icon: Settings, component: AdminAppsManagement },
   { id: 'features', label: 'Features Management', icon: ToggleLeft, component: AdminFeaturesManagement },
-  { id: 'users', label: 'Users Management', icon: Users, component: AdminUsersManagement }
+  { id: 'users', label: 'Users Management', icon: Users, component: AdminUsersManagement },
+  { id: 'subscriptions', label: 'Subscriptions', icon: BarChart3, component: AdminSubscriptionsManagement },
+  { id: 'products', label: 'Products', icon: Package, component: AdminProductsManagement },
+  { id: 'import', label: 'Import Data', icon: Upload, component: AdminPurchaseImport }
 ];
 
 // Error Boundary Component
@@ -212,7 +218,7 @@ StatsCards.displayName = 'StatsCards';
 
 const AdminDashboard: React.FC = () => {
   const { user, isAuthenticated, logout } = useAdmin();
-  const [activeTab, setActiveTab] = useState<'apps' | 'features' | 'users'>('apps');
+  const [activeTab, setActiveTab] = useState<'apps' | 'features' | 'users' | 'subscriptions' | 'products' | 'import'>('apps');
   const [showTimeoutWarning, setShowTimeoutWarning] = useState(false);
   const [announcements, setAnnouncements] = useState<string>('');
 
@@ -286,7 +292,7 @@ const AdminDashboard: React.FC = () => {
   }
 
   const handleTabChange = useCallback((tabId: string) => {
-    setActiveTab(tabId as 'apps' | 'features' | 'users');
+    setActiveTab(tabId as 'apps' | 'features' | 'users' | 'subscriptions' | 'products' | 'import');
   }, []);
 
   return (

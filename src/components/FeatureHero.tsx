@@ -67,47 +67,14 @@ const FeatureHero: React.FC<FeatureHeroProps> = ({
                 </h1>
               </MagicSparkles>
               
-              <motion.p 
+              <motion.p
                 className="text-xl text-gray-300 mb-8"
                 whileHover={{ x: 5, transition: { duration: 0.2 } }}
               >
                 {description}
               </motion.p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <motion.button
-                  whileHover={{ 
-                    scale: 1.05,
-                    boxShadow: "0 20px 25px -5px rgba(79, 70, 229, 0.3)"
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-bold px-8 py-4 rounded-lg flex items-center justify-center"
-                >
-                  Try This Feature
-                  <motion.div
-                    animate={{ 
-                      x: [0, 5, 0],
-                      transition: { repeat: Infinity, duration: 1.5 }
-                    }}
-                  >
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </motion.div>
-                </motion.button>
-                
-                <motion.button
-                  whileHover={{ 
-                    scale: 1.05,
-                    backgroundColor: "rgba(31, 41, 55, 0.8)",
-                    borderColor: "rgba(107, 114, 128, 0.5)"
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-gray-800 hover:bg-gray-700 text-white font-medium px-8 py-4 rounded-lg flex items-center justify-center border border-gray-700"
-                >
-                  Watch Demo
-                </motion.button>
-              </div>
-              
-              <motion.div 
+
+              <motion.div
                 className="flex items-center space-x-6"
                 whileHover={{ y: -3, transition: { duration: 0.2 } }}
               >

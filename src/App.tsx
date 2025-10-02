@@ -44,6 +44,7 @@ const SpecialFooter = lazy(() => import('./components/SpecialFooter'));
 const HelpCenterPage = lazy(() => import('./pages/HelpCenterPage'));
 const HelpArticlePage = lazy(() => import('./pages/HelpArticlePage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
+const ClaimPurchases = lazy(() => import('./pages/ClaimPurchases'));
 
 // Loading fallback component
 const SectionLoader = () => (
@@ -395,6 +396,19 @@ function App() {
               <SpecialHeader topOffset={bannerHeight} />
               <Suspense fallback={<SectionLoader />}>
                 <DashboardPage />
+                <SpecialFooter />
+              </Suspense>
+            </SparkleBackground>
+          </ErrorBoundary>
+        } />
+
+        {/* Claim Purchases Route */}
+        <Route path="/claim-purchases" element={
+          <ErrorBoundary onError={handleError}>
+            <SparkleBackground>
+              <SpecialHeader topOffset={bannerHeight} />
+              <Suspense fallback={<SectionLoader />}>
+                <ClaimPurchases />
                 <SpecialFooter />
               </Suspense>
             </SparkleBackground>

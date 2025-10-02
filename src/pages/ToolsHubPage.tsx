@@ -633,7 +633,7 @@ const ToolsHubPage: React.FC = () => {
                 </motion.a>
                 
                 <p className="mt-4 text-gray-400 text-sm">
-                  Start with our 14-day free trial. No credit card required.
+                  Get started with any AI tool today.
                 </p>
               </div>
             </motion.div>

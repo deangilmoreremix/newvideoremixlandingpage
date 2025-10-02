@@ -9,7 +9,7 @@ const PricingPage: React.FC = () => {
     <main className="w-full">
       <Helmet>
         <title>Pricing | VideoRemix.vip</title>
-        <meta name="description" content="Choose the perfect plan for your marketing personalization needs with VideoRemix.vip. From free to enterprise, we have the right pricing for you." />
+        <meta name="description" content="Choose from 14 powerful AI apps at $99/year each. Mix and match marketing, content creation, and productivity tools to build your perfect AI toolkit." />
       </Helmet>
       
       <section id="pricing-hero" className="py-20 md:py-28">
@@ -19,7 +19,7 @@ const PricingPage: React.FC = () => {
               Simple, Transparent Pricing
             </h1>
             <p className="text-xl text-gray-300 mb-10">
-              Choose the perfect plan for your creative needs. No hidden fees, cancel anytime.
+              Choose from 14 powerful AI apps at $99/year each. Mix and match to build your perfect toolkit.
             </p>
           </div>
         </div>
@@ -31,29 +31,29 @@ const PricingPage: React.FC = () => {
         title="Pricing FAQ"
         subtitle="Common questions about our pricing plans"
         faqs={[
-          { 
-            question: "Can I change plans at any time?", 
-            answer: "Yes, you can upgrade, downgrade, or cancel your subscription at any time. Changes take effect at the start of your next billing cycle." 
+          {
+            question: "How much does VideoRemix.vip cost?",
+            answer: "VideoRemix.vip offers 14 powerful AI apps at $99/year each. You can mix and match any combination of apps to build your perfect AI toolkit. Annual subscriptions are billed yearly for maximum value."
           },
-          { 
-            question: "Is there a free trial available?", 
-            answer: "Yes! We offer a 14-day free trial on all paid plans so you can experience the full power of VideoRemix.vip before committing." 
+          {
+            question: "Can I change my app selection at any time?",
+            answer: "Yes, you can add or remove apps from your subscription at any time. Changes take effect at the start of your next billing cycle. You can manage your app selection from your account dashboard."
           },
-          { 
-            question: "Do you offer refunds?", 
-            answer: "We offer a 30-day money-back guarantee if you're not satisfied with our service for any reason." 
+          {
+            question: "Do you offer refunds?",
+            answer: "We offer a 14-day money-back guarantee if you're not satisfied with our service for any reason. Contact our support team within 14 days of purchase for a full refund."
           },
-          { 
-            question: "What payment methods do you accept?", 
-            answer: "We accept all major credit cards, PayPal, and Apple Pay. For Enterprise plans, we can also arrange invoicing." 
+          {
+            question: "What payment methods do you accept?",
+            answer: "We accept all major credit cards, PayPal, and Apple Pay. For Enterprise plans, we can also arrange invoicing and purchase orders."
           },
-          { 
-            question: "Are there any hidden fees?", 
-            answer: "No hidden fees ever! The price you see is the price you pay. Usage limits are clearly stated on each plan." 
+          {
+            question: "Are there any hidden fees?",
+            answer: "No hidden fees ever! The $99/year per app price you see is the price you pay. All taxes and fees are clearly displayed during checkout."
           },
-          { 
-            question: "Do you offer discounts for non-profits or educational institutions?", 
-            answer: "Yes, we offer special pricing for qualified non-profits, educational institutions, and student creators. Contact our sales team for details." 
+          {
+            question: "Do you offer discounts for teams or enterprises?",
+            answer: "Yes, we offer volume discounts for multiple apps and custom enterprise solutions. Contact our sales team for pricing tailored to your organization's needs."
           }
         ]}
       />

@@ -6,67 +6,135 @@ import MagicSparkles from './MagicSparkles';
 
 export const PricingSection: React.FC = () => {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly' | 'lifetime'>('yearly');
+  const [selectedApps, setSelectedApps] = useState<{[key: string]: boolean}>({});
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const { pricingPlans, isLoading } = useLandingPageContent();
+
+  // All apps data
+  const allApps = [
+    { name: "AI Personalized Content", url: "https://capable-mermaid-3c73fa.netlify.app/" },
+    { name: "AI Referral Maximizer", url: "https://eloquent-kleicha-7e3a3e.netlify.app" },
+    { name: "AI Sales Maximizer", url: "https://magnificent-lamington-619374.netlify.app/" },
+    { name: "Smart CRM Closer", url: "https://stupendous-twilight-64389a.netlify.app/" },
+    { name: "Sales Assistant App", url: "https://gentle-frangipane-ceed17.netlify.app" },
+    { name: "Sales Page Builder", url: "https://prismatic-starship-c0b4c2.netlify.app" },
+    { name: "Video AI Editor", url: "https://heroic-seahorse-296f32.netlify.app/" },
+    { name: "AI Video & Image", url: "https://thriving-mochi-ecd815.netlify.app/" },
+    { name: "AI Template Generator", url: "https://cute-khapse-4e62cb.netlify.app" },
+    { name: "FunnelCraft AI", url: "https://serene-valkyrie-fec320.netlify.app/" },
+    { name: "AI Screen Recorder", url: "https://adorable-arithmetic-675d28.netlify.app/" },
+    { name: "AI Skills Monetizer", url: "https://roaring-mochi-39a60a.netlify.app" },
+    { name: "AI Signature", url: "https://kaleidoscopic-tarsier-3d0a6c.netlify.app/" },
+    { name: "AI Proposal", url: "https://keen-pastelito-6b9074.netlify.app" }
+  ];
+
+  // Category groupings
+  const marketingApps = [
+    "AI Personalized Content", "AI Referral Maximizer", "AI Sales Maximizer",
+    "Smart CRM Closer", "Sales Assistant App", "Sales Page Builder"
+  ];
+
+  const contentApps = [
+    "Video AI Editor", "AI Video & Image", "AI Template Generator", "FunnelCraft AI"
+  ];
+
+  const productivityApps = [
+    "AI Screen Recorder", "AI Skills Monetizer", "AI Signature",
+    "AI Proposal"
+  ];
+
+  // Helper functions
+  const getAppIcon = (appName: string) => {
+    const icons: {[key: string]: string} = {
+      "AI Personalized Content": "🤖",
+      "AI Referral Maximizer": "📈",
+      "AI Sales Maximizer": "💰",
+      "Smart CRM Closer": "🎯",
+      "Sales Assistant App": "👔",
+      "Sales Page Builder": "📄",
+      "Video AI Editor": "🎬",
+      "AI Video & Image": "🖼️",
+      "AI Template Generator": "📝",
+      "FunnelCraft AI": "🚀",
+      "AI Screen Recorder": "🖥️",
+      "AI Skills Monetizer": "💡",
+      "AI Signature": "✍️",
+      "AI Proposal": "📋"
+    };
+    return icons[appName] || "🔧";
+  };
+
+  const getAppDescription = (appName: string) => {
+    const descriptions: {[key: string]: string} = {
+      "AI Personalized Content": "Create personalized content at scale",
+      "AI Referral Maximizer": "Maximize referral program effectiveness",
+      "AI Sales Maximizer": "Boost sales with AI-powered strategies",
+      "Smart CRM Closer": "Close more deals with smart CRM automation",
+      "Sales Assistant App": "AI-powered sales assistance and insights",
+      "Sales Page Builder": "Build high-converting sales pages instantly",
+      "Video AI Editor": "Edit videos with advanced AI tools",
+      "AI Video & Image": "Transform videos and images with AI",
+      "AI Template Generator": "Generate professional templates automatically",
+      "FunnelCraft AI": "Build sales funnels with AI assistance",
+      "AI Screen Recorder": "Record and enhance screen content",
+      "AI Skills Monetizer": "Monetize your skills with AI help",
+      "AI Signature": "Create professional signatures automatically",
+      "AI Proposal": "Generate compelling proposals with AI"
+    };
+    return descriptions[appName] || "Powerful AI tool for your business";
+  };
   
-  // Default pricing data structure as fallback
-  const defaultPlans = [
+  // App categories with individual apps
+  const appCategories = [
     {
-      name: "Free",
-      price_monthly: 0,
-      price_yearly: 0,
-      price_lifetime: 0,
-      description: "Perfect for trying out the platform",
-      features: [
-        "5 video exports per month",
-        "720p video quality",
-        "Basic editing features",
-        "2GB cloud storage",
-        "Standard templates",
-        "Watermarked videos"
+      name: "Marketing & Sales Apps",
+      description: "Boost your marketing and sales with AI-powered tools",
+      apps: [
+        { name: "AI Personalized Content", url: "https://capable-mermaid-3c73fa.netlify.app/" },
+        { name: "AI Referral Maximizer", url: "https://eloquent-kleicha-7e3a3e.netlify.app" },
+        { name: "AI Sales Maximizer", url: "https://magnificent-lamington-619374.netlify.app/" },
+        { name: "Smart CRM Closer", url: "https://stupendous-twilight-64389a.netlify.app/" },
+        { name: "Sales Assistant App", url: "https://gentle-frangipane-ceed17.netlify.app" },
+        { name: "Sales Page Builder", url: "https://prismatic-starship-c0b4c2.netlify.app" }
       ],
       is_popular: false
     },
     {
-      name: "Pro",
-      price_monthly: 29,
-      price_yearly: 290,
-      price_lifetime: 699,
-      description: "Ideal for content creators and small teams",
-      features: [
-        "Unlimited video exports",
-        "4K video quality",
-        "All editing features",
-        "50GB cloud storage",
-        "Premium templates",
-        "No watermarks",
-        "Basic AI features",
-        "Auto subtitle generation",
-        "2 team members",
-        "Priority email support"
+      name: "Content Creation Apps",
+      description: "Create stunning content with professional AI tools",
+      apps: [
+        { name: "Video AI Editor", url: "https://heroic-seahorse-296f32.netlify.app/" },
+        { name: "AI Video & Image", url: "https://thriving-mochi-ecd815.netlify.app/" },
+        { name: "AI Template Generator", url: "https://cute-khapse-4e62cb.netlify.app" },
+        { name: "FunnelCraft AI", url: "https://serene-valkyrie-fec320.netlify.app/" }
       ],
       is_popular: true
     },
     {
-      name: "Business",
-      price_monthly: 79,
-      price_yearly: 790,
-      price_lifetime: 1999,
-      description: "For teams and professionals with advanced needs",
-      features: [
-        "Everything in Pro",
-        "500GB cloud storage",
-        "All AI features",
-        "Advanced analytics",
-        "White-label exports",
-        "10 team members",
-        "Custom templates",
-        "API access",
-        "Dedicated account manager",
-        "24/7 priority support"
+      name: "Productivity Apps",
+      description: "Streamline your workflow with intelligent automation",
+      apps: [
+        { name: "AI Screen Recorder", url: "https://adorable-arithmetic-675d28.netlify.app/" },
+        { name: "AI Skills Monetizer", url: "https://roaring-mochi-39a60a.netlify.app" },
+        { name: "AI Signature", url: "https://kaleidoscopic-tarsier-3d0a6c.netlify.app/" },
+        { name: "Interactive Shopping", url: "https://inspiring-mandazi-d17556.netlify.app" },
+        { name: "AI Proposal", url: "https://keen-pastelito-6b9074.netlify.app" }
       ],
       is_popular: false
     }
   ];
+
+  // Convert app categories to pricing plan format for compatibility
+  const defaultPlans = appCategories.map((category, index) => ({
+    name: category.name,
+    price_monthly: 99,
+    price_yearly: 990, // $99/year per app
+    price_lifetime: 2376, // 24 years worth at yearly rate
+    description: category.description,
+    features: category.apps.map(app => app.name),
+    is_popular: category.is_popular,
+    apps: category.apps
+  }));
   
   // Use dynamic data from Supabase if available
   const plans = (!isLoading && pricingPlans && pricingPlans.length > 0) ? pricingPlans : defaultPlans;
@@ -434,6 +502,21 @@ export const PricingSection: React.FC = () => {
     }
   };
 
+  // Handle app selection
+  const handleAppSelection = (appName: string, checked: boolean) => {
+    setSelectedApps(prev => ({
+      ...prev,
+      [appName]: checked
+    }));
+  };
+
+  // Calculate total selected apps and price
+  const selectedCount = Object.values(selectedApps).filter(Boolean).length;
+  const basePrice = billingCycle === 'yearly' ? 99 : billingCycle === 'monthly' ? 8.25 : 99 * 24;
+  const discountRate = selectedCount >= 5 ? 0.3 : selectedCount >= 3 ? 0.2 : selectedCount >= 2 ? 0.1 : 0;
+  const discountedPrice = basePrice * (1 - discountRate);
+  const totalPrice = selectedCount * discountedPrice;
+
   return (
     <section id="pricing" className="py-20 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden">
       {/* Background elements */}
@@ -458,12 +541,12 @@ export const PricingSection: React.FC = () => {
           
           <MagicSparkles minSparkles={3} maxSparkles={6} colors={['#6366f1', '#818cf8', '#f472b6', '#ec4899']}>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 break-words">
-              Get <span className="text-primary-400">Up To 40% OFF</span> Today!
+              Choose Your <span className="text-primary-400">AI Apps</span> Today!
             </h2>
           </MagicSparkles>
-          
+
           <p className="text-xl text-gray-300 mb-4 break-words">
-            This special offer won't last long. Lock in this discounted price now before it's gone forever.
+            Select from 14 powerful AI apps at just $99/year each. Mix and match to build your perfect toolkit.
           </p>
           
           <div className="flex justify-center mt-4 mb-4">
@@ -557,271 +640,175 @@ export const PricingSection: React.FC = () => {
           </div>
         </motion.div>
         
-        <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
-          {/* Free plan - less prominent */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="lg:w-1/3"
-            whileHover={{ 
-              y: -10,
-              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-              transition: { duration: 0.3 }
-            }}
-          >
-            <div className="h-full bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
-              <div className="p-6">
-                <div className="text-xl font-bold text-white mb-1 break-words">{freePlan.name}</div>
-                <div className="text-gray-400 mb-4 break-words">{freePlan.description}</div>
-                
-                <div className="mb-6">
-                  <div className="flex items-baseline mb-1">
-                    <span className="text-4xl font-bold text-white">Free</span>
-                    <span className="text-gray-400 ml-2">forever</span>
-                  </div>
-                  <div className="text-sm text-gray-500">No credit card required</div>
-                </div>
-                
-                <motion.a 
-                  href="#signup" 
-                  className="block w-full py-3 px-6 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-lg text-center mb-6"
-                  whileHover={{ 
-                    scale: 1.03,
-                    boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
-                    backgroundColor: "rgba(55, 65, 81, 1)"
-                  }}
+        {/* App Showcase Grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="max-w-6xl mx-auto"
+        >
+          <div className="text-center mb-8">
+            <motion.div
+              className="inline-block mb-3"
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className="bg-primary-500/20 text-primary-400 px-4 py-1.5 rounded-full text-sm font-semibold">
+                🎯 AI APPS SHOWCASE
+              </div>
+            </motion.div>
+
+            <MagicSparkles minSparkles={3} maxSparkles={6} colors={['#6366f1', '#818cf8', '#f472b6', '#ec4899']}>
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                Choose from 14 Powerful AI Tools
+              </h3>
+            </MagicSparkles>
+
+            <p className="text-gray-300 text-lg">
+              $99/year per app • Mix and match to build your perfect toolkit
+            </p>
+          </div>
+
+          {/* Category Filter Tabs */}
+          <div className="flex justify-center mb-8">
+            <div className="bg-gray-800 p-1 rounded-full inline-flex">
+              {[
+                { id: 'all', name: 'All Apps', count: 14 },
+                { id: 'marketing', name: 'Marketing & Sales', count: 6 },
+                { id: 'content', name: 'Content Creation', count: 4 },
+                { id: 'productivity', name: 'Productivity', count: 4 }
+              ].map((category) => (
+                <motion.button
+                  key={category.id}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                    selectedCategory === category.id
+                      ? 'bg-primary-600 text-white shadow'
+                      : 'text-gray-400 hover:text-white hover:bg-gray-700'
+                  }`}
+                  onClick={() => setSelectedCategory(category.id)}
+                  whileHover={{ scale: selectedCategory === category.id ? 1.0 : 1.05 }}
                   whileTap={{ scale: 0.98 }}
-                  transition={{ duration: 0.2 }}
                 >
-                  Start For Free
-                </motion.a>
-                
-                <div className="space-y-3">
-                  {Array.isArray(freePlan.features) && freePlan.features.slice(0, 6).map((feature, i) => (
-                    <motion.div 
-                      key={i} 
-                      className="flex items-start"
-                      whileHover={{ x: 5, transition: { duration: 0.2 } }}
-                    >
-                      <Check className="h-5 w-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-300 text-sm break-words">{feature}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+                  {category.name} ({category.count})
+                </motion.button>
+              ))}
             </div>
-          </motion.div>
-          
-          {/* Pro plan - Highlighted with special offer */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="lg:w-2/3 relative z-20"
-            whileHover={{ 
-              y: -10, 
-              boxShadow: "0 25px 50px -12px rgba(79, 70, 229, 0.4)",
-              transition: { duration: 0.3 }
-            }}
-          >
-            <div className="absolute -inset-px bg-gradient-to-b from-primary-500 to-primary-700 rounded-xl opacity-70 blur-[2px]"></div>
-            <div className="h-full bg-gradient-to-b from-gray-800 to-gray-900 border border-primary-500/50 rounded-xl overflow-hidden relative z-10 p-8">
-              {/* Popular badge */}
-              <div className="absolute top-4 right-4">
-                <motion.div 
-                  className="bg-gradient-to-r from-yellow-500 to-amber-500 text-black font-bold px-4 py-1 rounded-full text-sm"
-                  animate={{ 
-                    scale: [1, 1.05, 1],
-                    boxShadow: [
-                      "0 0 0 rgba(245, 158, 11, 0)",
-                      "0 0 20px rgba(245, 158, 11, 0.5)",
-                      "0 0 0 rgba(245, 158, 11, 0)"
-                    ]
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
+          </div>
+
+          {/* Apps Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {allApps
+              .filter(app => selectedCategory === 'all' ||
+                (selectedCategory === 'marketing' && marketingApps.includes(app.name)) ||
+                (selectedCategory === 'content' && contentApps.includes(app.name)) ||
+                (selectedCategory === 'productivity' && productivityApps.includes(app.name))
+              )
+              .map((app, index) => (
+                <motion.div
+                  key={app.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  className={`bg-gray-800/50 border rounded-xl overflow-hidden hover:bg-gray-800/80 transition-all duration-300 ${
+                    selectedApps[app.name] ? 'border-primary-500 ring-2 ring-primary-500/20' : 'border-gray-700 hover:border-primary-500/50'
+                  }`}
+                  whileHover={{ y: -5, scale: 1.02 }}
                 >
-                  BEST DEAL
-                </motion.div>
-              </div>
-              
-              <div className="flex flex-col lg:flex-row">
-                <div className="lg:w-2/5 mb-6 lg:mb-0 pr-0 lg:pr-8 lg:border-r lg:border-gray-700">
-                  <div className="text-xl font-bold text-white mb-1 break-words">{popularPlan.name}</div>
-                  <div className="text-gray-400 mb-4 break-words">{popularPlan.description}</div>
-                  
-                  <div className="mb-6">
-                    <div className="mb-2">
-                      <span className="text-lg font-medium text-gray-400 line-through">
-                        ${billingCycle === 'lifetime' ? 
-                          Math.round((popularPlan.price_yearly * 3.5) * 1.6) : 
-                          billingCycle === 'yearly' ? Math.round(popularPlan.price_yearly * 1.2) : 
-                          Math.round(popularPlan.price_monthly * 2)
-                        }
-                      </span>
-                      <motion.span 
-                        className="ml-2 inline-block bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded"
-                        animate={{ 
-                          scale: [1, 1.1, 1],
-                          rotate: [-1, 1, -1],
-                        }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      >
-                        -{getDiscount() || 50}%
-                      </motion.span>
-                    </div>
-                    <div className="flex items-baseline">
-                      <span className="text-4xl font-bold text-white break-words">
-                        ${billingCycle === 'lifetime' ? 
-                          Math.round(popularPlan.price_yearly * 3.5) : 
-                          getPrice(popularPlan)
-                        }
-                      </span>
-                      <span className="text-gray-400 ml-2">{getBillingText()}</span>
-                    </div>
-                    {billingCycle === 'yearly' && (
-                      <div className="text-sm text-gray-500">
-                        Billed annually (effectively ${Math.round(popularPlan.price_yearly/12)}/mo)
+                  <div className="p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="text-3xl mb-2">
+                        {getAppIcon(app.name)}
                       </div>
-                    )}
-                    {billingCycle === 'lifetime' && (
-                      <div className="text-sm text-gray-500">
-                        One-time payment, lifetime access
+                      <input
+                        type="checkbox"
+                        checked={selectedApps[app.name] || false}
+                        onChange={(e) => handleAppSelection(app.name, e.target.checked)}
+                        className="w-5 h-5 text-primary-600 bg-gray-700 border-gray-600 rounded focus:ring-primary-500 focus:ring-2"
+                      />
+                    </div>
+
+                    <h4 className="text-lg font-bold text-white mb-2 break-words">
+                      {app.name}
+                    </h4>
+
+                    <p className="text-gray-400 text-sm mb-4 break-words">
+                      {getAppDescription(app.name)}
+                    </p>
+
+                    <div className="flex items-center justify-between">
+                      <div className="text-primary-400 font-bold">
+                        $99/year
                       </div>
-                    )}
-                    
-                    <div className="bg-primary-900/50 rounded-lg p-3 mt-4">
-                      <motion.div 
-                        className="flex items-center"
-                        animate={{ 
-                          x: [0, 5, 0]
-                        }}
-                        transition={{ 
-                          duration: 2,
-                          repeat: Infinity,
-                          repeatType: "reverse"
-                        }}
+                      <a
+                        href={app.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-primary-400 hover:text-primary-300 underline"
                       >
-                        <Clock className="h-4 w-4 text-primary-400 mr-2 flex-shrink-0" />
-                        <span className="text-sm text-gray-300 break-words">Limited time offer - ends soon!</span>
+                        Preview →
+                      </a>
+                    </div>
+
+                    {selectedApps[app.name] && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="mt-3 text-center"
+                      >
+                        <span className="inline-flex items-center text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full">
+                          <Check className="w-3 h-3 mr-1" />
+                          Selected
+                        </span>
                       </motion.div>
-                    </div>
+                    )}
                   </div>
-                  
-                  <motion.div
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="mb-6"
-                  >
-                    <motion.a 
-                      href="#checkout" 
-                      className="block w-full text-center bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-bold py-4 px-6 rounded-lg shadow-lg shadow-primary-600/20"
-                      whileHover={{ 
-                        boxShadow: "0 20px 25px -5px rgba(79, 70, 229, 0.4)"
-                      }}
-                    >
-                      GET STARTED NOW
-                    </motion.a>
-                  </motion.div>
-                  
-                  <div className="text-center mb-4">
-                    <div className="flex items-center justify-center">
-                      <Shield className="h-4 w-4 text-gray-400 mr-1" />
-                      <span className="text-sm text-gray-400">14-day money-back guarantee</span>
-                    </div>
-                  </div>
+                </motion.div>
+              ))}
+          </div>
+        </motion.div>
+
+
+        {/* Selected Apps Summary */}
+        {selectedCount > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-4xl mx-auto mt-8 bg-gray-800 rounded-xl border border-primary-500/30 p-6"
+          >
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2">Your Selection</h3>
+                <p className="text-gray-300">
+                  {selectedCount} app{selectedCount > 1 ? 's' : ''} selected
+                  {discountRate > 0 && (
+                    <span className="text-green-400 ml-2">
+                      ({(discountRate * 100).toFixed(0)}% discount applied)
+                    </span>
+                  )}
+                </p>
+                <div className="mt-2 text-sm text-gray-400">
+                  {Object.entries(selectedApps).filter(([_, selected]) => selected).map(([appName]) => appName).join(', ')}
                 </div>
-                
-                <div className="lg:w-3/5 lg:pl-8">
-                  <div className="mb-6">
-                    <motion.div 
-                      className="flex items-center mb-2"
-                      whileHover={{ x: 5 }}
-                    >
-                      <Gift className="h-5 w-5 text-yellow-500 mr-2 flex-shrink-0" />
-                      <span className="font-bold text-lg text-white break-words">FREE BONUSES INCLUDED:</span>
-                    </motion.div>
-                    
-                    <div className="space-y-4">
-                      {bonuses.map((bonus, i) => (
-                        <motion.div 
-                          key={i} 
-                          className="bg-gray-800/50 rounded-lg p-3 border border-gray-700"
-                          whileHover={{ 
-                            backgroundColor: "rgba(55, 65, 81, 0.4)",
-                            borderColor: "rgba(245, 158, 11, 0.3)",
-                            x: 5
-                          }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="font-medium text-white break-words">{bonus.title}</span>
-                            <motion.span 
-                              className="text-yellow-500 font-bold"
-                              animate={{ 
-                                scale: [1, 1.05, 1], 
-                              }}
-                              transition={{ 
-                                duration: 1.5, 
-                                repeat: Infinity,
-                                repeatDelay: 1 
-                              }}
-                            >
-                              {bonus.value}
-                            </motion.span>
-                          </div>
-                          <p className="text-sm text-gray-400 break-words">{bonus.description}</p>
-                        </motion.div>
-                      ))}
-                      
-                      <div className="border-t border-gray-700 pt-3">
-                        <div className="flex justify-between">
-                          <span className="text-gray-300">Total Bonus Value:</span>
-                          <motion.span 
-                            className="font-bold text-yellow-500"
-                            animate={{ 
-                              y: [0, -2, 0],
-                              scale: [1, 1.05, 1]
-                            }}
-                            transition={{ 
-                              duration: 2, 
-                              repeat: Infinity,
-                              repeatDelay: 1 
-                            }}
-                          >
-                            $591
-                          </motion.span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <div className="font-medium text-white mb-3">Everything in Pro includes:</div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {Array.isArray(popularPlan.features) && popularPlan.features.map((feature, i) => (
-                        <motion.div 
-                          key={i} 
-                          className="flex items-start"
-                          whileHover={{ 
-                            x: 5,
-                            transition: { duration: 0.2 } 
-                          }}
-                        >
-                          <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
-                          <span className="text-gray-300 text-sm break-words">{feature}</span>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
+              </div>
+              <div className="text-right">
+                <div className="text-2xl font-bold text-white">
+                  ${totalPrice.toFixed(2)} {getBillingText()}
                 </div>
+                <div className="text-sm text-gray-400">
+                  ${discountedPrice.toFixed(2)} per app
+                </div>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="mt-3 bg-primary-600 hover:bg-primary-700 text-white font-bold py-2 px-6 rounded-lg"
+                >
+                  Subscribe Now
+                </motion.button>
               </div>
             </div>
           </motion.div>
-        </div>
-        
+        )}
+
         {/* Expanded Features Comparison */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -1020,10 +1007,6 @@ export const PricingSection: React.FC = () => {
                 question: "What happens after I purchase the lifetime plan?",
                 answer: "After purchasing the lifetime plan, you'll have permanent access to all features included in that plan for the lifetime of VideoRemix.vip. You'll also receive all major updates to those features."
               },
-              {
-                question: "Will I be charged automatically after the trial?",
-                answer: "No. We require manual activation after your trial period ends. We'll send you a reminder email before your trial expires."
-              }
             ].map((item, index) => (
               <motion.div
                 key={index}
@@ -1171,7 +1154,7 @@ const AnimatedFeatureTable = ({ showAllFeatures, featureCategories }) => {
             href="#signup-free" 
             className="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-lg"
           >
-            Start Free
+            Get Started
           </a>
           <a 
             href="#checkout" 

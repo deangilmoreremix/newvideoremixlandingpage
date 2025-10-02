@@ -59,7 +59,7 @@ export const featuresData: Feature[] = [
     shortDescription: 'Transform text into professional videos in minutes',
     description: 'Our advanced AI Video Creator transforms your text, keywords, and basic ideas into fully-produced, professional-quality videos in just minutes. Skip the learning curve of complex video editing software and let our AI handle the technical aspects while you maintain creative control.',
     icon: React.createElement(Video),
-    image: 'https://images.unsplash.com/photo-1626544827763-d516dce335e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
+    image: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     videoUrl: 'https://example.com/video/ai-creator-demo.mp4',
     keyPoints: [
       'Turn text and keywords into complete videos',
@@ -161,7 +161,7 @@ export const featuresData: Feature[] = [
     shortDescription: 'Intelligent video editing that saves hours of work',
     description: 'Our advanced AI video editing technology analyzes your footage and automatically enhances colors, adjusts lighting, crops frames, and suggests optimal cuts for professional results. The system identifies the best moments, removes mistakes, and applies Hollywood-quality editing techniques automatically.',
     icon: React.createElement(Wand2),
-    image: 'https://images.unsplash.com/photo-1536240478700-b869070f9279?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
+    image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     videoUrl: 'https://example.com/video/ai-editing-demo.mp4',
     keyPoints: [
       'Smart scene detection and auto-editing',
@@ -263,7 +263,7 @@ export const featuresData: Feature[] = [
     shortDescription: 'Professional video templates for any industry or purpose',
     description: 'Access our extensive library of customizable video templates designed for every industry and purpose. Our smart templates adapt to your content, automatically adjusting to maintain perfect timing, transitions, and visual coherence regardless of what assets you add.',
     icon: React.createElement(LayoutTemplate),
-    image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
+    image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     videoUrl: 'https://example.com/video/templates-demo.mp4',
     keyPoints: [
       '500+ professionally designed templates',
@@ -365,7 +365,7 @@ export const featuresData: Feature[] = [
     shortDescription: 'Turn long videos into short clips perfect for social media',
     description: 'Our intelligent content repurposing system automatically identifies the most engaging parts of your long-form videos and transforms them into perfectly formatted short-form content for every platform. Multiply your content output without additional creation time.',
     icon: React.createElement(PencilRuler),
-    image: 'https://images.unsplash.com/photo-1616469829941-c7200edec809?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
+    image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     videoUrl: 'https://example.com/video/repurposing-demo.mp4',
     keyPoints: [
       'AI-powered highlight detection',
@@ -467,7 +467,7 @@ export const featuresData: Feature[] = [
     shortDescription: 'Generate accurate captions and subtitles in multiple languages',
     description: 'Our powerful speech recognition technology automatically converts spoken words into accurate text captions. With support for 40+ languages and dialect recognition, your videos become accessible to global audiences and optimized for sound-off viewing.',
     icon: React.createElement(Globe),
-    image: 'https://images.unsplash.com/photo-1590599145458-366e731e0b6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     videoUrl: 'https://example.com/video/captions-demo.mp4',
     keyPoints: [
       '98% accuracy in speech recognition',
@@ -569,7 +569,7 @@ export const featuresData: Feature[] = [
     shortDescription: 'Work together seamlessly with team members on video projects',
     description: 'Our powerful collaboration features enable teams to work together effectively on video projects, regardless of location. With real-time editing, commenting, version control, and approval workflows, you can streamline your video production process and improve team efficiency.',
     icon: React.createElement(Users),
-    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     videoUrl: 'https://example.com/video/collaboration-demo.mp4',
     keyPoints: [
       'Real-time collaborative editing',

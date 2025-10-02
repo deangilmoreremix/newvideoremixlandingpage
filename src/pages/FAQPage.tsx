@@ -23,138 +23,88 @@ const faqData = [
   // Getting Started
   {
     question: "What is VideoRemix.vip?",
-    answer: "VideoRemix.vip is an AI-powered marketing personalization platform designed to help marketers and businesses create personalized marketing content that drives results. Our platform combines artificial intelligence with intuitive design to eliminate the technical barriers of traditional marketing content creation, enabling you to create personalized content, images, and campaigns in minutes instead of hours.",
+    answer: "VideoRemix.vip is an AI-powered marketing personalization platform offering 14 specialized apps at $99/year each. Choose any combination of tools to create personalized marketing content, images, and campaigns that drive results.",
     category: "getting-started"
   },
   {
     question: "How does VideoRemix.vip work?",
-    answer: "VideoRemix.vip uses artificial intelligence to automate the video editing process. Upload your footage, choose a template, make any customizations you want, and our AI will handle the technical aspects of editing. You can export the final video in minutes instead of hours.",
+    answer: "Each app uses artificial intelligence to automate specific marketing tasks. Upload your content, select your preferences, and our AI handles the technical work. You can combine multiple apps for comprehensive marketing automation.",
     category: "getting-started"
   },
   {
-    question: "Do I need any technical skills to use VideoRemix.vip?",
-    answer: "Not at all! VideoRemix.vip is designed for users with zero video editing experience. Our intuitive interface and AI-powered features make it easy for anyone to create professional-looking videos without technical skills.",
+    question: "How do I choose which apps I need?",
+    answer: "Start with one app that addresses your most pressing need, then add more as your marketing strategy grows. Each app costs $99/year and can be added or removed anytime. Our sales team can help you select the right combination.",
     category: "getting-started"
   },
   {
-    question: "How long does it take to learn VideoRemix.vip?",
-    answer: "Most users can create their first professional-quality video within 15 minutes of signing up. Our platform is designed to be intuitive with a minimal learning curve. We also provide interactive tutorials, tooltips, and a comprehensive help center to guide you through the process.",
-    category: "getting-started"
-  },
-  {
-    question: "What types of videos can I create with VideoRemix.vip?",
-    answer: "You can create virtually any type of video including social media content, marketing videos, product demos, educational content, YouTube videos, testimonials, webinar recordings, explainer videos, and much more. Our template library covers dozens of use cases across all major industries.",
-    category: "getting-started"
-  },
-  {
-    question: "Is there a free trial available?",
-    answer: "Yes! We offer a fully-featured 14-day free trial on our Pro and Business plans. No credit card is required to start your trial, and you can downgrade to our Free plan at any time if you decide not to continue with a paid subscription.",
+    question: "Do I need technical skills to use VideoRemix.vip?",
+    answer: "Not at all! Our apps are designed for marketers, business owners, and content creators with zero technical experience. Each app includes intuitive interfaces and AI that handles complex tasks automatically.",
     category: "getting-started"
   },
   
   // Accounts & Billing
   {
     question: "How much does VideoRemix.vip cost?",
-    answer: "VideoRemix.vip offers several pricing tiers to fit different needs. We have a Free plan with basic features, a Pro plan starting at $29/month, and a Business plan at $79/month. We also offer custom Enterprise solutions. Annual subscriptions receive a 20% discount. Check our pricing page for the most current pricing and feature details.",
+    answer: "Each AI app costs $99/year. You can subscribe to one app or multiple apps based on your needs. Annual billing provides the best value, but we also offer flexibility for growing businesses.",
     category: "accounts"
   },
   {
-    question: "Can I change my subscription plan later?",
-    answer: "Yes, you can upgrade, downgrade, or cancel your subscription at any time from your account dashboard. Upgrades take effect immediately, while downgrades and cancellations take effect at the end of your current billing cycle.",
-    category: "accounts"
-  },
-  {
-    question: "Do you offer any discounts?",
-    answer: "Yes, we offer a 20% discount on all annual subscriptions. We also have special pricing for educational institutions, non-profit organizations, and qualified students. Contact our sales team for more information about these specialized discounts.",
-    category: "accounts"
-  },
-  {
-    question: "What happens to my videos if I cancel my subscription?",
-    answer: "If you cancel your subscription, you'll have 30 days to download your projects and exported videos. After that period, they will be removed from our servers. We recommend downloading your important content before canceling. If you downgrade to our Free plan, you'll maintain access to a limited number of your most recent projects.",
+    question: "Can I change my app selection later?",
+    answer: "Absolutely! You can add or remove apps from your subscription at any time through your account dashboard. Changes take effect at the start of your next billing cycle, ensuring you only pay for what you need.",
     category: "accounts"
   },
   {
     question: "How does the 14-day money-back guarantee work?",
-    answer: "If you're not completely satisfied with VideoRemix.vip within 14 days of your initial purchase, contact our support team for a full refund. No questions asked. This guarantee applies to first-time purchases only and does not apply to renewals or subscription changes.",
+    answer: "If you're not completely satisfied with any VideoRemix.vip app within 14 days of purchase, contact our support team for a full refund. No questions asked. This applies to first-time purchases of any app.",
     category: "accounts"
   },
   {
     question: "Do you offer team or enterprise pricing?",
-    answer: "Yes! Our Business plan supports teams of up to 10 members with collaboration features. For larger teams or enterprise needs, please contact our sales team for custom pricing and features tailored to your organization's specific requirements.",
+    answer: "Yes! For teams needing multiple apps or enterprise solutions, we offer custom pricing and features. Contact our sales team to discuss volume discounts and tailored solutions for your organization.",
     category: "accounts"
   },
   {
     question: "What payment methods do you accept?",
-    answer: "We accept all major credit cards (Visa, Mastercard, American Express, Discover), PayPal, and Apple Pay. For Enterprise plans, we can also arrange invoicing and purchase orders. All payments are processed securely through our payment partners.",
+    answer: "We accept all major credit cards (Visa, Mastercard, American Express, Discover), PayPal, and Apple Pay. For Enterprise customers, we can arrange invoicing and purchase orders.",
     category: "accounts"
   },
 
   // Features & Capabilities
   {
-    question: "What video formats do you support?",
-    answer: "We support all major video formats including MP4, MOV, AVI, WMV, MKV, and WebM. You can also import images (JPG, PNG, SVG) and audio files (MP3, WAV, AAC) to include in your projects. Our platform automatically optimizes these files for the best performance.",
+    question: "What makes VideoRemix.vip different from other AI tools?",
+    answer: "Unlike generic AI platforms, VideoRemix.vip offers specialized apps designed specifically for marketing tasks. Each app is optimized for particular use cases, providing better results than general-purpose AI tools.",
     category: "features"
   },
   {
-    question: "Is there a limit to video length?",
-    answer: "Free accounts can upload videos up to 10 minutes in length and export projects up to 5 minutes. Pro accounts can upload videos up to 1 hour and export projects up to 30 minutes. Business accounts have no length restrictions. For very long videos, we recommend breaking them into smaller segments for the most efficient processing.",
+    question: "Can I use multiple apps together?",
+    answer: "Yes! Many users combine apps for comprehensive marketing automation. For example, you might use our content creation app with our personalization app for complete campaign automation.",
     category: "features"
   },
   {
-    question: "Can I use my own branding and assets?",
-    answer: "Absolutely! Pro and Business users can upload their logo, fonts, and color schemes to create a brand kit that can be applied to any template. This ensures all your videos maintain consistent branding across campaigns and channels.",
+    question: "Is there a limit to how many apps I can subscribe to?",
+    answer: "No limits! Subscribe to as many or as few apps as you need. Each app operates independently, so you can scale your AI toolkit as your business grows.",
     category: "features"
   },
   {
-    question: "What resolution and quality can I export videos in?",
-    answer: "Free plans can export in 720p HD. Pro plans support up to 4K resolution (2160p). All plans offer various quality settings to optimize for file size versus visual quality. We also automatically optimize format and compression settings for different platforms like YouTube, Instagram, etc.",
-    category: "features"
-  },
-  {
-    question: "Can I add custom transitions and effects?",
-    answer: "Yes! VideoRemix.vip includes a library of professional transitions and effects that you can apply with a single click. Pro and Business users can also create custom transitions and save them for future use.",
-    category: "features"
-  },
-  {
-    question: "Is there a limit to how many projects I can create?",
-    answer: "Free accounts can have up to 3 active projects simultaneously. Pro accounts get 50 projects, and Business accounts have unlimited projects. Completed projects can be archived to free up your active project slots.",
-    category: "features"
-  },
-  {
-    question: "Can I add background music to my videos?",
-    answer: "Yes, VideoRemix.vip includes a royalty-free music library with thousands of tracks categorized by mood, genre, and tempo. Pro and Business users can also upload their own music files. Our AI can even suggest music that matches the mood and pacing of your video content.",
+    question: "Do apps integrate with my existing tools?",
+    answer: "Most apps include API access and integrations with popular marketing platforms. Contact our support team to discuss specific integration needs for your tech stack.",
     category: "features"
   },
 
   // Technical Questions
   {
-    question: "What browsers does VideoRemix.vip support?",
-    answer: "VideoRemix.vip works on all modern browsers including Chrome, Firefox, Safari, and Edge. For optimal performance, we recommend using the latest version of Chrome or Firefox. Our platform is primarily cloud-based, so you don't need a powerful computer to create professional videos.",
-    category: "technical"
-  },
-  {
-    question: "Do you have mobile apps available?",
-    answer: "Yes, we offer mobile apps for iOS and Android that allow you to view, share, and make basic edits to your projects on the go. Full editing capabilities are available through our web application, which is also mobile-responsive for tablet users.",
+    question: "Do I need an internet connection to use the apps?",
+    answer: "Yes, VideoRemix.vip apps are cloud-based and require an internet connection. This enables powerful AI processing and ensures your apps are always up-to-date with the latest features.",
     category: "technical"
   },
   {
     question: "What are the minimum system requirements?",
-    answer: "Since VideoRemix.vip is cloud-based, the system requirements are minimal. You need a computer with a modern web browser and a stable internet connection (at least 5 Mbps download speed). For video uploading, a faster connection is recommended. 4GB of RAM and any modern processor should be sufficient.",
+    answer: "Any modern computer with a web browser and internet connection. We recommend Chrome or Firefox for optimal performance. No special hardware required.",
     category: "technical"
   },
   {
-    question: "Is VideoRemix.vip compatible with my existing video editing software?",
-    answer: "VideoRemix.vip can import project files from some popular video editing platforms. We currently support importing from Adobe Premiere (XML), Final Cut Pro (XML), and DaVinci Resolve (EDL). We can also import media assets from these platforms, even if the project structure itself isn't imported.",
-    category: "technical"
-  },
-  {
-    question: "Do I need an internet connection to use VideoRemix.vip?",
-    answer: "Yes, VideoRemix.vip is a cloud-based platform that requires an internet connection to access and use. This allows us to leverage powerful cloud computing resources for AI processing and rendering, without taxing your local machine. Pro and Business plans include a limited offline mode that allows you to make basic edits without connectivity and sync changes when you're back online.",
-    category: "technical"
-  },
-  {
-    question: "How do you handle large file uploads?",
-    answer: "Our platform is optimized for handling large video files. We use a chunked upload system that can resume if your connection is interrupted. For very large files (over 2GB), we recommend using our desktop uploader tool which provides enhanced stability and progress tracking for large uploads.",
+    question: "Is my data secure?",
+    answer: "Absolutely. All data is encrypted and stored securely. We comply with GDPR, CCPA, and other privacy regulations. Your marketing data and AI-generated content remain private and secure.",
     category: "technical"
   },
 
@@ -219,38 +169,18 @@ const faqData = [
 
   // AI Features
   {
-    question: "How does the AI video creation work?",
-    answer: "Our AI analyzes your inputs (text, images, audio) and uses advanced machine learning models to generate appropriate visuals, transitions, effects, and timing. It understands context, sentiment, and pacing to create a cohesive video that matches your intent. You can then fine-tune the AI's work with our intuitive editor.",
+    question: "How accurate is the AI in each app?",
+    answer: "Each app is trained on extensive datasets specific to its marketing domain. Accuracy varies by use case but typically ranges from 95-99% for well-defined tasks. Our AI continuously learns and improves.",
     category: "ai"
   },
   {
-    question: "How accurate are the automatic captions?",
-    answer: "Our AI-generated captions typically achieve 95-98% accuracy for clear audio in English. We also support automatic captioning in 20+ other languages with varying degrees of accuracy. All auto-generated captions are easily editable in our caption editor if you need to make corrections.",
+    question: "Can I customize how the AI works?",
+    answer: "Yes! Each app offers customization options. You can set preferences, upload brand guidelines, and provide feedback to improve AI performance for your specific needs.",
     category: "ai"
   },
   {
-    question: "Does the AI choose music for my videos?",
-    answer: "Yes, our AI can analyze your video content and suggest appropriate music tracks from our library based on the mood, pacing, and subject matter. It can even automatically time music transitions to match your video's natural breaking points.",
-    category: "ai"
-  },
-  {
-    question: "How does the AI know where to make cuts in my footage?",
-    answer: "Our AI analyzes your video using computer vision and audio processing to identify natural breaking points, changes in scenes, pauses in speech, and visual composition. It applies professional editing principles to determine the optimal cut points for engaging, well-paced videos.",
-    category: "ai"
-  },
-  {
-    question: "Can the AI generate voiceovers?",
-    answer: "Yes, our text-to-speech technology can generate natural-sounding voiceovers in 30+ languages and accents. Simply type your script, select a voice, and our AI will create a professional voiceover. Pro and Business users can adjust pacing, emphasis, and pronunciation for perfect results.",
-    category: "ai"
-  },
-  {
-    question: "How does the content repurposing AI work?",
-    answer: "Our content repurposing AI analyzes longer videos to identify the most engaging and meaningful segments. It then automatically creates shorter clips optimized for different platforms (TikTok, Instagram Reels, YouTube Shorts, etc.) with appropriate aspect ratios, captions, and pacing.",
-    category: "ai"
-  },
-  {
-    question: "Will the AI replace my existing editing team?",
-    answer: "VideoRemix.vip is designed to augment human creativity, not replace it. Many professional teams use our platform to handle routine editing tasks, allowing their creative staff to focus on higher-value work. The AI handles technical aspects while humans provide creative direction and final approval.",
+    question: "Will AI replace my marketing team?",
+    answer: "VideoRemix.vip AI enhances human creativity rather than replacing it. Our apps handle repetitive tasks and provide intelligent suggestions, freeing your team for strategic work.",
     category: "ai"
   },
 
@@ -358,12 +288,11 @@ const faqData = [
 
 // Frequently searched questions
 const popularSearches = [
-  "How does the free trial work",
-  "Export to social media",
-  "Team collaboration features",
-  "Video resolution options",
-  "AI caption accuracy",
-  "Cancel subscription"
+  "How do I get started",
+  "Which apps do I need",
+  "App pricing and billing",
+  "AI accuracy and customization",
+  "Security and data privacy"
 ];
 
 const FAQPage: React.FC = () => {
@@ -836,11 +765,9 @@ const FAQPage: React.FC = () => {
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-bold px-8 py-4 rounded-lg shadow-lg shadow-primary-600/20"
               >
-                Start Your Free Trial
+                Get Started
                 <ArrowRight className="ml-2 h-5 w-5" />
               </motion.a>
-              
-              <p className="mt-4 text-gray-400">No credit card required. 14-day trial on all premium features.</p>
               
               {/* Key features */}
               <div className="mt-12 flex flex-wrap justify-center gap-4">

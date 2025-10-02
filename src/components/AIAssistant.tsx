@@ -95,10 +95,10 @@ const knowledgeBase = [
     ]
   },
   {
-    question: "Do you offer a free trial?",
-    answer: "Yes! We offer a 14-day free trial on our Pro plan with no credit card required. This gives you full access to all our premium features so you can experience the full power of VideoRemix.vip before committing.",
+    question: "How do I get started?",
+    answer: "Getting started is easy! Choose any of our 14 AI apps for just $99/year each. You can mix and match tools to build your perfect AI toolkit. All apps include our 14-day money-back guarantee.",
     links: [
-      { text: "Start your free trial", url: "#pricing" }
+      { text: "View our apps", url: "#pricing" }
     ]
   },
   {

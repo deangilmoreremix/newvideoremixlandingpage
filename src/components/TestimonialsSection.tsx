@@ -639,7 +639,7 @@ const TestimonialsSection: React.FC = () => {
               whileTap={{ scale: 0.95 }}
               className="bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-bold px-8 py-4 rounded-lg flex items-center justify-center"
             >
-              Get Started Free
+              Get Started
               <motion.span
                 animate={{
                   x: [0, 5, 0],

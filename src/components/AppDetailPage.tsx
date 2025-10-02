@@ -1921,7 +1921,7 @@ const AppDetailPage: React.FC = () => {
                   ease: "easeInOut"
                 }}
               />
-              <span className="relative z-10">Start Free Trial</span>
+              <span className="relative z-10">Get Started</span>
               <motion.div
                 animate={{
                   x: [0, 5, 0],
@@ -1976,7 +1976,7 @@ const AppDetailPage: React.FC = () => {
             >
               <Gift className="h-4 w-4 text-gray-500 inline-block" />
             </motion.div>
-            No credit card required. 14-day free trial on all premium features.
+            Get started with premium features today.
           </p>
         </div>
       </motion.div>

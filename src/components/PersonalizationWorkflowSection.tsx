@@ -335,7 +335,7 @@ const PersonalizationWorkflowSection: React.FC = () => {
             </motion.div>
             
             <p className="mt-4 text-gray-400 text-sm">
-              Get started with our 14-day free marketing personalization trial. No credit card required.
+              Start personalizing your marketing campaigns today.
             </p>
           </div>
         </motion.div>

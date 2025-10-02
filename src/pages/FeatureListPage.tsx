@@ -13,6 +13,7 @@ const additionalFeatures = [
     title: 'AI Voice Generation',
     shortDescription: 'Create natural-sounding voiceovers in multiple languages',
     icon: '🎙️',
+    image: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     category: 'ai',
     tags: ['audio', 'voice', 'text-to-speech']
   },
@@ -21,6 +22,7 @@ const additionalFeatures = [
     title: 'Background Removal',
     shortDescription: 'Remove backgrounds from videos with one click, no green screen required',
     icon: '✂️',
+    image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     category: 'ai',
     tags: ['editing', 'effects']
   },
@@ -29,6 +31,7 @@ const additionalFeatures = [
     title: 'Motion Graphics Library',
     shortDescription: 'Add professional animated elements and graphics to your videos',
     icon: '🎬',
+    image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     category: 'templates',
     tags: ['animation', 'graphics']
   },
@@ -37,6 +40,7 @@ const additionalFeatures = [
     title: 'Personalized Video Creation',
     shortDescription: 'Create individualized videos at scale with dynamic content insertion',
     icon: '👤',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     category: 'workflow',
     tags: ['personalization', 'marketing']
   },
@@ -45,6 +49,7 @@ const additionalFeatures = [
     title: 'Video Performance Analytics',
     shortDescription: 'Track engagement, view rates, and conversion metrics across platforms',
     icon: '📊',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     category: 'business',
     tags: ['analytics', 'metrics', 'insights']
   },
@@ -53,6 +58,7 @@ const additionalFeatures = [
     title: 'Social Media Publishing',
     shortDescription: 'Schedule and publish videos directly to all major social platforms',
     icon: '🌐',
+    image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     category: 'workflow',
     tags: ['social media', 'publishing']
   },
@@ -61,6 +67,7 @@ const additionalFeatures = [
     title: 'Video SEO Tools',
     shortDescription: 'Optimize titles, descriptions, and tags for better discovery',
     icon: '🔍',
+    image: 'https://images.unsplash.com/photo-1562577309-2592ab84b1bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     category: 'marketing',
     tags: ['SEO', 'discovery']
   },
@@ -69,6 +76,7 @@ const additionalFeatures = [
     title: 'Screen Recording',
     shortDescription: 'Capture high-quality screen recordings with annotation tools',
     icon: '🖥️',
+    image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     category: 'workflow',
     tags: ['screen capture', 'tutorial creation']
   },
@@ -77,6 +85,7 @@ const additionalFeatures = [
     title: 'Multi-Camera Editing',
     shortDescription: 'Edit footage from multiple cameras with synchronized timelines',
     icon: '📹',
+    image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     category: 'advanced',
     tags: ['advanced editing', 'professional']
   },
@@ -85,6 +94,7 @@ const additionalFeatures = [
     title: 'Advanced Color Grading',
     shortDescription: 'Apply professional color grades and LUTs with fine control',
     icon: '🎨',
+    image: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     category: 'advanced',
     tags: ['color', 'professional']
   },
@@ -93,6 +103,7 @@ const additionalFeatures = [
     title: 'Audio Enhancement',
     shortDescription: 'Improve voice clarity, reduce noise, and optimize audio levels automatically',
     icon: '🔊',
+    image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     category: 'ai',
     tags: ['audio', 'sound quality']
   },
@@ -101,6 +112,7 @@ const additionalFeatures = [
     title: 'Interactive Video Elements',
     shortDescription: 'Add clickable buttons, forms, and interactive hotspots to videos',
     icon: '👆',
+    image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80',
     category: 'advanced',
     tags: ['interactive', 'engagement']
   }
@@ -424,10 +436,10 @@ const FeatureListPage: React.FC = () => {
             >
               <MagicSparkles minSparkles={5} maxSparkles={8}>
                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                  Ready to Transform Your Video Creation?
+                  Ready to Transform Your Personalized Content?
                 </h2>
               </MagicSparkles>
-              
+
               <p className="text-xl text-gray-300 mb-8">
                 Join thousands of creators and businesses who have revolutionized their workflow with VideoRemix.vip's powerful features.
               </p>
@@ -437,17 +449,17 @@ const FeatureListPage: React.FC = () => {
                 whileTap={{ scale: 0.95 }}
                 className="inline-block"
               >
-                <Link 
-                  to="/get-started" 
+                <Link
+                  to="/get-started"
                   className="bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-bold py-4 px-8 rounded-lg inline-flex items-center shadow-lg shadow-primary-700/30"
                 >
-                  Get Started Free
+                  Get Started
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </motion.div>
               
               <p className="text-gray-400 mt-4">
-                No credit card required. Free 14-day trial.
+                Get started with premium features today.
               </p>
             </motion.div>
           </div>

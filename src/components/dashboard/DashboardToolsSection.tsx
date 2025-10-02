@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Video, 
-  Users, 
-  Image as ImageIcon, 
-  Sparkles, 
-  Palette, 
-  UserCircle, 
-  Package, 
-  Layers, 
-  FileText, 
-  Mic, 
-  Search, 
-  ArrowRight, 
-  Filter, 
-  Play, 
+import {
+  Video,
+  Users,
+  Image as ImageIcon,
+  Sparkles,
+  Palette,
+  UserCircle,
+  Package,
+  Layers,
+  FileText,
+  Mic,
+  Search,
+  ArrowRight,
+  Filter,
+  Play,
   Star,
   PanelTop,
   Zap,
@@ -26,11 +26,15 @@ import {
   MessageSquare,
   Brain,
   FileVideo,
-  ShoppingCart
+  ShoppingCart,
+  Lock,
+  CheckCircle
 } from 'lucide-react';
 import MagicSparkles from '../MagicSparkles';
 import { useInView } from 'react-intersection-observer';
 import { appsData } from '../../data/appsData';
+import { useAuth } from '../../context/AuthContext';
+import { getUserAccessibleProducts } from '../../utils/supabaseClient';
 
 // Define TrendingUp component
 const TrendingUp: React.FC<{ className?: string }> = (props) => (
@@ -138,39 +142,75 @@ const toolUrlMap: {[key: string]: string} = {
 };
 
 const DashboardToolsSection: React.FC = () => {
+  const { user } = useAuth();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredApps, setFilteredApps] = useState(appsData);
   const [sortOrder, setSortOrder] = useState<'popular' | 'new' | 'a-z'>('popular');
   const [hoveredApp, setHoveredApp] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [userAccessibleProducts, setUserAccessibleProducts] = useState<string[]>([]);
+  const [loadingAccess, setLoadingAccess] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const [ref, inView] = useInView({
     threshold: 0.1,
     triggerOnce: true
   });
-  
+
   // Image loading error handling state
   const [imageErrors, setImageErrors] = useState<Record<string, number>>({});
 
+  // Load user accessible products
+  useEffect(() => {
+    const loadUserAccess = async () => {
+      if (user) {
+        setLoadingAccess(true);
+        try {
+          const accessibleProducts = await getUserAccessibleProducts(user.id);
+          setUserAccessibleProducts(accessibleProducts);
+        } catch (error) {
+          console.error('Error loading user access:', error);
+        } finally {
+          setLoadingAccess(false);
+        }
+      } else {
+        setUserAccessibleProducts([]);
+        setLoadingAccess(false);
+      }
+    };
+
+    loadUserAccess();
+  }, [user]);
+
   // Update filtered tools when category or search query changes
   useEffect(() => {
+    if (loadingAccess) return;
+
     let result = [...appsData];
-    
+
+    // Apply access control - only show apps user has purchased
+    if (user && userAccessibleProducts.length > 0) {
+      result = result.filter(app => userAccessibleProducts.includes(app.id));
+    } else if (user) {
+      // If user is logged in but has no purchases, show empty list
+      result = [];
+    }
+    // If no user, show all apps (for demo purposes)
+
     // Apply category filter
     if (selectedCategory !== 'all') {
       result = result.filter(app => app.category === selectedCategory);
     }
-    
+
     // Apply search filter
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
       result = result.filter(
-        app => app.name.toLowerCase().includes(query) || 
-               app.description.toLowerCase().includes(query)
+        app => app.name.toLowerCase().includes(query) ||
+                app.description.toLowerCase().includes(query)
       );
     }
-    
+
     // Apply sorting
     switch (sortOrder) {
       case 'popular':
@@ -191,9 +231,9 @@ const DashboardToolsSection: React.FC = () => {
         result.sort((a, b) => a.name.localeCompare(b.name));
         break;
     }
-    
+
     setFilteredApps(result);
-  }, [selectedCategory, searchQuery, sortOrder]);
+  }, [selectedCategory, searchQuery, sortOrder, user, userAccessibleProducts, loadingAccess]);
   
   // Handle image load errors
   const handleImageError = (appId: string) => {
@@ -613,9 +653,59 @@ const DashboardToolsSection: React.FC = () => {
           </div>
         </div>
         
+        {/* Subscription Status & Management */}
+        {user && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="max-w-4xl mx-auto mb-8"
+          >
+            <div className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-700">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-2">Your Subscription</h3>
+                  <p className="text-gray-300">
+                    {userAccessibleProducts.length > 0
+                      ? `You have access to ${userAccessibleProducts.length} tools`
+                      : 'No active subscriptions found'
+                    }
+                  </p>
+                </div>
+                <div className="flex items-center space-x-4">
+                  {userAccessibleProducts.length > 0 ? (
+                    <div className="flex items-center text-green-400">
+                      <CheckCircle className="h-5 w-5 mr-2" />
+                      <span className="font-medium">Active</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center text-yellow-400">
+                      <Lock className="h-5 w-5 mr-2" />
+                      <span className="font-medium">Upgrade Needed</span>
+                    </div>
+                  )}
+                  <Link
+                    to="/pricing"
+                    className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+                  >
+                    {userAccessibleProducts.length > 0 ? 'Manage Subscription' : 'Upgrade Now'}
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
         {/* Main tools grid/list */}
         <div className="max-w-6xl mx-auto mb-16">
-          {filteredApps.length > 0 ? (
+          {loadingAccess ? (
+            <div className="flex justify-center items-center py-20">
+              <div className="text-center">
+                <div className="w-16 h-16 border-t-4 border-primary-500 border-solid rounded-full animate-spin mx-auto mb-4"></div>
+                <p className="text-gray-400">Loading your accessible tools...</p>
+              </div>
+            </div>
+          ) : filteredApps.length > 0 ? (
             <motion.div
               variants={containerVariants}
               initial="hidden"
@@ -737,10 +827,37 @@ const DashboardToolsSection: React.FC = () => {
                 </motion.div>
               )})}
             </motion.div>
+          ) : user && userAccessibleProducts.length === 0 ? (
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-8 text-center border border-gray-700">
+              <div className="mb-6">
+                <Lock className="h-16 w-16 text-gray-500 mx-auto mb-4" />
+                <h3 className="text-2xl font-bold text-white mb-2">No Tools Available</h3>
+                <p className="text-gray-400 text-lg mb-4">
+                  You don't have access to any personalization tools yet.
+                </p>
+                <p className="text-gray-500 text-sm mb-6">
+                  Purchase a subscription to unlock all 50+ personalization tools and start creating amazing content.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  to="/pricing"
+                  className="bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-bold px-8 py-3 rounded-lg transition-all duration-200 shadow-lg shadow-primary-600/20"
+                >
+                  View Pricing Plans
+                </Link>
+                <Link
+                  to="/contact"
+                  className="bg-gray-700 hover:bg-gray-600 text-white font-medium px-8 py-3 rounded-lg transition-colors"
+                >
+                  Contact Sales
+                </Link>
+              </div>
+            </div>
           ) : (
             <div className="bg-gray-800 rounded-xl p-8 text-center">
               <div className="text-gray-400 text-lg mb-4">No personalization tools found matching your criteria</div>
-              <button 
+              <button
                 onClick={() => {
                   setSelectedCategory('all');
                   setSearchQuery('');

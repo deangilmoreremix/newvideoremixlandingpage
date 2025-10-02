@@ -185,7 +185,7 @@ const reasons = [
 const benefits = [
   {
     icon: <Clock />,
-    title: "Save 15+ Hours Weekly",
+    title: "Save 14+ Hours Weekly",
     description: "Reduce video editing time by 90% with our AI-powered tools"
   },
   {
@@ -228,7 +228,7 @@ const FinalCTA: React.FC = () => {
     const urgencyMessages = [
       "Only 7 discount codes remaining!",
       "53 people viewing this offer now",
-      "15 people signed up in the last hour"
+      "14 people signed up in the last hour"
     ];
     setUrgency(urgencyMessages[Math.floor(Math.random() * urgencyMessages.length)]);
   }, []);
@@ -273,21 +273,21 @@ const FinalCTA: React.FC = () => {
           
           <CountdownTimer hours={23} minutes={59} seconds={59} />
           
-          <motion.div 
+          <motion.div
             className="bg-white/10 backdrop-blur-sm rounded-lg p-4 mb-6 border border-white/20"
-            whileHover={{ 
+            whileHover={{
               borderColor: "rgba(255, 255, 255, 0.4)",
               y: -5,
               boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)"
             }}
           >
-            <motion.div 
+            <motion.div
               className="flex items-center justify-center"
               whileHover={{ scale: 1.05 }}
             >
-              <motion.div 
+              <motion.div
                 className="mr-2"
-                animate={{ 
+                animate={{
                   rotate: [0, 10, -10, 0],
                   scale: [1, 1.1, 1],
                   transition: { duration: 1.5, repeat: Infinity, repeatDelay: 5 }
@@ -296,13 +296,13 @@ const FinalCTA: React.FC = () => {
                 <Clock className="h-5 w-5 text-yellow-300" />
               </motion.div>
               <p className="text-xl">
-                <span className="font-bold">Limited Time:</span> Get 50% off our Pro Plan + Free Video Marketing Blueprint
+                <span className="font-bold">Limited Time:</span> Get any AI app for just $99/year + Free Video Marketing Blueprint
               </p>
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               className="text-sm mt-2 bg-secondary-600/30 py-1 px-4 rounded-full inline-block"
-              animate={{ 
+              animate={{
                 scale: [1, 1.05, 1],
                 transition: { duration: 2, repeat: Infinity }
               }}
@@ -402,43 +402,24 @@ const FinalCTA: React.FC = () => {
                 ))}
               </div>
               
-              <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-                <motion.a 
-                  href="#try-free" 
-                  className="btn bg-white text-primary-600 hover:bg-gray-100 font-semibold text-lg px-8 py-4 rounded-lg flex items-center justify-center"
-                  whileHover={{ 
-                    scale: 1.05,
-                    boxShadow: "0 20px 25px -5px rgba(255, 255, 255, 0.2)"
-                  }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  Try Free For 14 Days
-                  <motion.div
-                    animate={{ 
-                      x: [0, 5, 0],
-                      transition: { repeat: Infinity, duration: 1.5 }
-                    }}
-                  >
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </motion.div>
-                </motion.a>
-                <motion.a 
-                  href="#watch-demo" 
+              <div className="flex justify-center">
+                <motion.a
+                  href="#watch-demo"
                   className="btn bg-transparent border border-white text-white hover:bg-white/10 text-lg px-8 py-4 rounded-lg flex items-center justify-center group"
-                  whileHover={{ 
+                  whileHover={{
                     scale: 1.05,
                     boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)"
                   }}
                   whileTap={{ scale: 0.97 }}
                 >
-                  <motion.div 
+                  <motion.div
                     className="mr-2 relative"
-                    whileHover={{ 
+                    whileHover={{
                       rotate: [0, 10, -10, 0],
                       transition: { duration: 0.5 }
                     }}
                   >
-                    <motion.div 
+                    <motion.div
                       className="absolute inset-0 bg-white/30 rounded-full blur-md"
                       animate={{
                         scale: [1, 1.5, 1],
@@ -463,55 +444,46 @@ const FinalCTA: React.FC = () => {
               boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
             }}
           >
-            <motion.div 
-              className="bg-gradient-to-r from-secondary-500 to-pink-500 p-1 rounded-full inline-flex items-center justify-center mb-4 self-center"
+            <motion.div
+              className="bg-gradient-to-r from-primary-500 to-secondary-500 p-1 rounded-full inline-flex items-center justify-center mb-4 self-center"
               whileHover={{ scale: 1.1 }}
             >
-              <div className="bg-primary-700 px-4 py-1 rounded-full">
-                <motion.span 
-                  className="text-white font-bold text-sm"
-                  animate={{ 
-                    scale: [1, 1.1, 1],
-                    transition: { repeat: Infinity, duration: 1.5 }
+              <div className="bg-white px-4 py-1 rounded-full">
+                <motion.span
+                  className="text-primary-600 font-bold text-sm"
+                  animate={{
+                    scale: [1, 1.05, 1],
+                    transition: { repeat: Infinity, duration: 2 }
                   }}
                 >
-                  50% OFF
+                  CHOOSE YOUR AI APPS
                 </motion.span>
               </div>
             </motion.div>
             
             <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold mb-2">Pro Plan: Half Price</h3>
+              <h3 className="text-2xl font-bold mb-2">All Apps: $99/Year Each</h3>
               <div className="flex items-center justify-center mb-2">
-                <motion.span 
-                  className="text-3xl line-through opacity-70 mr-2"
-                  animate={{ 
-                    opacity: [0.7, 0.5, 0.7],
-                    transition: { repeat: Infinity, duration: 2 }
-                  }}
-                >
-                  $59
-                </motion.span>
-                <motion.span 
-                  className="text-5xl font-bold"
-                  whileHover={{ 
+                <motion.span
+                  className="text-5xl font-bold text-primary-400"
+                  whileHover={{
                     scale: 1.1,
-                    textShadow: "0 0 8px rgba(255, 255, 255, 0.5)"
+                    textShadow: "0 0 8px rgba(99, 102, 241, 0.5)"
                   }}
                 >
-                  $29
+                  $99
                 </motion.span>
-                <span className="ml-1 text-lg">/month</span>
+                <span className="ml-1 text-lg">/year per app</span>
               </div>
-              
-              <motion.div 
+
+              <motion.div
                 className="text-white/80 mt-2"
-                animate={{ 
+                animate={{
                   opacity: [0.8, 1, 0.8],
                   transition: { duration: 3, repeat: Infinity }
                 }}
               >
-                Limited time offer - ends soon!
+                Mix and match any combination of our 14 AI apps
               </motion.div>
             </div>
             
@@ -544,22 +516,22 @@ const FinalCTA: React.FC = () => {
               </p>
             </motion.div>
             
-            <motion.a 
-              href="#claim-offer" 
+            <motion.a
+              href="#claim-offer"
               className="block w-full btn bg-white text-primary-600 hover:bg-gray-100 font-semibold text-lg px-8 py-4 rounded-lg text-center"
-              whileHover={{ 
+              whileHover={{
                 scale: 1.03,
                 boxShadow: "0 20px 25px -5px rgba(255, 255, 255, 0.2)"
               }}
               whileTap={{ scale: 0.97 }}
             >
               <motion.span
-                animate={{ 
+                animate={{
                   scale: [1, 1.03, 1],
                   transition: { repeat: Infinity, duration: 2, repeatDelay: 1 }
                 }}
               >
-                Claim 50% Discount Now
+                Get Started with Any AI App
               </motion.span>
             </motion.a>
             
@@ -589,22 +561,11 @@ const FinalCTA: React.FC = () => {
             Don't miss this opportunity to transform your video creation process and start producing
             professional content that drives real results for your business or brand.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <motion.a 
-              href="#signup" 
-              className="btn bg-white text-primary-600 hover:bg-gray-100 font-semibold text-lg px-10 py-4 rounded-lg"
-              whileHover={{ 
-                scale: 1.05,
-                boxShadow: "0 20px 25px -5px rgba(255, 255, 255, 0.2)"
-              }}
-              whileTap={{ scale: 0.97 }}
-            >
-              Start Free Trial
-            </motion.a>
-            <motion.a 
-              href="#questions" 
+          <div className="flex justify-center">
+            <motion.a
+              href="#questions"
               className="btn bg-transparent border border-white text-white hover:bg-white/10 text-lg px-10 py-4 rounded-lg"
-              whileHover={{ 
+              whileHover={{
                 scale: 1.05,
                 boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
                 borderColor: "rgba(255, 255, 255, 0.5)"

@@ -55,10 +55,10 @@ const CreateFirstVideoCTA: React.FC<CreateFirstVideoCTAProps> = ({
         </div>
       </div>
       
-      <h3 className="text-center text-xl font-bold text-white mb-3">Create Your First Video</h3>
+      <h3 className="text-center text-xl font-bold text-white mb-3">Create Your First Personalized Marketing Content</h3>
       
       <p className="text-center text-gray-300 mb-4">
-        Follow our simple step-by-step guide to create a professional video in minutes, no experience needed.
+        Follow our simple step-by-step guide to create personalized marketing content in minutes, no experience needed.
       </p>
       
       {variant === 'sidebar' || variant === 'popup' ? (
@@ -79,7 +79,7 @@ const CreateFirstVideoCTA: React.FC<CreateFirstVideoCTAProps> = ({
             <div className="bg-primary-900/50 p-1.5 rounded-full mr-2 flex-shrink-0">
               <LayoutTemplate className="h-3.5 w-3.5 text-primary-400" />
             </div>
-            <span>Professional templates included</span>
+            <span>Professional marketing templates included</span>
           </div>
         </div>
       ) : null}
@@ -94,7 +94,7 @@ const CreateFirstVideoCTA: React.FC<CreateFirstVideoCTAProps> = ({
             className={getButtonClasses()}
           >
             {variant === 'popup' ? <FileVideo className="h-5 w-5 mr-2" /> : <Video className="h-5 w-5 mr-2" />}
-            Create Your First Video
+            Create Your First Personalized Marketing Content
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </motion.div>
@@ -107,7 +107,7 @@ const CreateFirstVideoCTA: React.FC<CreateFirstVideoCTAProps> = ({
             className="text-sm text-primary-400 hover:text-primary-300 inline-flex items-center"
           >
             <Play className="h-3 w-3 mr-1" />
-            Watch tutorial video
+            Watch personalized marketing tutorial
           </Link>
         </div>
       )}

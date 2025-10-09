@@ -291,4 +291,76 @@ user@example.com,stripe,2999,paid,ch_123,SMARTCRM_FE`;
       expect(applyEntitlementFromPurchase).toHaveBeenCalledWith(mockPurchaseEvent, 'SMARTCRM_FE');
     });
   });
+
+  it('should show preview modal when Preview Data button is clicked', async () => {
+    const csvContent = `email,provider,amount,status,transaction_id
+user@example.com,stripe,2999,paid,ch_123`;
+
+    render(<AdminPurchaseImport />);
+
+    const fileInput = screen.getByText('Choose CSV File').closest('label')?.querySelector('input[type="file"]') as HTMLInputElement;
+    const file = new File([csvContent], 'test.csv', { type: 'text/csv' });
+
+    fireEvent.change(fileInput, { target: { files: [file] } });
+
+    await waitFor(() => {
+      expect(screen.getByText('test.csv')).toBeTruthy();
+    });
+
+    const previewButton = screen.getByText('Preview Data');
+    fireEvent.click(previewButton);
+
+    await waitFor(() => {
+      expect(screen.getByText('Data Preview (First 10 Records)')).toBeTruthy();
+      expect(screen.getByText('user@example.com')).toBeTruthy();
+      expect(screen.getByText('stripe')).toBeTruthy();
+    });
+  });
+
+  it('should clear file when trash button is clicked', async () => {
+    render(<AdminPurchaseImport />);
+
+    const fileInput = screen.getByText('Choose CSV File').closest('label')?.querySelector('input[type="file"]') as HTMLInputElement;
+    const file = new File(['test'], 'test.csv', { type: 'text/csv' });
+
+    fireEvent.change(fileInput, { target: { files: [file] } });
+
+    await waitFor(() => {
+      expect(screen.getByText('test.csv')).toBeTruthy();
+    });
+
+    const trashButton = screen.getByRole('button', { name: /trash/i });
+    fireEvent.click(trashButton);
+
+    await waitFor(() => {
+      expect(screen.queryByText('test.csv')).toBeNull();
+      expect(screen.getByText('Choose CSV File')).toBeTruthy();
+    });
+  });
+
+  it('should download sample CSV when Sample CSV button is clicked', () => {
+    const createObjectURLSpy = vi.fn(() => 'blob:url');
+    const revokeObjectURLSpy = vi.fn();
+    global.URL.createObjectURL = createObjectURLSpy;
+    global.URL.revokeObjectURL = revokeObjectURLSpy;
+
+    const clickSpy = vi.fn();
+    global.document.createElement = vi.fn(() => ({
+      href: '',
+      download: '',
+      click: clickSpy,
+      style: {}
+    })) as any;
+    global.document.body.appendChild = vi.fn();
+    global.document.body.removeChild = vi.fn();
+
+    render(<AdminPurchaseImport />);
+
+    const sampleButton = screen.getByText('Sample CSV');
+    fireEvent.click(sampleButton);
+
+    expect(createObjectURLSpy).toHaveBeenCalled();
+    expect(clickSpy).toHaveBeenCalled();
+    expect(revokeObjectURLSpy).toHaveBeenCalled();
+  });
 });

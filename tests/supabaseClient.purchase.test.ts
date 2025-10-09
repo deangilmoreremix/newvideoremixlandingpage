@@ -1,20 +1,11 @@
 import { vi, describe, it, expect, beforeEach } from 'vitest';
-import { createPurchaseEvent, applyEntitlementFromPurchase } from '../src/utils/supabaseClient';
-import { supabase } from '../src/utils/supabaseClient';
+import { createPurchaseEvent, applyEntitlementFromPurchase, supabase } from '../src/utils/supabaseClient';
 
-vi.mock('../src/utils/supabaseClient', async () => {
-  const actual = await vi.importActual('../src/utils/supabaseClient');
-
-  // Mock Supabase client
-  const supabase = {
+vi.mock('@supabase/supabase-js', () => ({
+  createClient: vi.fn(() => ({
     from: vi.fn()
-  };
-
-  return {
-    ...actual,
-    supabase: supabase
-  };
-});
+  }))
+}));
 
 describe('Supabase Client Purchase Functions', () => {
   beforeEach(() => {
@@ -40,7 +31,7 @@ describe('Supabase Client Purchase Functions', () => {
         }))
       }));
 
-      supabase.from.mockReturnValue({
+      (supabase as any).from.mockReturnValue({
         insert: mockInsert
       });
 
@@ -56,7 +47,7 @@ describe('Supabase Client Purchase Functions', () => {
         processed_at: '2024-01-01T00:00:00Z'
       });
 
-      expect(supabase.from).toHaveBeenCalledWith('purchase_events');
+      expect((supabase as any).from).toHaveBeenCalledWith('purchase_events');
       expect(mockInsert).toHaveBeenCalledWith({
         provider: 'stripe' as const,
         provider_event_id: 'ch_123',
@@ -78,7 +69,7 @@ describe('Supabase Client Purchase Functions', () => {
         }))
       }));
 
-      supabase.from.mockReturnValue({
+      (supabase as any).from.mockReturnValue({
         insert: mockInsert
       });
 
@@ -100,8 +91,14 @@ describe('Supabase Client Purchase Functions', () => {
     it('should handle database errors gracefully', async () => {
       const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
-      supabase.from.mockImplementation(() => {
-        throw new Error('Database connection failed');
+      (supabase as any).from.mockReturnValue({
+        insert: vi.fn(() => ({
+          select: vi.fn(() => ({
+            single: vi.fn(() => {
+              throw new Error('Database connection failed');
+            })
+          }))
+        }))
       });
 
       const result = await createPurchaseEvent({
@@ -139,13 +136,13 @@ describe('Supabase Client Purchase Functions', () => {
 
       const mockInsert = vi.fn(() => Promise.resolve({ error: null }));
 
-      supabase.from.mockReturnValue({
+      (supabase as any).from.mockReturnValue({
         insert: mockInsert
       });
 
       const result = await applyEntitlementFromPurchase(mockPurchaseEvent, 'SMARTCRM_FE');
 
-      expect(supabase.from).toHaveBeenCalledWith('pending_entitlements');
+      expect((supabase as any).from).toHaveBeenCalledWith('pending_entitlements');
       expect(mockInsert).toHaveBeenCalledWith({
         purchaser_email: 'user@example.com',
         product_sku: 'SMARTCRM_FE',
@@ -172,7 +169,7 @@ describe('Supabase Client Purchase Functions', () => {
 
       const mockInsert = vi.fn(() => Promise.resolve({ error: null }));
 
-      supabase.from.mockReturnValue({
+      (supabase as any).from.mockReturnValue({
         insert: mockInsert
       });
 
@@ -204,7 +201,7 @@ describe('Supabase Client Purchase Functions', () => {
 
       const mockInsert = vi.fn(() => Promise.resolve({ error: null }));
 
-      supabase.from.mockReturnValue({
+      (supabase as any).from.mockReturnValue({
         insert: mockInsert
       });
 
@@ -236,7 +233,7 @@ describe('Supabase Client Purchase Functions', () => {
 
       const mockInsert = vi.fn(() => Promise.resolve({ error: { message: 'Insert failed' } }));
 
-      supabase.from.mockReturnValue({
+      (supabase as any).from.mockReturnValue({
         insert: mockInsert
       });
 
@@ -260,8 +257,10 @@ describe('Supabase Client Purchase Functions', () => {
         created_at: '2024-01-01T00:00:00Z'
       };
 
-      supabase.from.mockImplementation(() => {
-        throw new Error('Database connection failed');
+      (supabase as any).from.mockReturnValue({
+        insert: vi.fn(() => {
+          throw new Error('Database connection failed');
+        })
       });
 
       const result = await applyEntitlementFromPurchase(mockPurchaseEvent, 'SMARTCRM_FE');

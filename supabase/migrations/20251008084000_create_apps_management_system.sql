@@ -55,9 +55,9 @@ CREATE POLICY "Admins can view all apps"
   TO authenticated
   USING (
     EXISTS (
-      SELECT 1 FROM admin_profiles
-      WHERE admin_profiles.user_id = auth.uid()
-      AND admin_profiles.is_active = true
+      SELECT 1 FROM user_roles
+      WHERE user_roles.user_id = auth.uid()
+      AND user_roles.role IN ('super_admin', 'admin')
     )
   );
 
@@ -68,9 +68,9 @@ CREATE POLICY "Admins can insert apps"
   TO authenticated
   WITH CHECK (
     EXISTS (
-      SELECT 1 FROM admin_profiles
-      WHERE admin_profiles.user_id = auth.uid()
-      AND admin_profiles.is_active = true
+      SELECT 1 FROM user_roles
+      WHERE user_roles.user_id = auth.uid()
+      AND user_roles.role IN ('super_admin', 'admin')
     )
   );
 
@@ -81,16 +81,16 @@ CREATE POLICY "Admins can update apps"
   TO authenticated
   USING (
     EXISTS (
-      SELECT 1 FROM admin_profiles
-      WHERE admin_profiles.user_id = auth.uid()
-      AND admin_profiles.is_active = true
+      SELECT 1 FROM user_roles
+      WHERE user_roles.user_id = auth.uid()
+      AND user_roles.role IN ('super_admin', 'admin')
     )
   )
   WITH CHECK (
     EXISTS (
-      SELECT 1 FROM admin_profiles
-      WHERE admin_profiles.user_id = auth.uid()
-      AND admin_profiles.is_active = true
+      SELECT 1 FROM user_roles
+      WHERE user_roles.user_id = auth.uid()
+      AND user_roles.role IN ('super_admin', 'admin')
     )
   );
 
@@ -101,9 +101,9 @@ CREATE POLICY "Admins can delete apps"
   TO authenticated
   USING (
     EXISTS (
-      SELECT 1 FROM admin_profiles
-      WHERE admin_profiles.user_id = auth.uid()
-      AND admin_profiles.is_active = true
+      SELECT 1 FROM user_roles
+      WHERE user_roles.user_id = auth.uid()
+      AND user_roles.role IN ('super_admin', 'admin')
     )
   );
 

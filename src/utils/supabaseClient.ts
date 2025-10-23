@@ -1,16 +1,16 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 // Initialize the Supabase client
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabaseUrl = 'https://mohueeozazjxyzmikdbs.supabase.co';
+const supabaseKey = process.env.SUPABASE_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
+if (!supabaseUrl || !supabaseKey) {
   console.error('Supabase credentials are not set. Please check your environment variables.');
 }
 
 export const supabase: SupabaseClient = createClient(
   supabaseUrl || '',
-  supabaseAnonKey || ''
+  supabaseKey || ''
 );
 
 // Hero section types

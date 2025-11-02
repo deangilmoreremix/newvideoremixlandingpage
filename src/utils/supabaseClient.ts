@@ -1,8 +1,8 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 // Initialize the Supabase client
-const supabaseUrl = 'https://mohueeozazjxyzmikdbs.supabase.co';
-const supabaseKey = process.env.SUPABASE_KEY;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
   console.error('Supabase credentials are not set. Please check your environment variables.');
@@ -321,6 +321,160 @@ export async function getAllLandingPageContent() {
   }
 }
 
+// Video upload functions
+async function uploadVideo(file: File, userId: string, onProgress?: (progress: number) => void): Promise<{ path: string; url: string } | null> {
+  try {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}.${fileExt}`;
+    const filePath = `${userId}/${fileName}`;
+
+    const { data, error } = await supabase.storage
+      .from('videos')
+      .upload(filePath, file, {
+        cacheControl: '3600',
+        upsert: false
+      });
+
+    if (error) {
+      console.error('Error uploading video:', error);
+      return null;
+    }
+
+    // Get public URL
+    const { data: urlData } = supabase.storage
+      .from('videos')
+      .getPublicUrl(filePath);
+
+    return {
+      path: data.path,
+      url: urlData.publicUrl
+    };
+  } catch (error) {
+    console.error('Error uploading video:', error);
+    return null;
+  }
+}
+
+async function deleteVideo(filePath: string): Promise<boolean> {
+  try {
+    const { error } = await supabase.storage
+      .from('videos')
+      .remove([filePath]);
+
+    if (error) {
+      console.error('Error deleting video:', error);
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error('Error deleting video:', error);
+    return false;
+  }
+}
+
+async function getVideoUrl(filePath: string): Promise<string | null> {
+  try {
+    const { data } = supabase.storage
+      .from('videos')
+      .getPublicUrl(filePath);
+
+    return data.publicUrl;
+  } catch (error) {
+    console.error('Error getting video URL:', error);
+    return null;
+  }
+}
+
+// Update the Video interface to include storage path
+export interface Video {
+  id: string;
+  user_id: string;
+  title?: string;
+  description?: string;
+  original_filename: string;
+  storage_path: string; // Add this field
+  thumbnail_path?: string;
+  status: 'uploaded' | 'processing' | 'completed' | 'failed';
+  duration?: number;
+  file_size?: number;
+  mime_type?: string;
+  processing_started_at?: string;
+  completed_at?: string;
+  error_message?: string;
+  metadata?: Record<string, any>;
+  created_at: string;
+  updated_at: string;
+}
+
+// Update video creation function
+async function createVideoRecord(videoData: {
+  userId: string;
+  title?: string;
+  description?: string;
+  originalFilename: string;
+  storagePath: string;
+  fileSize?: number;
+  mimeType?: string;
+}): Promise<Video | null> {
+  try {
+    const { data, error } = await supabase
+      .from('videos')
+      .insert({
+        user_id: videoData.userId,
+        title: videoData.title,
+        description: videoData.description,
+        original_filename: videoData.originalFilename,
+        storage_path: videoData.storagePath,
+        file_size: videoData.fileSize,
+        mime_type: videoData.mimeType,
+        status: 'uploaded'
+      })
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error creating video record:', error);
+      return null;
+    }
+
+    return data as Video;
+  } catch (error) {
+    console.error('Error creating video record:', error);
+    return null;
+  }
+}
+
+// Complete video upload function
+async function uploadUserVideo(
+  file: File,
+  userId: string,
+  metadata?: { title?: string; description?: string },
+  onProgress?: (progress: number) => void
+): Promise<Video | null> {
+  try {
+    // Upload file to storage
+    const uploadResult = await uploadVideo(file, userId, onProgress);
+    if (!uploadResult) return null;
+
+    // Create database record
+    const videoRecord = await createVideoRecord({
+      userId,
+      title: metadata?.title,
+      description: metadata?.description,
+      originalFilename: file.name,
+      storagePath: uploadResult.path,
+      fileSize: file.size,
+      mimeType: file.type
+    });
+
+    return videoRecord;
+  } catch (error) {
+    console.error('Error in complete video upload:', error);
+    return null;
+  }
+}
+
 // Video-related utility functions
 async function getUserVideos(): Promise<Video[]> {
   const { data: { user } } = await supabase.auth.getUser();
@@ -540,6 +694,11 @@ async function applyEntitlementFromPurchase(purchase: PurchaseEvent, productSku?
 export {
   getUserVideos,
   getVideoById,
+  uploadVideo,
+  deleteVideo,
+  getVideoUrl,
+  createVideoRecord,
+  uploadUserVideo,
   getProducts,
   getProductBySku,
   getUserEntitlements,

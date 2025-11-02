@@ -183,57 +183,50 @@ const DashboardToolsSection: React.FC = () => {
   }, [user]);
 
   // Update filtered tools when category or search query changes
-  useEffect(() => {
-    if (loadingAccess) return;
+   useEffect(() => {
+     if (loadingAccess) return;
 
-    let result = [...appsData];
+     let result = [...appsData];
 
-    // Apply access control - only show apps user has purchased
-    if (user && userAccessibleProducts.length > 0) {
-      result = result.filter(app => userAccessibleProducts.includes(app.id));
-    } else if (user) {
-      // If user is logged in but has no purchases, show empty list
-      result = [];
-    }
-    // If no user, show all apps (for demo purposes)
+     // Show all apps regardless of purchase status - users can see all apps but locked ones redirect to purchase
 
-    // Apply category filter
-    if (selectedCategory !== 'all') {
-      result = result.filter(app => app.category === selectedCategory);
-    }
+     // Apply category filter
+     if (selectedCategory !== 'all') {
+       result = result.filter(app => app.category === selectedCategory);
+     }
 
-    // Apply search filter
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
-      result = result.filter(
-        app => app.name.toLowerCase().includes(query) ||
-                app.description.toLowerCase().includes(query)
-      );
-    }
+     // Apply search filter
+     if (searchQuery.trim()) {
+       const query = searchQuery.toLowerCase();
+       result = result.filter(
+         app => app.name.toLowerCase().includes(query) ||
+                 app.description.toLowerCase().includes(query)
+       );
+     }
 
-    // Apply sorting
-    switch (sortOrder) {
-      case 'popular':
-        result.sort((a, b) => {
-          if (a.popular && !b.popular) return -1;
-          if (!a.popular && b.popular) return 1;
-          return 0;
-        });
-        break;
-      case 'new':
-        result.sort((a, b) => {
-          if (a.new && !b.new) return -1;
-          if (!a.new && b.new) return 1;
-          return 0;
-        });
-        break;
-      case 'a-z':
-        result.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-    }
+     // Apply sorting
+     switch (sortOrder) {
+       case 'popular':
+         result.sort((a, b) => {
+           if (a.popular && !b.popular) return -1;
+           if (!a.popular && b.popular) return 1;
+           return 0;
+         });
+         break;
+       case 'new':
+         result.sort((a, b) => {
+           if (a.new && !b.new) return -1;
+           if (!a.new && b.new) return 1;
+           return 0;
+         });
+         break;
+       case 'a-z':
+         result.sort((a, b) => a.name.localeCompare(b.name));
+         break;
+     }
 
-    setFilteredApps(result);
-  }, [selectedCategory, searchQuery, sortOrder, user, userAccessibleProducts, loadingAccess]);
+     setFilteredApps(result);
+   }, [selectedCategory, searchQuery, sortOrder, user, userAccessibleProducts, loadingAccess]);
   
   // Handle image load errors
   const handleImageError = (appId: string) => {
@@ -310,8 +303,22 @@ const DashboardToolsSection: React.FC = () => {
   };
 
   // Get URL for an app (use custom URL if available)
-  const getAppUrl = (appId: string) => {
-    return toolUrlMap[appId] || `/app/${appId}`;
+   const getAppUrl = (appId: string) => {
+     return toolUrlMap[appId] || `/app/${appId}`;
+   };
+
+  // Check if user has access to an app
+  const hasAppAccess = (appId: string) => {
+    return userAccessibleProducts.includes(appId);
+  };
+
+  // Handle app click - redirect to pricing if locked
+  const handleAppClick = (appId: string, event: React.MouseEvent) => {
+    if (!hasAppAccess(appId)) {
+      event.preventDefault();
+      // Redirect to pricing page
+      window.location.href = '/pricing';
+    }
   };
 
   return (
@@ -594,25 +601,44 @@ const DashboardToolsSection: React.FC = () => {
                 <motion.div
                   key={app.id}
                   whileHover={{ y: -10 }}
-                  className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden border border-gray-700 w-[280px] flex-shrink-0 group hover:border-primary-500/50 transition-colors"
+                  className={`bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden border w-[280px] flex-shrink-0 group transition-colors ${
+                    hasAppAccess(app.id)
+                      ? "border-gray-700 hover:border-primary-500/50"
+                      : "border-gray-600 hover:border-yellow-500/50"
+                  }`}
                 >
-                  <a href={appUrl} className="block">
+                  <a
+                    href={appUrl}
+                    className="block"
+                    onClick={(e) => handleAppClick(app.id, e)}
+                  >
                     <div className="relative h-[160px]">
-                      <img 
-                        src={imageErrors[app.id] ? getFallbackImage(app.id, imageErrors[app.id]) : app.image} 
-                        alt={app.name} 
-                        className="w-full h-full object-cover"
+                      <img
+                        src={imageErrors[app.id] ? getFallbackImage(app.id, imageErrors[app.id]) : app.image}
+                        alt={app.name}
+                        className={`w-full h-full object-cover ${
+                          !hasAppAccess(app.id) ? "filter grayscale opacity-75" : ""
+                        }`}
                         onError={() => handleImageError(app.id)}
                       />
-                      
+
                       {/* Overlay with personalization focus */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                      
+
                       {/* Personalization badge */}
                       <div className="absolute top-3 left-3 bg-primary-600/80 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full">
                         Personalized
                       </div>
-                      
+
+                      {/* Lock indicator for unpurchased apps */}
+                      {!hasAppAccess(app.id) && (
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                          <div className="bg-yellow-500/90 backdrop-blur-sm rounded-full p-3">
+                            <Lock className="h-6 w-6 text-black" />
+                          </div>
+                        </div>
+                      )}
+
                       {/* Status badges */}
                       <div className="absolute top-3 right-3 flex flex-col space-y-1 items-end">
                         {app.popular && (
@@ -627,21 +653,35 @@ const DashboardToolsSection: React.FC = () => {
                         )}
                       </div>
                     </div>
-                    
+
                     <div className="p-4">
-                      <h4 className="text-white font-bold text-lg group-hover:text-primary-400 transition-colors">{app.name}</h4>
-                      <p className="text-gray-400 text-sm mb-3">{app.description}</p>
-                      
+                      <h4 className={`font-bold text-lg transition-colors ${
+                        hasAppAccess(app.id)
+                          ? "text-white group-hover:text-primary-400"
+                          : "text-gray-400"
+                      }`}>
+                        {app.name}
+                      </h4>
+                      <p className={`text-sm mb-3 ${
+                        hasAppAccess(app.id) ? "text-gray-400" : "text-gray-500"
+                      }`}>
+                        {app.description}
+                      </p>
+
                       <div className="flex justify-between items-center">
                         <div className="flex items-center">
-                          {React.isValidElement(app.icon) ? 
+                          {React.isValidElement(app.icon) ?
                             React.cloneElement(app.icon as React.ReactElement, { className: "h-4 w-4 text-primary-400 mr-1" })
                             : <Sparkles className="h-4 w-4 text-primary-400 mr-1" />}
                           <span className="text-gray-500 text-xs">Personalization Tool</span>
                         </div>
-                        
-                        <span className="text-primary-400 text-sm font-medium flex items-center">
-                          Use Tool
+
+                        <span className={`text-sm font-medium flex items-center ${
+                          hasAppAccess(app.id)
+                            ? "text-primary-400"
+                            : "text-yellow-400"
+                        }`}>
+                          {hasAppAccess(app.id) ? "Use Tool" : "Unlock"}
                           <ArrowRight className="h-3 w-3 ml-1" />
                         </span>
                       </div>
@@ -727,34 +767,51 @@ const DashboardToolsSection: React.FC = () => {
                   onHoverEnd={() => setHoveredApp(null)}
                   className={`relative ${
                     viewMode === 'grid'
-                    ? "group bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden border border-gray-700 hover:border-primary-500/50 transition-colors shadow-lg"
-                    : "flex bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl overflow-hidden border border-gray-700 hover:border-primary-500/50 transition-colors shadow-lg"
+                    ? `group bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-lg transition-colors ${
+                        hasAppAccess(app.id)
+                          ? "border border-gray-700 hover:border-primary-500/50"
+                          : "border border-gray-600 hover:border-yellow-500/50"
+                      }`
+                    : `flex bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-lg transition-colors ${
+                        hasAppAccess(app.id)
+                          ? "border border-gray-700 hover:border-primary-500/50"
+                          : "border border-gray-600 hover:border-yellow-500/50"
+                      }`
                   }`}
                 >
                   {/* App image */}
-                  <div 
-                    className={viewMode === 'grid' 
-                      ? "w-full aspect-video" 
+                  <div
+                    className={viewMode === 'grid'
+                      ? "w-full aspect-video"
                       : "flex-shrink-0 w-32 h-full"
                     }
                   >
                     <div className="relative h-full">
-                      <img 
-                        src={imageErrors[app.id] ? getFallbackImage(app.id, imageErrors[app.id]) : app.image} 
-                        alt={app.name} 
+                      <img
+                        src={imageErrors[app.id] ? getFallbackImage(app.id, imageErrors[app.id]) : app.image}
+                        alt={app.name}
                         className={`object-cover ${
-                          viewMode === 'grid' 
-                          ? "w-full h-full" 
+                          viewMode === 'grid'
+                          ? "w-full h-full"
                           : "w-32 h-full"
-                        }`}
+                        } ${!hasAppAccess(app.id) ? "filter grayscale opacity-75" : ""}`}
                         onError={() => handleImageError(app.id)}
                       />
-                      
+
                       {/* Personalization marker */}
                       <div className="absolute top-2 left-2 bg-primary-600/80 text-xs text-white px-2 py-0.5 rounded-full">
                         Personalized
                       </div>
-                      
+
+                      {/* Lock indicator for unpurchased apps */}
+                      {!hasAppAccess(app.id) && (
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                          <div className="bg-yellow-500/90 backdrop-blur-sm rounded-full p-2">
+                            <Lock className="h-5 w-5 text-black" />
+                          </div>
+                        </div>
+                      )}
+
                       {/* Status badges */}
                       <div className="absolute top-2 right-2">
                         {app.popular && (
@@ -770,57 +827,86 @@ const DashboardToolsSection: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Content */}
                   <div className={viewMode === 'grid' ? "p-4" : "p-4 flex-grow"}>
-                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary-400 transition-colors break-words">
+                    <h3 className={`text-xl font-bold mb-2 break-words transition-colors ${
+                      hasAppAccess(app.id)
+                        ? "text-white group-hover:text-primary-400"
+                        : "text-gray-400"
+                    }`}>
                       {app.name}
                     </h3>
-                    <p className="text-gray-300 text-sm mb-4 break-words">Personalized {app.description.toLowerCase()}</p>
-                    
+                    <p className={`text-sm mb-4 break-words ${
+                      hasAppAccess(app.id) ? "text-gray-300" : "text-gray-500"
+                    }`}>
+                      Personalized {app.description.toLowerCase()}
+                    </p>
+
                     {/* Link to app details */}
                     <div className="flex justify-between items-center">
                       <div className="flex items-center text-xs text-gray-400">
-                        {React.isValidElement(app.icon) ? 
-                          React.cloneElement(app.icon as React.ReactElement, { className: "h-4 w-4 text-primary-400 mr-1" }) 
+                        {React.isValidElement(app.icon) ?
+                          React.cloneElement(app.icon as React.ReactElement, { className: "h-4 w-4 text-primary-400 mr-1" })
                           : <Sparkles className="h-4 w-4 text-primary-400 mr-1" />}
                         <span>{toolCategories.find(c => c.id === app.category)?.label}</span>
                       </div>
-                      
-                      <a 
+
+                      <a
                         href={appUrl}
-                        className="text-primary-400 hover:text-primary-300 text-sm font-medium flex items-center"
+                        onClick={(e) => handleAppClick(app.id, e)}
+                        className={`text-sm font-medium flex items-center ${
+                          hasAppAccess(app.id)
+                            ? "text-primary-400 hover:text-primary-300"
+                            : "text-yellow-400 hover:text-yellow-300"
+                        }`}
                       >
-                        Try Personalization
+                        {hasAppAccess(app.id) ? "Try Personalization" : "Unlock Tool"}
                         <ArrowRight className="ml-1 h-3 w-3" />
                       </a>
                     </div>
-                    
+
                     {/* Hover effect for grid view */}
                     {viewMode === 'grid' && (
-                      <div className="absolute inset-0 bg-primary-900/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center">
+                      <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center ${
+                        hasAppAccess(app.id)
+                          ? "bg-primary-900/70"
+                          : "bg-yellow-900/70"
+                      }`}>
                         <a
                           href={appUrl}
+                          onClick={(e) => handleAppClick(app.id, e)}
                           className="bg-white text-gray-900 font-bold py-2 px-6 rounded-lg flex items-center"
                         >
-                          <Wand2 className="h-5 w-5 mr-2" />
-                          Personalize Now
+                          {hasAppAccess(app.id) ? (
+                            <>
+                              <Wand2 className="h-5 w-5 mr-2" />
+                              Personalize Now
+                            </>
+                          ) : (
+                            <>
+                              <Lock className="h-5 w-5 mr-2" />
+                              Unlock Tool
+                            </>
+                          )}
                         </a>
-                        
+
                         {/* User count for popular apps */}
-                        {app.popular && (
+                        {app.popular && hasAppAccess(app.id) && (
                           <div className="mt-3 flex items-center text-white text-sm">
                             <Users className="h-4 w-4 mr-1" />
                             <span>Used by 1,200+ creators</span>
                           </div>
                         )}
-                        
+
                         {/* Star ratings */}
-                        <div className="mt-2 flex items-center">
-                          {[...Array(5)].map((_, i) => (
-                            <Star key={i} className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-                          ))}
-                        </div>
+                        {hasAppAccess(app.id) && (
+                          <div className="mt-2 flex items-center">
+                            {[...Array(5)].map((_, i) => (
+                              <Star key={i} className="h-4 w-4 text-yellow-500 fill-yellow-500" />
+                            ))}
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>
@@ -831,9 +917,9 @@ const DashboardToolsSection: React.FC = () => {
             <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-8 text-center border border-gray-700">
               <div className="mb-6">
                 <Lock className="h-16 w-16 text-gray-500 mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-white mb-2">No Tools Available</h3>
+                <h3 className="text-2xl font-bold text-white mb-2">No Tools Unlocked Yet</h3>
                 <p className="text-gray-400 text-lg mb-4">
-                  You don't have access to any personalization tools yet.
+                  You can see all our personalization tools below, but you'll need to purchase access to use them.
                 </p>
                 <p className="text-gray-500 text-sm mb-6">
                   Purchase a subscription to unlock all 50+ personalization tools and start creating amazing content.
@@ -900,7 +986,7 @@ const DashboardToolsSection: React.FC = () => {
         </motion.div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .hide-scrollbar::-webkit-scrollbar {
           display: none;
         }
@@ -908,7 +994,7 @@ const DashboardToolsSection: React.FC = () => {
           -ms-overflow-style: none;
           scrollbar-width: none;
         }
-        
+
         .line-clamp-2 {
           display: -webkit-box;
           -webkit-line-clamp: 2;

@@ -1,6 +1,5 @@
-import "jsr:@supabase/functions-js/edge-runtime.d.ts";
-import { createClient } from "npm:@supabase/supabase-js@2";
-import { stripe } from "npm:stripe@14.21.0";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import Stripe from "https://esm.sh/stripe@14.21.0";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -34,7 +33,7 @@ Deno.serve(async (req: Request) => {
     const stripeSecretKey = Deno.env.get("STRIPE_SECRET_KEY")!;
     const stripeWebhookSecret = Deno.env.get("STRIPE_WEBHOOK_SECRET")!;
 
-    const stripeClient = new stripe(stripeSecretKey, {
+    const stripeClient = new Stripe(stripeSecretKey, {
       apiVersion: "2023-10-16",
     });
 
@@ -53,10 +52,10 @@ Deno.serve(async (req: Request) => {
     // Get the raw body
     const body = await req.text();
 
-    let event: stripe.Event;
+    let event: Stripe.Event;
 
     try {
-      event = stripe.webhooks.constructEvent(body, signature, stripeWebhookSecret);
+      event = Stripe.webhooks.constructEvent(body, signature, stripeWebhookSecret);
     } catch (err) {
       console.error("Webhook signature verification failed:", err);
       return new Response(
@@ -161,8 +160,8 @@ Deno.serve(async (req: Request) => {
 
 async function handleCheckoutSessionCompleted(
   supabase: any,
-  stripeClient: stripe,
-  session: stripe.Checkout.Session
+  stripeClient: Stripe,
+  session: Stripe.Checkout.Session
 ) {
   console.log("Processing checkout session completed:", session.id);
 
@@ -294,8 +293,8 @@ async function handleCheckoutSessionCompleted(
 
 async function handleInvoicePaymentSucceeded(
   supabase: any,
-  stripeClient: stripe,
-  invoice: stripe.Invoice
+  stripeClient: Stripe,
+  invoice: Stripe.Invoice
 ) {
   console.log("Processing invoice payment succeeded:", invoice.id);
 
@@ -329,8 +328,8 @@ async function handleInvoicePaymentSucceeded(
 
 async function handleInvoicePaymentFailed(
   supabase: any,
-  stripeClient: stripe,
-  invoice: stripe.Invoice
+  stripeClient: Stripe,
+  invoice: Stripe.Invoice
 ) {
   console.log("Processing invoice payment failed:", invoice.id);
 
@@ -348,8 +347,8 @@ async function handleInvoicePaymentFailed(
 
 async function handleSubscriptionCreated(
   supabase: any,
-  stripeClient: stripe,
-  subscription: stripe.Subscription
+  stripeClient: Stripe,
+  subscription: Stripe.Subscription
 ) {
   console.log("Processing subscription created:", subscription.id);
 
@@ -359,8 +358,8 @@ async function handleSubscriptionCreated(
 
 async function handleSubscriptionUpdated(
   supabase: any,
-  stripeClient: stripe,
-  subscription: stripe.Subscription
+  stripeClient: Stripe,
+  subscription: Stripe.Subscription
 ) {
   console.log("Processing subscription updated:", subscription.id);
 
@@ -382,8 +381,8 @@ async function handleSubscriptionUpdated(
 
 async function handleSubscriptionDeleted(
   supabase: any,
-  stripeClient: stripe,
-  subscription: stripe.Subscription
+  stripeClient: Stripe,
+  subscription: Stripe.Subscription
 ) {
   console.log("Processing subscription deleted:", subscription.id);
 
@@ -399,8 +398,8 @@ async function handleSubscriptionDeleted(
 
 async function handleInvoiceCreated(
   supabase: any,
-  stripeClient: stripe,
-  invoice: stripe.Invoice
+  stripeClient: Stripe,
+  invoice: Stripe.Invoice
 ) {
   console.log("Processing invoice created:", invoice.id);
 

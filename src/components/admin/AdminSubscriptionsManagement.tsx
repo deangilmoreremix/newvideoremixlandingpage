@@ -14,7 +14,23 @@ import {
   Package,
   Filter
 } from 'lucide-react';
-import { UserSubscription, getUserSubscriptions, createUserSubscription, updateSubscriptionStatus } from '../../utils/supabaseClient';
+interface UserSubscription {
+  id: string;
+  user_id: string;
+  product_id: string;
+  product_type: string;
+  purchase_date: string;
+  expiry_date: string | null;
+  status: string;
+  payment_method: string;
+  transaction_id: string;
+  amount: number;
+  currency: string;
+  created_at: string;
+  updated_at: string;
+  user_email?: string;
+  app_access_count?: number;
+}
 
 interface UserWithEmail {
   id: string;
@@ -36,44 +52,31 @@ const AdminSubscriptionsManagement: React.FC = () => {
 
   const loadSubscriptions = async () => {
     try {
-      // For now, we'll create mock data since we don't have the actual user emails
-      // In a real implementation, you'd join with the auth.users table or have a users table
-      const mockSubscriptions: UserSubscription[] = [
-        {
-          id: '1',
-          user_id: 'user-1',
-          product_id: 'video-creator',
-          product_type: 'app',
-          purchase_date: '2024-01-15T10:00:00Z',
-          expiry_date: '2025-01-15T10:00:00Z',
-          status: 'active',
-          payment_method: 'stripe',
-          transaction_id: 'txn_123456',
-          amount: 29.99,
-          currency: 'USD',
-          created_at: '2024-01-15T10:00:00Z',
-          updated_at: '2024-01-15T10:00:00Z'
-        },
-        {
-          id: '2',
-          user_id: 'user-2',
-          product_id: 'ai-editing',
-          product_type: 'feature',
-          purchase_date: '2024-02-01T14:30:00Z',
-          expiry_date: '2024-08-01T14:30:00Z',
-          status: 'active',
-          payment_method: 'paypal',
-          transaction_id: 'txn_789012',
-          amount: 19.99,
-          currency: 'USD',
-          created_at: '2024-02-01T14:30:00Z',
-          updated_at: '2024-02-01T14:30:00Z'
-        }
-      ];
+      const token = localStorage.getItem('admin_token');
+      if (!token) {
+        throw new Error('No authentication token found');
+      }
 
-      setSubscriptions(mockSubscriptions);
+      const response = await fetch('/functions/v1/admin-subscriptions', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      if (data.success) {
+        setSubscriptions(data.data || []);
+      } else {
+        throw new Error(data.error || 'Failed to load subscriptions');
+      }
     } catch (error) {
       console.error('Error loading subscriptions:', error);
+      // Fallback to empty array on error
+      setSubscriptions([]);
     } finally {
       setLoading(false);
     }

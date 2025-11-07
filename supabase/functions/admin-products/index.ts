@@ -88,6 +88,112 @@ Deno.serve(async (req: Request) => {
       );
     }
 
+    if (req.method === "POST") {
+      const body = await req.json();
+      const { data: newProduct, error: insertError } = await supabase
+        .from("products")
+        .insert([{
+          sku: body.sku,
+          name: body.name,
+          description: body.description,
+          tier: body.tier,
+          features: body.features || {},
+          price_cents: body.price_cents,
+          currency: body.currency || 'USD',
+          is_active: body.is_active ?? true,
+        }])
+        .select()
+        .maybeSingle();
+
+      if (insertError) {
+        return new Response(
+          JSON.stringify({ success: false, error: insertError.message }),
+          {
+            status: 500,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+      }
+
+      return new Response(
+        JSON.stringify({ success: true, data: newProduct }),
+        {
+          status: 201,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    if (req.method === "PUT") {
+      const url = new URL(req.url);
+      const pathParts = url.pathname.split("/").filter(Boolean);
+      const productId = pathParts[pathParts.length - 1];
+      const body = await req.json();
+
+      const { data: updatedProduct, error: updateError } = await supabase
+        .from("products")
+        .update({
+          sku: body.sku,
+          name: body.name,
+          description: body.description,
+          tier: body.tier,
+          features: body.features || {},
+          price_cents: body.price_cents,
+          currency: body.currency || 'USD',
+          is_active: body.is_active,
+        })
+        .eq("id", productId)
+        .select()
+        .maybeSingle();
+
+      if (updateError) {
+        return new Response(
+          JSON.stringify({ success: false, error: updateError.message }),
+          {
+            status: 500,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+      }
+
+      return new Response(
+        JSON.stringify({ success: true, data: updatedProduct }),
+        {
+          status: 200,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    if (req.method === "DELETE") {
+      const url = new URL(req.url);
+      const pathParts = url.pathname.split("/").filter(Boolean);
+      const productId = pathParts[pathParts.length - 1];
+
+      const { error: deleteError } = await supabase
+        .from("products")
+        .delete()
+        .eq("id", productId);
+
+      if (deleteError) {
+        return new Response(
+          JSON.stringify({ success: false, error: deleteError.message }),
+          {
+            status: 500,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+      }
+
+      return new Response(
+        JSON.stringify({ success: true }),
+        {
+          status: 200,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
     return new Response(
       JSON.stringify({ success: false, error: "Method not allowed" }),
       {

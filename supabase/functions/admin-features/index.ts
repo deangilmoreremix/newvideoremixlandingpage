@@ -105,6 +105,128 @@ Deno.serve(async (req: Request) => {
       );
     }
 
+    // General POST method for creating new features
+    if (req.method === "POST" && !action) {
+      try {
+        const body = await req.json();
+        
+        // Validate required fields
+        if (!body.name || !body.slug || !body.category) {
+          return new Response(
+            JSON.stringify({
+              success: false,
+              error: "Missing required fields: name, slug, and category are required"
+            }),
+            {
+              status: 400,
+              headers: { ...corsHeaders, "Content-Type": "application/json" },
+            }
+          );
+        }
+
+        // Validate slug format (URL-friendly)
+        const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+        if (!slugPattern.test(body.slug)) {
+          return new Response(
+            JSON.stringify({
+              success: false,
+              error: "Slug must be URL-friendly (lowercase letters, numbers, and hyphens only)"
+            }),
+            {
+              status: 400,
+              headers: { ...corsHeaders, "Content-Type": "application/json" },
+            }
+          );
+        }
+
+        // Check for duplicate slug
+        const { data: existingApp } = await supabase
+          .from("apps")
+          .select("id")
+          .eq("slug", body.slug)
+          .maybeSingle();
+
+        if (existingApp) {
+          return new Response(
+            JSON.stringify({
+              success: false,
+              error: "Feature with this slug already exists"
+            }),
+            {
+              status: 409,
+              headers: { ...corsHeaders, "Content-Type": "application/json" },
+            }
+          );
+        }
+
+        // Create the new feature
+        const { data: newApp, error: insertError } = await supabase
+          .from("apps")
+          .insert({
+            name: body.name,
+            slug: body.slug,
+            description: body.description || '',
+            category: body.category,
+            icon_url: body.icon_url || null,
+            is_active: body.is_enabled !== undefined ? body.is_enabled : true,
+            is_featured: body.is_featured || false,
+            sort_order: body.sort_order || 0,
+            deployment_url: body.deployment_url || null,
+            domain: body.domain || null,
+          })
+          .select()
+          .single();
+
+        if (insertError) {
+          return new Response(
+            JSON.stringify({
+              success: false,
+              error: insertError.message,
+              details: "Failed to create feature in database"
+            }),
+            {
+              status: 500,
+              headers: { ...corsHeaders, "Content-Type": "application/json" },
+            }
+          );
+        }
+
+        return new Response(
+          JSON.stringify({
+            success: true,
+            data: {
+              id: newApp.id,
+              name: newApp.name,
+              slug: newApp.slug,
+              description: newApp.description,
+              is_enabled: newApp.is_active,
+              app_slug: newApp.slug,
+              config: body.config || {},
+              created_at: newApp.created_at,
+              updated_at: newApp.updated_at,
+            }
+          }),
+          {
+            status: 201,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+
+      } catch (error) {
+        console.error("Error creating feature:", error);
+        return new Response(
+          JSON.stringify({
+            success: false,
+            error: error.message || "Internal server error while creating feature"
+          }),
+          {
+            status: 500,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+      }
+    }
+
     if (req.method === "POST" && action === "toggle") {
       const { data: app, error: fetchError } = await supabase
         .from("apps")

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import AdminUsersManagement from '../src/components/admin/AdminUsersManagement';
 
@@ -15,13 +15,15 @@ describe('AdminUsersManagement Component', () => {
     localStorage.setItem('admin_token', 'mock-admin-token');
   });
 
-  it('should display loading spinner initially', () => {
+  it('should display loading spinner initially', async () => {
     mockFetch.mockResolvedValueOnce({
       ok: true,
       json: async () => ({ success: true, data: [] })
     });
 
-    render(<AdminUsersManagement />);
+    await act(async () => {
+      render(<AdminUsersManagement />);
+    });
 
     // Check for loading spinner (the div with animate-spin class)
     const spinner = document.querySelector('.animate-spin');
@@ -33,7 +35,8 @@ describe('AdminUsersManagement Component', () => {
       {
         id: '1',
         email: 'user1@example.com',
-        name: 'John Doe',
+        first_name: 'John',
+        last_name: 'Doe',
         role: 'user',
         is_active: true,
         created_at: '2024-01-01T00:00:00Z',
@@ -42,7 +45,8 @@ describe('AdminUsersManagement Component', () => {
       {
         id: '2',
         email: 'admin@example.com',
-        name: 'Jane Smith',
+        first_name: 'Jane',
+        last_name: 'Smith',
         role: 'admin',
         is_active: false,
         created_at: '2024-01-01T00:00:00Z',
@@ -55,7 +59,9 @@ describe('AdminUsersManagement Component', () => {
       json: async () => ({ success: true, data: mockUsers })
     });
 
-    render(<AdminUsersManagement />);
+    await act(async () => {
+      render(<AdminUsersManagement />);
+    });
 
     await waitFor(() => {
       expect(screen.getByText('John Doe')).toBeInTheDocument();
@@ -76,7 +82,8 @@ describe('AdminUsersManagement Component', () => {
       {
         id: '1',
         email: 'user1@example.com',
-        name: 'John Doe',
+        first_name: 'John',
+        last_name: 'Doe',
         role: 'user',
         is_active: true,
         created_at: '2024-01-01T00:00:00Z',
@@ -96,7 +103,9 @@ describe('AdminUsersManagement Component', () => {
       json: async () => ({ success: true, data: { ...mockUsers[0], is_active: false } })
     });
 
-    render(<AdminUsersManagement />);
+    await act(async () => {
+      render(<AdminUsersManagement />);
+    });
 
     await waitFor(() => {
       expect(screen.getByText('John Doe')).toBeInTheDocument();
@@ -108,7 +117,9 @@ describe('AdminUsersManagement Component', () => {
       button.className.includes('rounded-full')
     );
     if (toggleButton) {
-      fireEvent.click(toggleButton);
+      await act(async () => {
+        fireEvent.click(toggleButton);
+      });
     }
 
     // Verify the toggle API was called
@@ -149,17 +160,24 @@ describe('AdminUsersManagement Component', () => {
       json: async () => ({ success: true, message: 'User deleted successfully' })
     });
 
-    render(<AdminUsersManagement />);
+    await act(async () => {
+      render(<AdminUsersManagement />);
+    });
 
     await waitFor(() => {
       expect(screen.getByText('John Doe')).toBeInTheDocument();
     });
 
     // Find and click the delete button (trash icon)
-    const deleteButton = screen.getByTestId('delete-user-1') || screen.getAllByRole('button').find(button =>
-      button.querySelector('svg') && button.querySelector('svg').classList.contains('lucide-trash2')
+    const deleteButton = screen.getAllByRole('button').find(button =>
+      button.querySelector('svg') && button.querySelector('svg')?.classList.contains('lucide-trash2')
     );
-    fireEvent.click(deleteButton);
+
+    if (deleteButton) {
+      await act(async () => {
+        fireEvent.click(deleteButton);
+      });
+    }
 
     // Wait for modal to appear
     await waitFor(() => {
@@ -168,7 +186,9 @@ describe('AdminUsersManagement Component', () => {
 
     // Click the confirm delete button
     const confirmButton = screen.getByText('Delete User');
-    fireEvent.click(confirmButton);
+    await act(async () => {
+      fireEvent.click(confirmButton);
+    });
 
     // Verify the delete API was called
     expect(mockFetch).toHaveBeenCalledWith(
@@ -187,7 +207,8 @@ describe('AdminUsersManagement Component', () => {
       {
         id: '1',
         email: 'user1@example.com',
-        name: 'John Doe',
+        first_name: 'John',
+        last_name: 'Doe',
         role: 'user',
         is_active: true,
         created_at: '2024-01-01T00:00:00Z',
@@ -196,7 +217,8 @@ describe('AdminUsersManagement Component', () => {
       {
         id: '2',
         email: 'admin@example.com',
-        name: 'Jane Smith',
+        first_name: 'Jane',
+        last_name: 'Smith',
         role: 'admin',
         is_active: true,
         created_at: '2024-01-01T00:00:00Z',
@@ -209,7 +231,9 @@ describe('AdminUsersManagement Component', () => {
       json: async () => ({ success: true, data: mockUsers })
     });
 
-    render(<AdminUsersManagement />);
+    await act(async () => {
+      render(<AdminUsersManagement />);
+    });
 
     await waitFor(() => {
       expect(screen.getByText('John Doe')).toBeInTheDocument();
@@ -218,11 +242,15 @@ describe('AdminUsersManagement Component', () => {
 
     // Click on role selector dropdown
     const dropdownButton = screen.getByText('All Roles');
-    fireEvent.click(dropdownButton);
+    await act(async () => {
+      fireEvent.click(dropdownButton);
+    });
 
     // Select admin role
     const adminOption = screen.getByText('Admin');
-    fireEvent.click(adminOption);
+    await act(async () => {
+      fireEvent.click(adminOption);
+    });
 
     // Should only show Jane Smith (admin)
     await waitFor(() => {
@@ -232,11 +260,12 @@ describe('AdminUsersManagement Component', () => {
   });
 
   it('should create a new user successfully', async () => {
-    const mockUsers = [];
+    const mockUsers: any[] = [];
     const newUser = {
       id: '1',
       email: 'newuser@example.com',
-      name: 'New User',
+      first_name: 'New',
+      last_name: 'User',
       role: 'user',
       is_active: true,
       created_at: '2024-01-01T00:00:00Z',
@@ -255,7 +284,9 @@ describe('AdminUsersManagement Component', () => {
       json: async () => ({ success: true, data: newUser })
     });
 
-    render(<AdminUsersManagement />);
+    await act(async () => {
+      render(<AdminUsersManagement />);
+    });
 
     await waitFor(() => {
       expect(screen.getByText('No users found')).toBeInTheDocument();
@@ -263,18 +294,26 @@ describe('AdminUsersManagement Component', () => {
 
     // Click Add User button
     const addButton = screen.getByText('Add User');
-    fireEvent.click(addButton);
+    await act(async () => {
+      fireEvent.click(addButton);
+    });
 
     // Fill in the form
     const emailInput = screen.getByPlaceholderText('user@example.com');
-    const nameInput = screen.getByPlaceholderText('John Doe');
+    const firstNameInput = screen.getByPlaceholderText('John');
+    const lastNameInput = screen.getByPlaceholderText('Doe');
 
-    fireEvent.change(emailInput, { target: { value: 'newuser@example.com' } });
-    fireEvent.change(nameInput, { target: { value: 'New User' } });
+    await act(async () => {
+      fireEvent.change(emailInput, { target: { value: 'newuser@example.com' } });
+      fireEvent.change(firstNameInput, { target: { value: 'New' } });
+      fireEvent.change(lastNameInput, { target: { value: 'User' } });
+    });
 
     // Click Add User button in modal
-    const modalAddButton = screen.getByText('Add User');
-    fireEvent.click(modalAddButton);
+    const modalAddButton = screen.getAllByText('Add User')[1]; // Second instance is in modal
+    await act(async () => {
+      fireEvent.click(modalAddButton);
+    });
 
     // Verify the create API was called
     expect(mockFetch).toHaveBeenCalledWith(
@@ -283,7 +322,8 @@ describe('AdminUsersManagement Component', () => {
         method: 'POST',
         body: JSON.stringify({
           email: 'newuser@example.com',
-          name: 'New User',
+          first_name: 'New',
+          last_name: 'User',
           role: 'user'
         })
       })
@@ -296,7 +336,9 @@ describe('AdminUsersManagement Component', () => {
       json: async () => ({ success: true, data: [] })
     });
 
-    render(<AdminUsersManagement />);
+    await act(async () => {
+      render(<AdminUsersManagement />);
+    });
 
     await waitFor(() => {
       expect(screen.getByText('No users found')).toBeInTheDocument();
@@ -310,7 +352,9 @@ describe('AdminUsersManagement Component', () => {
     // Mock console.error to avoid test output pollution
     const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
-    render(<AdminUsersManagement />);
+    await act(async () => {
+      render(<AdminUsersManagement />);
+    });
 
     await waitFor(() => {
       expect(screen.getByText('No users found')).toBeInTheDocument();

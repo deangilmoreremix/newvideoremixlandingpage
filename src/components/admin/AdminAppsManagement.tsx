@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo, memo } from 'react';
 import { motion } from 'framer-motion';
-import { Settings, Plus, Edit, Trash2, ToggleLeft, ToggleRight, Eye, EyeOff, ChevronDown, AlertTriangle, X, CheckCircle } from 'lucide-react';
+import { Settings, Plus, Edit, Trash2, ToggleLeft, ToggleRight, Eye, EyeOff, ChevronDown, AlertTriangle, X, CheckCircle, Save } from 'lucide-react';
 
 interface App {
   id: string;
@@ -38,6 +38,19 @@ const AdminAppsManagement: React.FC = () => {
   }>({ show: false, app: null });
   const [operationLoading, setOperationLoading] = useState<{ [key: string]: boolean }>({});
 
+  // Add App Modal State
+  const [showAddAppModal, setShowAddAppModal] = useState(false);
+  const [appFormData, setAppFormData] = useState({
+    name: '',
+    slug: '',
+    description: '',
+    category: '',
+    icon_url: '',
+    is_active: true,
+    is_featured: false,
+    sort_order: 0
+  });
+
   // Utility functions
   const addNotification = useCallback((type: 'success' | 'error', message: string) => {
     const id = Date.now().toString();
@@ -56,6 +69,7 @@ const AdminAppsManagement: React.FC = () => {
 
   // Memoized filtering for better performance
   const filteredApps = useMemo(() => {
+    if (!allApps || !Array.isArray(allApps)) return [];
     return selectedApp === 'all'
       ? allApps
       : allApps.filter(app => app.slug === selectedApp);
@@ -102,6 +116,59 @@ const AdminAppsManagement: React.FC = () => {
       setLoading(false);
     }
   }, [clearMessages]);
+
+  const createApp = async () => {
+    try {
+      setOperationLoading({ create: true });
+      setError(null);
+      
+      const token = localStorage.getItem('admin_token');
+      if (!token) {
+        throw new Error('No authentication token found');
+      }
+
+      const response = await fetch('/functions/v1/admin-apps', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(appFormData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      if (data.success) {
+        setAllApps(prev => [...prev, data.data]);
+        setSuccess('App created successfully');
+        setShowAddAppModal(false);
+        resetAppForm();
+      } else {
+        throw new Error(data.error || 'Failed to create app');
+      }
+    } catch (error) {
+      console.error('Error creating app:', error);
+      setError(error instanceof Error ? error.message : 'Failed to create app');
+    } finally {
+      setOperationLoading({});
+    }
+  };
+
+  const resetAppForm = () => {
+    setAppFormData({
+      name: '',
+      slug: '',
+      description: '',
+      category: '',
+      icon_url: '',
+      is_active: true,
+      is_featured: false,
+      sort_order: 0
+    });
+  };
 
   const toggleApp = useCallback(async (appId: string, currentStatus: boolean) => {
     setToggling(appId);
@@ -240,6 +307,19 @@ const AdminAppsManagement: React.FC = () => {
         </div>
       )}
 
+      {/* Success Message */}
+      {success && (
+        <div className="bg-green-500/20 border border-green-500/50 text-green-400 p-4 rounded-lg flex items-center justify-between">
+          <div className="flex items-center">
+            <CheckCircle className="h-5 w-5 mr-2" />
+            <span>{success}</span>
+          </div>
+          <button onClick={() => setSuccess(null)} className="text-green-400 hover:text-green-300">
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -295,7 +375,13 @@ const AdminAppsManagement: React.FC = () => {
             )}
           </div>
 
-          <button className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg flex items-center transition-colors">
+          <button 
+            onClick={() => {
+              resetAppForm();
+              setShowAddAppModal(true);
+            }}
+            className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg flex items-center transition-colors"
+          >
             <Plus className="h-4 w-4 mr-2" />
             Add App
           </button>
@@ -402,6 +488,131 @@ const AdminAppsManagement: React.FC = () => {
           <Settings className="h-16 w-16 text-gray-600 mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-white mb-2">No applications found</h3>
           <p className="text-gray-400">Get started by adding your first application.</p>
+        </div>
+      )}
+
+      {/* Add App Modal */}
+      {showAddAppModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-gray-800 rounded-lg p-6 max-w-lg mx-4 max-h-[90vh] overflow-y-auto">
+            <h3 className="text-lg font-semibold text-white mb-4">Add New App</h3>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Name *</label>
+                <input
+                  type="text"
+                  value={appFormData.name}
+                  onChange={(e) => setAppFormData({...appFormData, name: e.target.value})}
+                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500"
+                  placeholder="App name"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Slug *</label>
+                <input
+                  type="text"
+                  value={appFormData.slug}
+                  onChange={(e) => setAppFormData({...appFormData, slug: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-')})}
+                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500"
+                  placeholder="app-slug"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Description</label>
+                <textarea
+                  value={appFormData.description}
+                  onChange={(e) => setAppFormData({...appFormData, description: e.target.value})}
+                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500"
+                  placeholder="App description"
+                  rows={3}
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Category</label>
+                <input
+                  type="text"
+                  value={appFormData.category}
+                  onChange={(e) => setAppFormData({...appFormData, category: e.target.value})}
+                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500"
+                  placeholder="Category"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Icon URL</label>
+                <input
+                  type="url"
+                  value={appFormData.icon_url}
+                  onChange={(e) => setAppFormData({...appFormData, icon_url: e.target.value})}
+                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500"
+                  placeholder="https://example.com/icon.png"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Sort Order</label>
+                <input
+                  type="number"
+                  value={appFormData.sort_order}
+                  onChange={(e) => setAppFormData({...appFormData, sort_order: parseInt(e.target.value) || 0})}
+                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500"
+                  placeholder="0"
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="app_is_active"
+                    checked={appFormData.is_active}
+                    onChange={(e) => setAppFormData({...appFormData, is_active: e.target.checked})}
+                    className="mr-2"
+                  />
+                  <label htmlFor="app_is_active" className="text-sm text-gray-300">Active</label>
+                </div>
+                
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="app_is_featured"
+                    checked={appFormData.is_featured}
+                    onChange={(e) => setAppFormData({...appFormData, is_featured: e.target.checked})}
+                    className="mr-2"
+                  />
+                  <label htmlFor="app_is_featured" className="text-sm text-gray-300">Featured</label>
+                </div>
+              </div>
+            </div>
+            
+            <div className="flex justify-end space-x-3 mt-6">
+              <button
+                onClick={() => {
+                  setShowAddAppModal(false);
+                  resetAppForm();
+                }}
+                className="px-4 py-2 text-gray-400 hover:text-white"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={createApp}
+                disabled={operationLoading.create || !appFormData.name || !appFormData.slug}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded disabled:opacity-50 flex items-center"
+              >
+                {operationLoading.create ? (
+                  <div className="w-4 h-4 border-t border-white border-solid rounded-full animate-spin mr-2"></div>
+                ) : (
+                  <Save className="h-4 w-4 mr-2" />
+                )}
+                Create App
+              </button>
+            </div>
+          </div>
         </div>
       )}
 

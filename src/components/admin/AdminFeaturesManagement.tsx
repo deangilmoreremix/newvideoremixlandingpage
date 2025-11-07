@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo, memo } from 'react';
 import { motion } from 'framer-motion';
-import { ToggleLeft, ToggleRight, Plus, Edit, Trash2, Settings, ChevronDown, AlertTriangle, X, CheckCircle } from 'lucide-react';
+import { ToggleLeft, ToggleRight, Plus, Edit, Trash2, Settings, ChevronDown, AlertTriangle, X, CheckCircle, Save } from 'lucide-react';
 
 interface Feature {
   id: string;
@@ -36,6 +36,17 @@ const AdminFeaturesManagement: React.FC = () => {
     feature: Feature | null;
   }>({ show: false, feature: null });
   const [operationLoading, setOperationLoading] = useState<{ [key: string]: boolean }>({});
+
+  // Add Feature Modal State
+  const [showAddFeatureModal, setShowAddFeatureModal] = useState(false);
+  const [featureFormData, setFeatureFormData] = useState({
+    name: '',
+    slug: '',
+    description: '',
+    is_enabled: true,
+    app_slug: '',
+    config: {}
+  });
 
   // Utility functions
   const addNotification = useCallback((type: 'success' | 'error', message: string) => {
@@ -126,6 +137,57 @@ const AdminFeaturesManagement: React.FC = () => {
       console.error('Error fetching apps:', error);
     }
   }, []);
+
+  const createFeature = async () => {
+    try {
+      setOperationLoading({ create: true });
+      setError(null);
+      
+      const token = localStorage.getItem('admin_token');
+      if (!token) {
+        throw new Error('No authentication token found');
+      }
+
+      const response = await fetch('/functions/v1/admin-features', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(featureFormData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      if (data.success) {
+        setAllFeatures(prev => [...prev, data.data]);
+        setSuccess('Feature created successfully');
+        setShowAddFeatureModal(false);
+        resetFeatureForm();
+      } else {
+        throw new Error(data.error || 'Failed to create feature');
+      }
+    } catch (error) {
+      console.error('Error creating feature:', error);
+      setError(error instanceof Error ? error.message : 'Failed to create feature');
+    } finally {
+      setOperationLoading({});
+    }
+  };
+
+  const resetFeatureForm = () => {
+    setFeatureFormData({
+      name: '',
+      slug: '',
+      description: '',
+      is_enabled: true,
+      app_slug: '',
+      config: {}
+    });
+  };
 
   const toggleFeature = useCallback(async (featureId: string, currentStatus: boolean) => {
     setToggling(featureId);
@@ -264,6 +326,19 @@ const AdminFeaturesManagement: React.FC = () => {
         </div>
       )}
 
+      {/* Success Message */}
+      {success && (
+        <div className="bg-green-500/20 border border-green-500/50 text-green-400 p-4 rounded-lg flex items-center justify-between">
+          <div className="flex items-center">
+            <CheckCircle className="h-5 w-5 mr-2" />
+            <span>{success}</span>
+          </div>
+          <button onClick={() => setSuccess(null)} className="text-green-400 hover:text-green-300">
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -319,7 +394,13 @@ const AdminFeaturesManagement: React.FC = () => {
             )}
           </div>
 
-          <button className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg flex items-center transition-colors">
+          <button 
+            onClick={() => {
+              resetFeatureForm();
+              setShowAddFeatureModal(true);
+            }}
+            className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg flex items-center transition-colors"
+          >
             <Plus className="h-4 w-4 mr-2" />
             Add Feature
           </button>
@@ -425,6 +506,99 @@ const AdminFeaturesManagement: React.FC = () => {
           <ToggleLeft className="h-16 w-16 text-gray-600 mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-white mb-2">No features found</h3>
           <p className="text-gray-400">Get started by adding your first feature.</p>
+        </div>
+      )}
+
+      {/* Add Feature Modal */}
+      {showAddFeatureModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-gray-800 rounded-lg p-6 max-w-lg mx-4 max-h-[90vh] overflow-y-auto">
+            <h3 className="text-lg font-semibold text-white mb-4">Add New Feature</h3>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Name *</label>
+                <input
+                  type="text"
+                  value={featureFormData.name}
+                  onChange={(e) => setFeatureFormData({...featureFormData, name: e.target.value})}
+                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500"
+                  placeholder="Feature name"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Slug *</label>
+                <input
+                  type="text"
+                  value={featureFormData.slug}
+                  onChange={(e) => setFeatureFormData({...featureFormData, slug: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-')})}
+                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500"
+                  placeholder="feature-slug"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Description</label>
+                <textarea
+                  value={featureFormData.description}
+                  onChange={(e) => setFeatureFormData({...featureFormData, description: e.target.value})}
+                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500"
+                  placeholder="Feature description"
+                  rows={3}
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Associated App</label>
+                <select
+                  value={featureFormData.app_slug}
+                  onChange={(e) => setFeatureFormData({...featureFormData, app_slug: e.target.value})}
+                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="">No specific app</option>
+                  {apps.map((app) => (
+                    <option key={app.id} value={app.slug}>{app.name}</option>
+                  ))}
+                </select>
+              </div>
+              
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  id="feature_is_enabled"
+                  checked={featureFormData.is_enabled}
+                  onChange={(e) => setFeatureFormData({...featureFormData, is_enabled: e.target.checked})}
+                  className="mr-2"
+                />
+                <label htmlFor="feature_is_enabled" className="text-sm text-gray-300">Enabled</label>
+              </div>
+            </div>
+            
+            <div className="flex justify-end space-x-3 mt-6">
+              <button
+                onClick={() => {
+                  setShowAddFeatureModal(false);
+                  resetFeatureForm();
+                }}
+                className="px-4 py-2 text-gray-400 hover:text-white"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={createFeature}
+                disabled={operationLoading.create || !featureFormData.name || !featureFormData.slug}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded disabled:opacity-50 flex items-center"
+              >
+                {operationLoading.create ? (
+                  <div className="w-4 h-4 border-t border-white border-solid rounded-full animate-spin mr-2"></div>
+                ) : (
+                  <Save className="h-4 w-4 mr-2" />
+                )}
+                Create Feature
+              </button>
+            </div>
+          </div>
         </div>
       )}
 

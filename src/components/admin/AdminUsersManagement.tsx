@@ -301,9 +301,10 @@ const AdminUsersManagement: React.FC = () => {
   };
 
   const filteredUsers = useMemo(() => {
+    if (!users || !Array.isArray(users)) return [];
     return selectedRole === 'all'
-      ? (users || [])
-      : (users || []).filter(user => user.role === selectedRole);
+      ? users
+      : users.filter(user => user.role === selectedRole);
   }, [users, selectedRole]);
 
   if (loading) {
